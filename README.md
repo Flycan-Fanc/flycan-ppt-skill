@@ -39,6 +39,20 @@
 - 🎨 **主题色预设**: Avocado 4 套 / Blackboard 固定配色
 - 📄 **单文件 HTML**: 不需要构建、不需要服务器，浏览器直接打开
 
+## 示例
+
+### Style Avocado · 清新牛油果自然风
+
+| 封面 | 内容页 | 数据页 |
+|------|--------|--------|
+| ![cover](examples/avocado-cover.png) | ![content](examples/avocado-content.png) | ![compound](examples/avocado-compound.png) |
+
+### Style Blackboard · 黑板手绘板书风
+
+| 封面 | 推导页 |
+|------|--------|
+| ![cover](examples/blackboard-cover.png) | ![deduction](examples/blackboard-deduction.png) |
+
 ## 适合 / 不适合
 
 **✅ 合适**: 知识分享 / 观点表达 / 视频制作 / 公众号改编 / 技术分享 / 阅读感悟 / 独立开发故事
@@ -70,6 +84,25 @@
 > 3. 验证: `ls ~/.claude/skills/flycan-ppt-skill/` 应该看到 `SKILL.md`、`assets/`、`references/` 三项
 > 4. 告诉我安装好了
 
+### 方式二: npx 手动安装
+
+在终端中直接运行:
+
+```bash
+npx github:Flycan-Fanc/flycan-ppt-skill
+```
+
+或者先克隆到本地:
+
+```bash
+git clone https://github.com/Flycan-Fanc/flycan-ppt-skill.git
+cd flycan-ppt-skill
+npm install -g .
+flycan-ppt-skill
+```
+
+安装脚本会将所有文件复制到 `~/.claude/skills/flycan-ppt-skill/`。如果想更新，在项目目录下重新运行上述任一命令即可。
+
 ### 触发方式
 
 装好后，Claude Code 会在对话里自动发现并调用这个 skill。触发关键词:
@@ -97,17 +130,28 @@
 flycan-ppt-skill/
 ├── SKILL.md                    ← Skill 主文件: 工作流、原则
 ├── README.md                   ← 本文件
+├── package.json                ← npm 包配置
+├── bin/
+│   └── cli.js                  ← npx 安装脚本
 ├── assets/
 │   ├── template-avocado.html   ← 风格一: 牛油果自然风模板
 │   ├── template-blackboard.html ← 风格二: 黑板手绘板书风模板
 │   └── motion.min.js           ← Motion One 本地副本
-├── references/
-│   ├── themes-avocado.md       ← 风格一: 4 套主题色预设
-│   ├── themes-blackboard.md    ← 风格二: 黑板配色预设
-│   ├── layouts-avocado.md      ← 风格一: 页面布局骨架
-│   ├── layouts-blackboard.md   ← 风格二: 页面布局骨架
-│   ├── components.md           ← 组件手册
-│   └── checklist.md            ← 质量检查清单
+├── examples/
+│   ├── example-avocado.html    ← 牛油果风完整示例
+│   ├── example-blackboard.html ← 黑板风完整示例
+│   ├── avocado-cover.png       ← 示例封面截图
+│   ├── avocado-content.png     ← 示例内容页截图
+│   ├── avocado-compound.png    ← 示例数据页截图
+│   ├── blackboard-cover.png    ← 黑板风封面截图
+│   └── blackboard-deduction.png ← 黑板风推导页截图
+└── references/
+    ├── themes-avocado.md       ← 风格一: 4 套主题色预设
+    ├── themes-blackboard.md    ← 风格二: 黑板配色预设
+    ├── layouts-avocado.md      ← 风格一: 页面布局骨架
+    ├── layouts-blackboard.md   ← 风格二: 页面布局骨架
+    ├── components.md           ← 组件手册
+    └── checklist.md            ← 质量检查清单
 ```
 
 ## 主题色预设

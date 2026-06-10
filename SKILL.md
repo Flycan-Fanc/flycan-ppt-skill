@@ -83,6 +83,18 @@ description: 生成横向翻页网页 PPT（单 HTML 文件），两种风格：
 沉淀(Reflection)   → 1 页   : 金句/总结/行动建议
 ```
 
+### Step 0 · 安装 skill
+
+如果你还没有安装 flycan-ppt-skill，可以通过 npx 安装：
+
+```bash
+npx github:Flycan-Fanc/flycan-ppt-skill
+```
+
+或让 AI 帮你安装（把这段话发给 AI Agent）：
+
+> 帮我安装 flycan-ppt-skill。请把项目克隆到 ~/.claude/skills/flycan-ppt-skill，安装完成后检查 SKILL.md、assets/、references/ 是否存在。
+
 ### Step 2 · 拷贝模板
 
 根据 Step 1 选定的风格，拷贝对应模板到目标位置：
@@ -190,10 +202,16 @@ open "项目/XXX/index.html"
 ```
 flycan-ppt-skill/
 ├── SKILL.md                  ← 你正在读
+├── package.json              ← npm 包配置
+├── bin/
+│   └── cli.js                ← npx 安装脚本
 ├── assets/
 │   ├── template-avocado.html   ← 风格一 · 牛油果自然风模板
 │   ├── template-blackboard.html ← 风格二 · 黑板手绘板书风模板
 │   └── motion.min.js           ← Motion One 本地副本
+├── examples/
+│   ├── example-avocado.html    ← 牛油果风完整示例
+│   └── example-blackboard.html ← 黑板风完整示例
 └── references/
     ├── themes-avocado.md       ← 风格一 · 4 套主题色预设
     ├── themes-blackboard.md    ← 风格二 · 黑板配色预设

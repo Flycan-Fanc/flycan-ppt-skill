@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>从第一性原理理解 React · Flycan 黑板板书</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@300;400;500;600&family=Liu+Jian+Mao+Cao&family=ZCOOL+XiaoWei&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --board:#1B2F1D;
+    --board-rgb:27,47,29;
+    --chalk-white:#F5F0E8;
+    --chalk-white-rgb:245,240,232;
+    --chalk-yellow:#E8D56E;
+    --chalk-yellow-rgb:232,213,110;
+    --chalk-blue:#7AADD9;
+    --chalk-blue-rgb:122,173,217;
+    --chalk-red:#D9756B;
+    --chalk-red-rgb:217,117,107;
+    --chalk-grey:#9A9A9A;
+    --chalk-grey-rgb:154,154,154;
+    --handwrite:"ZCOOL XiaoWei","Ma Shan Zheng","Liu Jian Mao Cao",cursive;
+    --serif-zh:"Noto Serif SC",source-han-serif-sc,serif;
+    --sans-zh:"Noto Sans SC",source-han-sans-sc,sans-serif;
+    --mono:"JetBrains Mono","IBM Plex Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:100%;height:100%;overflow:hidden;background:var(--board);color:var(--chalk-white);font-family:var(--sans-zh);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,.012) 2px, rgba(255,255,255,.012) 4px);opacity:.4}
+  body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse at 50% 50%, transparent 0%, rgba(0,0,0,.15) 100%)}
+  #deck{position:fixed;inset:0;width:10000vw;height:100vh;display:flex;flex-wrap:nowrap;transition:transform .9s cubic-bezier(.77,0,.175,1);z-index:10;will-change:transform}
+  .slide{width:100vw;height:100vh;flex:0 0 100vw;position:relative;padding:5vh 6vw 10vh 6vw;display:flex;flex-direction:column;overflow:hidden;background:var(--board);color:var(--chalk-white)}
+  .slide.dark{color:var(--chalk-white);background:var(--board)}
+  .slide.hero.dark{color:var(--chalk-white);background:var(--board)}
+  .chrome{display:flex;justify-content:space-between;align-items:flex-start;font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;opacity:.5;color:var(--chalk-grey)}
+  .foot{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.4;color:var(--chalk-grey);padding-top:2vh;border-top:1px solid rgba(var(--chalk-white-rgb),.12)}
+  .rule{width:100%;height:1px;background:rgba(var(--chalk-white-rgb),.12);margin:2.5vh 0}
+  .chalk-yellow{color:var(--chalk-yellow)}
+  .chalk-blue{color:var(--chalk-blue)}
+  .chalk-red{color:var(--chalk-red)}
+  .chalk-grey{color:var(--chalk-grey)}
+  .chalk-marker{font-family:var(--mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--chalk-grey);opacity:.6}
+  .board-title{font-family:var(--serif-zh);font-weight:700;font-size:8.5vw;line-height:1.05;letter-spacing:-.01em;color:var(--chalk-white);}
+  .h-xl{font-family:var(--serif-zh);font-weight:600;font-size:5.2vw;line-height:1.15;letter-spacing:-.005em;color:var(--chalk-white);}
+  .h-sub{font-family:var(--serif-zh);font-weight:400;font-size:2.6vw;line-height:1.3;opacity:.8;color:var(--chalk-blue);}
+  .h-md{font-family:var(--serif-zh);font-weight:600;font-size:2vw;line-height:1.3;}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.28em;text-transform:uppercase;opacity:.5;margin-bottom:2.2vh;color:var(--chalk-blue)}
+  .lead{font-family:var(--serif-zh);font-weight:400;font-size:1.6vw;line-height:1.5;color:var(--chalk-white)}
+  .body-text{font-family:var(--sans-zh);font-weight:400;font-size:max(14px,1.05vw);line-height:1.7;color:rgba(var(--chalk-white-rgb),.82)}
+  .meta{font-family:var(--mono);font-size:max(10px,.78vw);letter-spacing:.18em;text-transform:uppercase;opacity:.5;color:var(--chalk-grey)}
+  .frame{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .fill{flex:1}
+  .center{align-items:center;justify-content:center;text-align:center}
+  #nav{position:fixed;left:50%;bottom:2.2vh;transform:translateX(-50%);z-index:30;display:flex;gap:8px;padding:5px 10px;border-radius:2px;background:rgba(0,0,0,.25)}
+  #nav .dot{width:6px;height:6px;border-radius:0;background:rgba(var(--chalk-white-rgb),.2);cursor:pointer;transition:all .3s ease;border:0;padding:0}
+  #nav .dot:hover{background:rgba(var(--chalk-white-rgb),.4)}
+  #nav .dot.active{background:var(--chalk-yellow);width:16px}
+  #hint{position:fixed;bottom:2.6vh;right:2.6vw;z-index:30;font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;opacity:.3;color:var(--chalk-grey)}
+  body.low-power #hint{opacity:.5;color:var(--chalk-yellow)}
+  [data-anim]{opacity:1}
+  body.motion-ready [data-anim]{opacity:0}
+  body.motion-ready [data-anim="line"]{opacity:0;transform:translateY(8px)}
+  body.low-power #deck{transition:none!important}
+  body.low-power *,body.low-power *::before,body.low-power *::after{animation:none!important;transition:none!important}
+  body.low-power.motion-ready [data-anim],body.low-power [data-anim]{opacity:1!important;transform:none!important}
+  .board-box{border:2px solid rgba(var(--chalk-white-rgb),.3);padding:2vh 2vw}
+  .board-box.highlight{border-color:var(--chalk-yellow)}
+  .board-box.emphasis{border-color:var(--chalk-red)}
+  .hand-drawn-arrow{display:inline-block;font-size:2vw;color:rgba(var(--chalk-white-rgb),.4);font-family:var(--mono)}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:3vw;flex:1;align-items:stretch}
+  .pipeline{display:grid;grid-template-columns:repeat(5,1fr);gap:1.2vw}
+  .pipeline[data-cols="3"]{grid-template-columns:repeat(3,1fr)}
+  .step{display:flex;flex-direction:column;gap:.6vh;padding-top:1.2vh;border-top:1px solid rgba(var(--chalk-white-rgb),.2)}
+  .step-nb{font-family:var(--mono);font-weight:500;font-size:1vw;color:var(--chalk-yellow)}
+  .step-title{font-family:var(--sans-zh);font-weight:700;font-size:1.4vw;letter-spacing:.01em;line-height:1.2;color:var(--chalk-white)}
+  .step-desc{font-family:var(--sans-zh);font-weight:400;font-size:max(11px,.9vw);line-height:1.45;color:var(--chalk-grey)}
+  @media (max-width:900px){
+    .board-title{font-size:12vw}.h-xl{font-size:8vw}.h-sub{font-size:4vw}.lead{font-size:3vw}
+  }
+</style>
+</head>
+<body>
+<script>
+  (function(){
+    const KEY = 'flycan-board-low-power';
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const stored = localStorage.getItem(KEY);
+    window.__lowPowerMode = stored === '1' || (stored === null && reduced);
+    function updateHint(){
+      const hint = document.getElementById('hint');
+      if(hint) hint.textContent = `← → · B ${window.__lowPowerMode ? '动态' : '静态'} · ESC`;
+    }
+    window.__setLowPowerMode = function(on, opts={}){
+      window.__lowPowerMode = !!on;
+      document.body.classList.toggle('low-power', window.__lowPowerMode);
+      if(opts.persist !== false) localStorage.setItem(KEY, window.__lowPowerMode ? '1' : '0');
+      if(window.__lowPowerMode && document.getAnimations) document.getAnimations().forEach(a=>a.cancel());
+      updateHint();
+      if(window.__playSlide) window.__playSlide(window.__currentSlideIndex || 0);
+    };
+    document.body.classList.toggle('low-power', window.__lowPowerMode);
+    addEventListener('DOMContentLoaded', updateHint, {once:true});
+  })();
+</script>
+
+<div id="hint">← → · B 静态 · ESC</div>
+
+<div id="deck">
+
+<!-- ============ Slide 1: Cover ============ -->
+<div class="slide dark" data-animate="hero">
+  <div class="chrome">
+    <span class="chalk-marker">第一性原理</span>
+    <span class="chalk-marker">01 / 05</span>
+  </div>
+  <div class="frame center" style="gap:1vh">
+    <div class="kicker" data-anim style="color:var(--chalk-blue)">从第一性原理出发</div>
+    <h1 class="board-title" data-anim>理解 React</h1>
+    <div class="h-sub" data-anim style="margin-top:1.5vh">为什么 React 这样设计？</div>
+    <div class="board-box" data-anim style="margin-top:4vh;max-width:45%;text-align:center;padding:2vh 3vw">
+      <span style="font-family:var(--mono);font-size:max(11px,.85vw);letter-spacing:.1em;color:var(--chalk-grey)">"UI = f(state)"</span>
+      <span style="display:block;margin-top:0.6vh;font-size:max(12px,.9vw);opacity:.55">—— React 核心公式</span>
+    </div>
+  </div>
+  <div class="foot">
+    <span class="chalk-marker">从第一性原理理解 React</span>
+    <span class="chalk-marker">Flycan 进化论 · 1</span>
+  </div>
+</div>
+
+<!-- ============ Slide 2: Core Question ============ -->
+<div class="slide dark" data-animate="cascade">
+  <div class="chrome">
+    <span class="chalk-marker">核心问题</span>
+    <span class="chalk-marker">02 / 05</span>
+  </div>
+  <div class="frame center">
+    <div class="kicker" data-anim style="color:var(--chalk-yellow)">Q</div>
+    <h2 class="h-xl" data-anim style="font-family:var(--serif-zh);text-align:center;max-width:80%">为什么我们需要 React？</h2>
+    <div class="rule" data-anim style="width:30%"></div>
+    <div class="board-box" data-anim style="margin-top:2vh;max-width:65%;text-align:center">
+      <div class="body-text" style="text-align:left">
+        直接操作 DOM 的问题：<br><br>
+        • 命令式操作：每一步都得告诉浏览器做什么<br>
+        • 状态与视图不同步：手动维护 DOM 状态<br>
+        • 难以管理复杂交互：事件、数据、UI 交织
+      </div>
+    </div>
+    <div style="font-family:var(--serif-zh);font-size:max(16px,1.3vw);margin-top:2.5vh;color:var(--chalk-yellow);text-align:center;" data-anim>
+      React 的回答：让 UI 成为状态的函数
+    </div>
+  </div>
+  <div class="foot">
+    <span class="chalk-marker">从第一性原理理解 React</span>
+    <span class="chalk-marker">Flycan 进化论 · 2</span>
+  </div>
+</div>
+
+<!-- ============ Slide 3: Deduction ============ -->
+<div class="slide dark" data-animate="pipeline">
+  <div class="chrome">
+    <span class="chalk-marker">推导过程</span>
+    <span class="chalk-marker">03 / 05</span>
+  </div>
+  <div class="frame">
+    <div class="kicker" data-anim style="color:var(--chalk-blue)">核心概念推导</div>
+    <h2 class="h-xl" data-anim style="font-size:3.5vw">从问题到方案</h2>
+    <div class="pipeline" data-cols="3" style="margin-top:3vh">
+      <div class="step" data-anim="step">
+        <div class="step-nb">01</div>
+        <div style="font-family:var(--sans-zh);font-weight:700;font-size:1.4vw;color:var(--chalk-white)">声明式 UI</div>
+        <div style="font-family:var(--sans-zh);font-weight:400;font-size:max(11px,.9vw);line-height:1.45;color:var(--chalk-grey)">描述"想要什么"，而不是"怎么做"。UI = f(state) 的核心含义。</div>
+      </div>
+      <div class="step" data-anim="step">
+        <div class="step-nb">02</div>
+        <div style="font-family:var(--sans-zh);font-weight:700;font-size:1.4vw;color:var(--chalk-white)">组件化</div>
+        <div style="font-family:var(--sans-zh);font-weight:400;font-size:max(11px,.9vw);line-height:1.45;color:var(--chalk-grey)">将 UI 拆分为独立、可复用的组件。每个组件管理自己的状态。</div>
+      </div>
+      <div class="step" data-anim="step">
+        <div class="step-nb">03</div>
+        <div style="font-family:var(--sans-zh);font-weight:700;font-size:1.4vw;color:var(--chalk-white)">单向数据流</div>
+        <div style="font-family:var(--sans-zh);font-weight:400;font-size:max(11px,.9vw);line-height:1.45;color:var(--chalk-grey)">数据从上往下流动，状态变化触发重新渲染。</div>
+      </div>
+    </div>
+    <div class="board-box highlight" data-anim style="margin-top:auto;text-align:center">
+      <span style="color:var(--chalk-yellow);font-size:max(14px,1.1vw)">
+        这三个概念构成了 React 的基石：声明式 + 组件化 + 单向数据流
+      </span>
+    </div>
+  </div>
+  <div class="foot">
+    <span class="chalk-marker">从第一性原理理解 React</span>
+    <span class="chalk-marker">Flycan 进化论 · 3</span>
+  </div>
+</div>
+
+<!-- ============ Slide 4: Compare ============ -->
+<div class="slide dark" data-animate="directional">
+  <div class="chrome">
+    <span class="chalk-marker">对比分析</span>
+    <span class="chalk-marker">04 / 05</span>
+  </div>
+  <div class="frame">
+    <div class="kicker" data-anim style="color:var(--chalk-blue)">编程范式</div>
+    <h2 class="h-xl" data-anim style="font-size:3.5vw">声明式 vs 命令式</h2>
+    <div class="split" style="margin-top:2vh;flex:1;gap:3vw">
+      <div class="board-box emphasis" data-anim="left" style="flex:1;display:flex;flex-direction:column;gap:1.2vh">
+        <div style="font-family:var(--serif-zh);font-weight:600;color:var(--chalk-red);font-size:1.4vw">命令式（直接操作 DOM）</div>
+        <div style="font-family:var(--mono);font-size:max(10px,.72vw);color:var(--chalk-grey);background:rgba(255,255,255,.06);padding:1.2vh 1vw;border-radius:2px;margin-top:0.8vh">
+          // 每一步都要手动操作<br>
+          const el = document.getElementById('root');<br>
+          el.innerHTML = '';<br>
+          const h1 = document.createElement('h1');<br>
+          h1.textContent = count;<br>
+          el.appendChild(h1);
+        </div>
+        <div style="font-size:max(11px,.78vw);color:var(--chalk-red)">痛点：状态越多，代码越复杂</div>
+      </div>
+      <div class="board-box highlight" data-anim="right" style="flex:1;display:flex;flex-direction:column;gap:1.2vh">
+        <div style="font-family:var(--serif-zh);font-weight:600;color:var(--chalk-yellow);font-size:1.4vw">声明式（React）</div>
+        <div style="font-family:var(--mono);font-size:max(10px,.72vw);color:var(--chalk-grey);background:rgba(255,255,255,.06);padding:1.2vh 1vw;border-radius:2px;margin-top:0.8vh">
+          // 只关心"要显示什么"<br>
+          function App() {<br>
+          &nbsp;&nbsp;return &lt;h1&gt;{count}&lt;/h1&gt;;<br>
+          }
+        </div>
+        <div style="font-size:max(11px,.78vw);color:var(--chalk-yellow)">优势：关注结果，而非过程</div>
+      </div>
+    </div>
+    <div class="board-box" data-anim style="margin-top:auto;text-align:center;border-color:rgba(245,240,232,.2)">
+      <span style="color:var(--chalk-white);font-size:max(12px,.9vw)">
+        声明式不是 React 的专利，它是人类解决问题最自然的方式
+      </span>
+    </div>
+  </div>
+  <div class="foot">
+    <span class="chalk-marker">从第一性原理理解 React</span>
+    <span class="chalk-marker">Flycan 进化论 · 4</span>
+  </div>
+</div>
+
+<!-- ============ Slide 5: Conclusion ============ -->
+<div class="slide dark" data-animate="quote">
+  <div class="chrome">
+    <span class="chalk-marker">结论</span>
+    <span class="chalk-marker">05 / 05</span>
+  </div>
+  <div class="frame center">
+    <div class="kicker" data-anim style="color:var(--chalk-yellow)">总结</div>
+    <div style="font-family:var(--serif-zh);font-weight:400;font-size:max(24px,2.2vw);line-height:1.6;text-align:center;max-width:70%;opacity:.9;color:var(--chalk-white)" data-anim>
+      "React 的本质，<br>是用更符合人类直觉的方式构建 UI。"
+    </div>
+    <div class="rule" data-anim style="width:20%;margin:3vh auto"></div>
+    <div class="board-box" data-anim style="max-width:55%;text-align:center">
+      <div class="body-text" style="text-align:center;font-size:max(13px,.9vw)">
+        声明式 · 组件化 · 单向数据流 —<br>
+        从第一性原理出发，这些设计其实都是自然推导的结果。
+      </div>
+    </div>
+    <div class="meta" data-anim style="margin-top:4vh;text-align:center">Flycan 进化论 · 独立思考</div>
+  </div>
+  <div class="foot">
+    <span class="chalk-marker">从第一性原理理解 React</span>
+    <span class="chalk-marker">Flycan 进化论 · 5</span>
+  </div>
+</div>
+
+</div>
+
+<div id="nav"></div>
+
+<script>
+const deck=document.getElementById('deck');
+const slides=deck.querySelectorAll('.slide');
+const nav=document.getElementById('nav');
+let idx=0,total=slides.length,lock=false;
+deck.style.width=(total*100)+'vw';
+slides.forEach((s,i)=>{
+  const b=document.createElement('button');
+  b.className='dot';b.dataset.i=i;b.setAttribute('aria-label','Page '+(i+1));
+  b.onclick=()=>go(i);
+  nav.appendChild(b);
+});
+function go(n){
+  if(lock)return;
+  idx=Math.max(0,Math.min(total-1,n));
+  window.__currentSlideIndex = idx;
+  deck.style.transform=`translateX(${-idx*100}vw)`;
+  nav.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===idx));
+  if(window.__playSlide) setTimeout(()=>window.__playSlide(idx), 450);
+  lock=true;setTimeout(()=>lock=false,700);
+}
+let overviewOn=false;
+const ov=document.createElement('div');
+ov.id='overview';
+ov.style.cssText='position:fixed;inset:0;z-index:100;background:rgba(27,47,29,.95);backdrop-filter:blur(12px);display:none;overflow-y:auto;padding:4vh 4vw';
+document.body.appendChild(ov);
+function buildOverview(){
+  ov.innerHTML='';
+  const grid=document.createElement('div');
+  grid.style.cssText='display:grid;grid-template-columns:repeat(4,1fr);gap:2vh 1.6vw;max-width:90vw;margin:0 auto';
+  slides.forEach((s,i)=>{
+    const card=document.createElement('div');
+    card.style.cssText='cursor:pointer;overflow:hidden;border:2px solid '+(i===idx?'var(--chalk-yellow)':'rgba(245,240,232,.15)')+';transition:border-color .2s';
+    const wrap=document.createElement('div');
+    wrap.style.cssText='width:100%;aspect-ratio:16/9;overflow:hidden;position:relative;pointer-events:none;background:var(--board)';
+    const clone=s.cloneNode(true);
+    clone.style.cssText='width:100vw;height:100vh;transform:scale('+(1/4.5)+');transform-origin:top left;position:absolute;top:0;left:0;pointer-events:none';
+    wrap.appendChild(clone);
+    const label=document.createElement('div');
+    label.style.cssText='padding:6px 10px;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--chalk-grey)';
+    label.textContent=(i+1)+' / '+total;
+    card.appendChild(wrap);
+    card.appendChild(label);
+    card.onclick=()=>{toggleOverview();go(i)};
+    grid.appendChild(card);
+  });
+  ov.appendChild(grid);
+}
+function toggleOverview(){
+  overviewOn=!overviewOn;
+  if(overviewOn){buildOverview();ov.style.display='block';}
+  else{ov.style.display='none';}
+}
+addEventListener('keydown',e=>{
+  if(e.key==='Escape'){e.preventDefault();toggleOverview();return;}
+  if(e.key && e.key.toLowerCase()==='b' && !e.metaKey && !e.ctrlKey && !e.altKey){e.preventDefault();window.__setLowPowerMode(!window.__lowPowerMode);return;}
+  if(overviewOn)return;
+  if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '||e.key==='ArrowDown'){if(window.__pipeAdvance && window.__pipeAdvance()) return;go(idx+1);return;}
+  if(e.key==='ArrowLeft'||e.key==='PageUp'||e.key==='ArrowUp')go(idx-1);
+  if(e.key==='Home')go(0);if(e.key==='End')go(total-1);
+});
+let wheelTO=null,wheelAcc=0;
+addEventListener('wheel',e=>{
+  wheelAcc+=e.deltaY+e.deltaX;
+  if(Math.abs(wheelAcc)>50){if(wheelAcc>0 && window.__pipeAdvance && window.__pipeAdvance()){wheelAcc=0;}else{go(idx+(wheelAcc>0?1:-1));wheelAcc=0;}}
+  clearTimeout(wheelTO);wheelTO=setTimeout(()=>wheelAcc=0,150);
+},{passive:true});
+let tx=0,ty=0;
+addEventListener('touchstart',e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY},{passive:true});
+addEventListener('touchend',e=>{
+  const dx=(e.changedTouches[0].clientX-tx);const dy=(e.changedTouches[0].clientY-ty);
+  if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)){if(dx<0 && window.__pipeAdvance && window.__pipeAdvance()) return;go(idx+(dx<0?1:-1));}
+},{passive:true});
+go(0);
+</script>
+
+<script type="module">
+let motion;
+try { motion = await import('../assets/motion.min.js'); } catch(e1) {
+  try { motion = await import('https://cdn.jsdelivr.net/npm/motion@11.11.17/+esm'); } catch(e2) {
+    console.warn('[motion] failed', e1, e2);
+    document.querySelectorAll('[data-anim]').forEach(el=>{el.style.opacity='1';el.style.transform='none'});
+  }
+}
+if(motion){
+  const { animate, stagger } = motion;
+  const EASE = [.22, 1, .36, 1];
+  const slides = [...document.querySelectorAll('.slide')];
+  document.body.classList.add('motion-ready');
+  let lastIdx = -1;
+  function resetAnims(slide){slide.querySelectorAll('[data-anim]').forEach(el=>{el.style.opacity='';el.style.transform='';});}
+  function revealStatic(slide){resetAnims(slide);document.getAnimations?.().forEach(a=>a.cancel());slide.querySelectorAll('[data-anim]').forEach(el=>{el.style.opacity='1';el.style.transform='none';});}
+  function playSlide(i){
+    const slide=slides[i];if(!slide)return;lastIdx=i;
+    if(window.__lowPowerMode){revealStatic(slide);return;}
+    resetAnims(slide);const all=[...slide.querySelectorAll('[data-anim]')];if(!all.length)return;
+    const lines=all.filter(el=>el.dataset.anim==='line');const others=all.filter(el=>el.dataset.anim!=='line');
+    if(lines.length){if(others.length)animate(others,{opacity:[0,1],y:[8,0]},{duration:.5,delay:stagger(.1,{start:.1}),easing:EASE});animate(lines,{opacity:[0,1],y:[6,0]},{duration:.6,delay:stagger(.4,{start:.3}),easing:EASE});}
+    else{animate(all,{opacity:[0,1],y:[10,0]},{duration:.6,delay:stagger(.12,{start:.15}),easing:EASE});}
+  }
+  window.__playSlide=playSlide;
+  playSlide(0);
+}
+</script>
+</body>
+</html>
