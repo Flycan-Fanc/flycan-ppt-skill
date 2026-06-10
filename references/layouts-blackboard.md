@@ -1,6 +1,6 @@
-# Blackboard Sketch · 页面布局库
+# 黑板手绘板报风 · 页面布局库
 
-8 种黑板手绘板书风布局骨架。每种都是一个完整可粘贴的 `<section class="slide ...">` 代码块。
+8 种黑板板报风布局骨架。每种都是一个完整可粘贴的 `<div class="slide dark">` 代码块。
 
 ---
 
@@ -14,51 +14,48 @@
 
 ### B. 黑板风设计规则
 
-- 所有页面使用 `dark` 主题（黑板底色）
-- 粉笔白为正文色
-- 粉笔黄为高亮色（重点内容）
-- 粉笔蓝为辅助色（副标题、分类）
-- 粉笔红为强调色（圈注、标注）
-- 使用 `<span class="chalk-yellow">` / `<span class="chalk-blue">` / `<span class="chalk-red">` 标色
-- 元素间用 `border-color:rgba(245,240,232,0.15)` 做极淡分割线
+- 所有页面使用纯黑底色 `#0B0B0B`
+- 标题/正文：白色粉笔（默认色 `#F5F5F5`）
+- 关键词/重点：黄色粉笔 `.chalk-yellow`
+- 流程/逻辑：蓝色粉笔 `.chalk-blue`
+- 强调：粉色 `.chalk-pink` / 红色 `.chalk-red`
+- 正向：绿色 `.chalk-green`
+- 行动：橙色 `.chalk-orange`
+- 优先用 `chalk-box` / `chalk-underline` / `chalk-arrow` 做手绘效果
+- 如需人物示意，用 `<svg class="stickman">` 火柴人
 
 ### C. 动画规范
 
-- 默认：内容逐步出现，像老师写板书
-- 每行/每块依次揭示
-- 重点内容用黄/红色高亮时，高亮色在动画最后一步出现
-- **禁止**：横向滑动、缩放翻转等商业动画
+- 逐步揭示，像老师在黑板上边讲边写
+- 用 `data-anim="step"` 标注重步进元素
+- 禁止：飞入、弹跳、旋转、炫酷转场
 
-### D. 图片使用
+### D. 禁止
 
-- 黑板风以板书为主，图片少用
-- 如需图片，用白色描边边框 `style="border:2px solid rgba(245,240,232,0.3);"`
-- 流程图用 HTML/SVG 画，不要用图片
+- ❌ 真实照片、3D 图标
+- ❌ 渐变背景、毛玻璃
+- ❌ 商务/企业/杂志排版
+- ❌ 极细字体、无衬线商业感
+- ❌ Magzine-like chrome/foot
 
 ---
 
 ## Layout 1: 封面（Cover）
 
 ```html
-<section class="slide hero dark">
-  <div class="chrome">
-    <div>Flycan 进化论 · 板书</div>
-    <div>Vol.01</div>
+<div class="slide dark" data-animate="hero">
+  <div class="frame center" style="gap:1.5vh">
+    <div style="font-family:var(--mono);font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--chalk-dim);opacity:.6;margin-bottom:1vh" data-anim>—— 黑板 · 手绘 ——</div>
+    <h1 class="chalk-title" data-anim>主标题</h1>
+    <div class="chalk-h2 chalk-blue" data-anim style="margin-top:1vh">副标题 / 问题</div>
+    <div style="width:40%;height:2px;background:rgba(245,245,245,.15);margin:2vh auto" data-anim></div>
+    <div class="chalk-note" data-anim style="text-align:center;max-width:50vw">一句话说明 / 引言</div>
   </div>
-  <div class="frame" style="display:grid; gap:4vh; align-content:center; min-height:78vh; text-align:center">
-    <div class="chalk-marker" style="margin-bottom:1vh" data-anim>—— 黑板 ——</div>
-    <h1 class="board-title" data-anim>标题</h1>
-    <h2 class="h-sub" style="color:#7AADD9" data-anim>副标题 / 问题</h2>
-    <div style="margin-top:3vh; width:60%; height:2px; background:rgba(245,240,232,0.2); margin-inline:auto" data-anim></div>
-    <p class="lead" style="max-width:50vw; margin:0 auto; margin-top:2vh" data-anim>
-      Flycan 进化论
-    </p>
+  <div class="chalk-foot">
+    <span>Flycan 进化论</span>
+    <span>01 / NN</span>
   </div>
-  <div class="foot" style="border-top-color:rgba(245,240,232,0.15)">
-    <div>Flycan 进化论 · 板书</div>
-    <div>— · —</div>
-  </div>
-</section>
+</div>
 ```
 
 ---
@@ -66,197 +63,152 @@
 ## Layout 2: 核心问题（Core Question）
 
 ```html
-<section class="slide dark">
-  <div class="chrome">
-    <div>核心问题 · Question</div>
-    <div>01 / NN</div>
-  </div>
-  <div class="frame" style="display:grid; gap:3vh; align-content:center; min-height:78vh">
-    <span class="chalk-blue" style="font-family:var(--mono); font-size:14px; letter-spacing:.3em; text-transform:uppercase" data-anim>QUESTION · 核心问题</span>
-    <h1 style="font-family:var(--serif-zh); font-weight:700; font-size:6.5vw; line-height:1.15; letter-spacing:-.01em; color:#F5F0E8" data-anim>
-      一个需要被回答的问题？
-    </h1>
-    <div style="margin-top:2vh; display:flex; gap:1vw; align-items:center" data-anim>
-      <span style="color:#E8D56E; font-size:2vw">✎</span>
-      <span style="font-family:var(--sans-zh); font-size:max(15px,1.1vw); color:rgba(245,240,232,0.7)">—— 让我们来推导</span>
+<div class="slide dark" data-animate="cascade">
+  <div class="frame center">
+    <span class="chalk-label" data-anim style="color:var(--chalk-yellow)">Q · 核心问题</span>
+    <h1 class="chalk-h1 chalk-yellow" data-anim style="margin-top:1.5vh;text-align:center;max-width:80%">一个需要被回答的问题？</h1>
+    <div style="width:30%;height:2px;background:rgba(245,245,245,.1);margin:2.5vh auto" data-anim></div>
+    <div class="chalk-box" data-anim style="max-width:60%;text-align:center;margin:0 auto">
+      <div class="chalk-body" style="text-align:left">
+        背景说明问题由来的文字。<br><br>
+        • 要点 1<br>
+        • 要点 2<br>
+        • 要点 3
+      </div>
+    </div>
+    <div class="chalk-body chalk-yellow" data-anim style="margin-top:2vh;text-align:center">
+      → 让我们来推导
     </div>
   </div>
-  <div class="foot" style="border-top-color:rgba(245,240,232,0.15)">
-    <div>Page · 问题</div>
-    <div>01 / NN</div>
+  <div class="chalk-foot">
+    <span>核心问题</span>
+    <span>02 / NN</span>
   </div>
-</section>
+</div>
 ```
 
 ---
 
-## Layout 3: 推导过程（Deduction Process）
+## Layout 3: 推导过程（Deduction）
 
 ```html
-<section class="slide dark">
-  <div class="chrome">
-    <div>推导 · Deduction</div>
-    <div>02 / NN</div>
-  </div>
-  <div class="frame" style="padding-top:3vh">
-    <span class="chalk-blue" style="font-family:var(--mono); font-size:14px; letter-spacing:.2em;" data-anim>推导过程 · DEDUCTION</span>
-    <h2 style="font-family:var(--serif-zh); font-weight:600; font-size:3.2vw; margin:2vh 0 3vh; color:#F5F0E8" data-anim>推导标题</h2>
-
-    <div style="display:flex; flex-direction:column; gap:2.5vh">
-      <div style="display:grid; grid-template-columns:auto 1fr; gap:1.5vw 2vw; align-items:start" data-anim>
-        <span style="font-family:var(--mono); color:#E8D56E; font-weight:600; font-size:1.3vw">01</span>
-        <div>
-          <p style="font-family:var(--sans-zh); font-size:max(15px,1.25vw); line-height:1.65; color:#F5F0E8">第一步推导，用粉笔白写清晰。</p>
-          <span class="chalk-yellow" style="font-size:max(13px,1vw)">→ 关键推论</span>
-        </div>
-      </div>
-      <div style="height:1px; background:rgba(245,240,232,0.12); width:100%" data-anim></div>
-      <div style="display:grid; grid-template-columns:auto 1fr; gap:1.5vw 2vw; align-items:start" data-anim>
-        <span style="font-family:var(--mono); color:#E8D56E; font-weight:600; font-size:1.3vw">02</span>
-        <div>
-          <p style="font-family:var(--sans-zh); font-size:max(15px,1.25vw); line-height:1.65; color:#F5F0E8">第二步推导。</p>
-          <span class="chalk-yellow" style="font-size:max(13px,1vw)">→ 另一个推论</span>
-        </div>
-      </div>
-      <div style="height:1px; background:rgba(245,240,232,0.12); width:100%" data-anim></div>
-      <div style="display:grid; grid-template-columns:auto 1fr; gap:1.5vw 2vw; align-items:start" data-anim>
-        <span style="font-family:var(--mono); color:#D9756B; font-weight:600; font-size:1.3vw">03</span>
-        <div>
-          <p style="font-family:var(--sans-zh); font-size:max(15px,1.25vw); line-height:1.65; color:#F5F0E8">第三步，得出 <span class="chalk-red">关键结论</span>。</p>
-          <span style="font-family:var(--sans-zh); font-size:max(13px,1.05vw); color:rgba(245,240,232,0.6)">← 推导完成</span>
-        </div>
-      </div>
+<div class="slide dark" data-animate="cascade">
+  <div class="frame">
+    <span class="chalk-label" data-anim>推导 · DEDUCTION</span>
+    <div class="chalk-h2" data-anim style="margin:1.5vh 0 2.5vh">推导标题</div>
+    <div class="flow-step" data-anim>
+      <div class="step-label">步骤 01</div>
+      <div class="step-body">第一步推导文字<br><span class="chalk-yellow">→ 关键推论</span></div>
+    </div>
+    <svg class="chalk-arrow" viewBox="0 0 60 20" data-anim="fade"><path d="M5,10 H50 M45,4 L52,10 L45,16" stroke="currentColor"/></svg>
+    <div class="flow-step blue" data-anim>
+      <div class="step-label">步骤 02</div>
+      <div class="step-body">第二步推导<br><span class="chalk-yellow">→ 另一个推论</span></div>
+    </div>
+    <svg class="chalk-arrow" viewBox="0 0 60 20" data-anim="fade"><path d="M5,10 H50 M45,4 L52,10 L45,16" stroke="currentColor"/></svg>
+    <div class="flow-step pink" data-anim>
+      <div class="step-label">结论</div>
+      <div class="step-body chalk-pink">最终结论</div>
     </div>
   </div>
-  <div class="foot" style="border-top-color:rgba(245,240,232,0.15)">
-    <div>Page · 推导</div>
-    <div>02 / NN</div>
+  <div class="chalk-foot">
+    <span>推导过程</span>
+    <span>03 / NN</span>
   </div>
-</section>
+</div>
 ```
 
 ---
 
-## Layout 4: 流程图（Flowchart）
+## Layout 4: 对比分析（Compare & Contrast）
 
 ```html
-<section class="slide dark">
-  <div class="chrome">
-    <div>流程 · Flow</div>
-    <div>03 / NN</div>
-  </div>
-  <div class="frame" style="padding-top:3vh">
-    <span class="chalk-blue" style="font-family:var(--mono); font-size:14px; letter-spacing:.2em" data-anim>流程图 · FLOW</span>
-    <h2 style="font-family:var(--serif-zh); font-weight:600; font-size:3.2vw; margin:2vh 0 3vh; color:#F5F0E8" data-anim>流程标题</h2>
-
-    <div style="display:flex; align-items:center; justify-content:center; gap:1vw; flex:1; padding:2vh 0" data-anim>
-      <!-- Step 1 -->
-      <div style="border:2px solid rgba(245,240,232,0.4); padding:2vh 2vw; text-align:center; min-width:12vw">
-        <div style="font-family:var(--sans-zh); font-weight:600; font-size:1.2vw; color:#E8D56E; margin-bottom:1vh" class="chalk-yellow">步骤一</div>
-        <div style="font-family:var(--sans-zh); font-size:max(13px,.95vw); color:rgba(245,240,232,0.8)">描述</div>
+<div class="slide dark" data-animate="directional">
+  <div class="frame">
+    <span class="chalk-label" data-anim style="color:var(--chalk-blue)">对比 · COMPARE</span>
+    <div class="chalk-h2" data-anim style="margin:1.5vh 0 2.5vh">对比标题</div>
+    <div class="split" style="flex:1;align-items:stretch">
+      <div class="chalk-box dashed" data-anim="left" style="display:flex;flex-direction:column;gap:1.2vh">
+        <div class="chalk-label" style="color:var(--chalk-dim);margin-bottom:.5vh">A · 旧方式</div>
+        <div class="chalk-body" style="color:var(--chalk-dim)">× 局限性描述</div>
+        <div class="chalk-body" style="color:var(--chalk-dim)">× 局限性描述</div>
       </div>
-      <!-- Arrow -->
-      <div style="font-size:2vw; color:rgba(245,240,232,0.4)">→</div>
-      <!-- Step 2 -->
-      <div style="border:2px solid rgba(245,240,232,0.4); padding:2vh 2vw; text-align:center; min-width:12vw">
-        <div style="font-family:var(--sans-zh); font-weight:600; font-size:1.2vw; color:#E8D56E; margin-bottom:1vh" class="chalk-yellow">步骤二</div>
-        <div style="font-family:var(--sans-zh); font-size:max(13px,.95vw); color:rgba(245,240,232,0.8)">描述</div>
-      </div>
-      <!-- Arrow -->
-      <div style="font-size:2vw; color:rgba(245,240,232,0.4)">→</div>
-      <!-- Step 3 -->
-      <div style="border:2px solid var(--accent); padding:2vh 2vw; text-align:center; min-width:12vw">
-        <div style="font-family:var(--sans-zh); font-weight:600; font-size:1.2vw; color:#D9756B; margin-bottom:1vh">结论</div>
-        <div style="font-family:var(--sans-zh); font-size:max(13px,.95vw); color:rgba(245,240,232,0.8)">结果</div>
+      <div class="chalk-box yellow" data-anim="right" style="display:flex;flex-direction:column;gap:1.2vh">
+        <div class="chalk-label chalk-yellow" style="margin-bottom:.5vh">B · 新方式 ✓</div>
+        <div class="chalk-body">→ 优势描述</div>
+        <div class="chalk-body">→ 优势描述</div>
       </div>
     </div>
+    <div class="chalk-box chalk-blue" data-anim style="margin-top:auto;text-align:center;border-style:dotted">
+      <span style="color:var(--chalk);font-size:max(12px,.95vw)">结论总结</span>
+    </div>
   </div>
-  <div class="foot" style="border-top-color:rgba(245,240,232,0.15)">
-    <div>Page · 流程</div>
-    <div>03 / NN</div>
+  <div class="chalk-foot">
+    <span>对比分析</span>
+    <span>04 / NN</span>
   </div>
-</section>
+</div>
 ```
 
 ---
 
-## Layout 5: 对比分析（Compare & Contrast）
+## Layout 5: 思维导图（Mind Map）
 
 ```html
-<section class="slide dark">
-  <div class="chrome">
-    <div>对比 · Compare</div>
-    <div>04 / NN</div>
-  </div>
-  <div class="frame" style="padding-top:3vh">
-    <span class="chalk-blue" style="font-family:var(--mono); font-size:14px; letter-spacing:.2em" data-anim>对比分析 · COMPARE</span>
-    <h2 style="font-family:var(--serif-zh); font-weight:600; font-size:3.2vw; margin:2vh 0 3vh; color:#F5F0E8" data-anim>对比标题</h2>
-
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:3vw; flex:1; align-items:start">
-      <!-- 左列 -->
-      <div style="border:2px dashed rgba(245,240,232,0.25); padding:2.5vh 2vw" data-anim>
-        <div style="font-family:var(--mono); font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:rgba(245,240,232,0.5); margin-bottom:1.5vh">A · 旧方式</div>
-        <ul style="list-style:none; display:flex; flex-direction:column; gap:1.2vh">
-          <li style="font-family:var(--sans-zh); font-size:max(14px,1.1vw); color:rgba(245,240,232,0.7); padding-left:1.2em; position:relative">× 局限性描述</li>
-          <li style="font-family:var(--sans-zh); font-size:max(14px,1.1vw); color:rgba(245,240,232,0.7); padding-left:1.2em; position:relative">× 局限性描述</li>
-        </ul>
+<div class="slide dark" data-animate="cascade">
+  <div class="frame">
+    <span class="chalk-label" data-anim>思维导图 · MIND MAP</span>
+    <div class="mind-map-center" data-anim>中心主题</div>
+    <div class="mind-map-branches" data-anim>
+      <div class="mind-map-branch">
+        <div class="branch-label chalk-yellow">分支 01</div>
+        <div class="branch-desc">说明文字</div>
       </div>
-      <!-- 右列 -->
-      <div style="border:2px solid var(--accent); padding:2.5vh 2vw; position:relative" data-anim>
-        <div style="font-family:var(--mono); font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:#E8D56E; margin-bottom:1.5vh">B · 新方式 ✓</div>
-        <ul style="list-style:none; display:flex; flex-direction:column; gap:1.2vh">
-          <li style="font-family:var(--sans-zh); font-size:max(14px,1.1vw); color:#F5F0E8; padding-left:1.2em; position:relative"><span class="chalk-yellow">→</span> 优势描述</li>
-          <li style="font-family:var(--sans-zh); font-size:max(14px,1.1vw); color:#F5F0E8; padding-left:1.2em; position:relative"><span class="chalk-yellow">→</span> 优势描述</li>
-        </ul>
-        <div style="position:absolute; top:-1.2vh; right:1vw; font-size:1.2vw; color:#E8D56E" class="chalk-yellow">★ 推荐</div>
+      <div class="mind-map-branch">
+        <div class="branch-label chalk-blue">分支 02</div>
+        <div class="branch-desc">说明文字</div>
+      </div>
+      <div class="mind-map-branch">
+        <div class="branch-label chalk-green">分支 03</div>
+        <div class="branch-desc">说明文字</div>
+      </div>
+      <div class="mind-map-branch">
+        <div class="branch-label chalk-pink">分支 04</div>
+        <div class="branch-desc">说明文字</div>
       </div>
     </div>
   </div>
-  <div class="foot" style="border-top-color:rgba(245,240,232,0.15)">
-    <div>Page · 对比</div>
-    <div>04 / NN</div>
+  <div class="chalk-foot">
+    <span>思维导图</span>
+    <span>05 / NN</span>
   </div>
-</section>
+</div>
 ```
 
 ---
 
-## Layout 6: 重点圈注（Highlight & Annotate）
+## Layout 6: 重点清单（Checklist）
 
 ```html
-<section class="slide dark">
-  <div class="chrome">
-    <div>重点 · Highlight</div>
-    <div>05 / NN</div>
-  </div>
-  <div class="frame" style="padding-top:3vh">
-    <span class="chalk-blue" style="font-family:var(--mono); font-size:14px; letter-spacing:.2em" data-anim>重点圈注 · KEY POINTS</span>
-
-    <div style="display:flex; flex-direction:column; gap:3vh; flex:1; justify-content:center; padding:2vh 0">
-      <div style="display:flex; align-items:center; gap:1.5vw" data-anim>
-        <span style="font-family:var(--serif-zh); font-size:2.5vw; color:#E8D56E; font-weight:700" class="chalk-yellow">01</span>
-        <span style="font-family:var(--serif-zh); font-size:2.8vw; color:#F5F0E8; line-height:1.2">第一个重点</span>
-        <span style="font-family:var(--sans-zh); font-size:max(13px,1.05vw); color:#D9756B; margin-left:1vw" class="chalk-red">← 核心</span>
-      </div>
-      <div style="height:1px; background:rgba(245,240,232,0.1)" data-anim></div>
-      <div style="display:flex; align-items:center; gap:1.5vw" data-anim>
-        <span style="font-family:var(--serif-zh); font-size:2.5vw; color:#E8D56E; font-weight:700" class="chalk-yellow">02</span>
-        <span style="font-family:var(--serif-zh); font-size:2.8vw; color:#F5F0E8; line-height:1.2">第二个重点</span>
-        <span style="font-family:var(--mono); font-size:max(12px,.9vw); color:#7AADD9; margin-left:1vw">detail</span>
-      </div>
-      <div style="height:1px; background:rgba(245,240,232,0.1)" data-anim></div>
-      <div style="display:flex; align-items:center; gap:1.5vw" data-anim>
-        <span style="font-family:var(--serif-zh); font-size:2.5vw; color:#D9756B; font-weight:700" class="chalk-red">03</span>
-        <span style="font-family:var(--serif-zh); font-size:2.8vw; color:#F5F0E8; line-height:1.2"><span class="chalk-red">最重要</span>的一个</span>
-        <span style="font-family:var(--sans-zh); font-size:max(13px,1.05vw); color:#E8D56E; margin-left:1vw" class="chalk-yellow">!! 牢记</span>
-      </div>
+<div class="slide dark" data-animate="cascade">
+  <div class="frame">
+    <span class="chalk-label" data-anim>清单 · CHECKLIST</span>
+    <div class="chalk-h2" data-anim style="margin:1.5vh 0 2.5vh">标题</div>
+    <ul class="chalk-list" data-anim>
+      <li class="done" data-anim="step">已完成事项</li>
+      <li data-anim="step">待办事项 1</li>
+      <li data-anim="step">待办事项 2</li>
+      <li data-anim="step" class="chalk-yellow">重要待办</li>
+    </ul>
+    <div class="chalk-box yellow" data-anim style="margin-top:auto;text-align:center">
+      <span class="chalk-yellow">所有要点总结</span>
     </div>
   </div>
-  <div class="foot" style="border-top-color:rgba(245,240,232,0.15)">
-    <div>Page · 重点</div>
-    <div>05 / NN</div>
+  <div class="chalk-foot">
+    <span>要点清单</span>
+    <span>06 / NN</span>
   </div>
-</section>
+</div>
 ```
 
 ---
@@ -264,72 +216,47 @@
 ## Layout 7: 结论页（Conclusion）
 
 ```html
-<section class="slide hero dark">
-  <div class="chrome">
-    <div>结论 · Conclusion</div>
-    <div>NN / NN</div>
+<div class="slide dark" data-animate="hero">
+  <div class="frame center">
+    <div style="width:30%;height:2px;background:rgba(245,245,245,.15);margin-bottom:3vh" data-anim></div>
+    <svg class="stickman lg" viewBox="0 0 100 180" data-anim="fade">
+      <circle cx="50" cy="20" r="14"/>
+      <line x1="50" y1="34" x2="50" y2="120"/>
+      <line x1="50" y1="55" x2="25" y2="85"/>
+      <line x1="50" y1="55" x2="75" y2="85"/>
+      <line x1="50" y1="120" x2="30" y2="170"/>
+      <line x1="50" y1="120" x2="70" y2="170"/>
+    </svg>
+    <h1 class="chalk-h1 chalk-yellow" data-anim style="margin-top:1.5vh;text-align:center">结论</h1>
+    <div class="chalk-note" data-anim style="margin-top:1.5vh;text-align:center;max-width:60%">一句话总结核心结论。</div>
   </div>
-  <div class="frame" style="display:grid; gap:4vh; align-content:center; min-height:78vh; text-align:center">
-    <div style="width:40%; height:3px; background:rgba(245,240,232,0.2); margin:0 auto" data-anim></div>
-    <h1 style="font-family:var(--serif-zh); font-weight:700; font-size:6vw; line-height:1.2; color:#E8D56E" data-anim class="chalk-yellow">
-      结论
-    </h1>
-    <p style="font-family:var(--sans-zh); font-size:max(16px,1.3vw); line-height:1.7; max-width:60vw; margin:0 auto; color:#F5F0E8" data-anim>
-      一句话总结核心结论。
-    </p>
-    <div style="margin-top:3vh; display:flex; justify-content:center; gap:2vw" data-anim>
-      <span style="font-family:var(--mono); font-size:13px; letter-spacing:.2em; color:#7AADD9">FLYCAN · 2026</span>
-    </div>
+  <div class="chalk-foot">
+    <span>结论</span>
+    <span>NN / NN</span>
   </div>
-  <div class="foot" style="border-top-color:rgba(245,240,232,0.15)">
-    <div>结论 · 下课</div>
-    <div>— · —</div>
-  </div>
-</section>
+</div>
 ```
 
 ---
 
-## Layout 8: 列表展开（Bullet Points）
+## Layout 8: 金句收束（Quote）
 
 ```html
-<section class="slide dark">
-  <div class="chrome">
-    <div>要点 · Points</div>
-    <div>06 / NN</div>
-  </div>
-  <div class="frame" style="padding-top:3vh">
-    <span class="chalk-blue" style="font-family:var(--mono); font-size:14px; letter-spacing:.2em" data-anim>要点总结 · KEY POINTS</span>
-
-    <div style="display:flex; flex-direction:column; gap:2.5vh; flex:1; justify-content:center; padding:3vh 2vw; margin-top:2vh">
-      <div style="display:grid; grid-template-columns:auto 1fr; gap:1.5vw; align-items:start" data-anim>
-        <span style="color:#E8D56E; font-size:1.5vw; margin-top:0.1em">✦</span>
-        <div>
-          <div style="font-family:var(--serif-zh); font-weight:600; font-size:2.2vw; color:#F5F0E8; margin-bottom:0.8vh">要点标题一</div>
-          <p style="font-family:var(--sans-zh); font-size:max(14px,1.05vw); line-height:1.6; color:rgba(245,240,232,0.75)">展开说明文字。</p>
-        </div>
-      </div>
-      <div style="height:1px; background:rgba(245,240,232,0.1)" data-anim></div>
-      <div style="display:grid; grid-template-columns:auto 1fr; gap:1.5vw; align-items:start" data-anim>
-        <span style="color:#7AADD9; font-size:1.5vw; margin-top:0.1em">✦</span>
-        <div>
-          <div style="font-family:var(--serif-zh); font-weight:600; font-size:2.2vw; color:#F5F0E8; margin-bottom:0.8vh">要点标题二</div>
-          <p style="font-family:var(--sans-zh); font-size:max(14px,1.05vw); line-height:1.6; color:rgba(245,240,232,0.75)">展开说明文字。</p>
-        </div>
-      </div>
-      <div style="height:1px; background:rgba(245,240,232,0.1)" data-anim></div>
-      <div style="display:grid; grid-template-columns:auto 1fr; gap:1.5vw; align-items:start" data-anim>
-        <span style="color:#D9756B; font-size:1.5vw; margin-top:0.1em">✦</span>
-        <div>
-          <div style="font-family:var(--serif-zh); font-weight:600; font-size:2.2vw; color:#F5F0E8; margin-bottom:0.8vh"><span class="chalk-red">要点标题三</span></div>
-          <p style="font-family:var(--sans-zh); font-size:max(14px,1.05vw); line-height:1.6; color:rgba(245,240,232,0.75)">展开说明文字。</p>
-        </div>
-      </div>
+<div class="slide dark" data-animate="cascade">
+  <div class="frame center">
+    <span class="chalk-label" data-anim style="color:var(--chalk-yellow)">金句 · QUOTE</span>
+    <div class="chalk-h1" data-anim style="margin-top:2vh;text-align:center;max-width:70%;line-height:1.35">
+      "一句话金句。"
+    </div>
+    <div style="width:15%;height:2px;background:rgba(245,245,245,.12);margin:2.5vh auto" data-anim></div>
+    <div class="chalk-note" data-anim style="text-align:center;max-width:55%">解释金句的文字。</div>
+    <div style="margin-top:3vh;display:flex;gap:1.5vw;justify-content:center" data-anim>
+      <span class="chalk-dim" style="font-family:var(--mono);font-size:9px;letter-spacing:.25em">FLYCAN · 2026</span>
     </div>
   </div>
-  <div class="foot" style="border-top-color:rgba(245,240,232,0.15)">
-    <div>Page · 要点</div>
-    <div>06 / NN</div>
+  <div class="chalk-foot">
+    <span>金句</span>
+    <span>NN / NN</span>
   </div>
-</section>
+</div>
 ```

@@ -1,20 +1,35 @@
 # 组件手册（Components）
 
-通用组件和样式用法，适用于 Avocado Nature 和 Blackboard Sketch 两种风格。
+通用组件和样式用法，适用于 Avocado Nature、Dark Green Magazine 和 Blackboard Sketch 三种风格。
 
 ---
 
-## 通用排版层级
+## Style 对照
 
-| 层级 | 类名 | 字体 | 用途 |
-|------|------|------|------|
-| 巨标题 | `h-hero` | Noto Serif SC（衬线） | 封面主标题 |
-| 大标题 | `h-xl` | Noto Serif SC（衬线） | 章节/内容标题 |
-| 副标题 | `h-sub` | Noto Serif SC（衬线） | 副标题/引语 |
-| 中等标题 | `h-md` | Noto Serif SC（衬线） | 小标题 |
-| 引语 | `lead` | Noto Serif SC（衬线） | 重要引语 |
-| 正文 | `.body-zh` | Noto Sans SC（非衬线） | 大段正文 |
-| 元数据 | `.meta` / `.mono` | IBM Plex Mono（等宽） | 标签/页码 |
+| 组件/类名 | Avocado Nature | Dark Green Magazine | Blackboard Sketch |
+|-----------|----------------|---------------------|-------------------|
+| 标题类 | `.h-hero` / `.h-xl` | `.h-hero` / `.h-xl` | `.chalk-title` / `.chalk-h1` |
+| 正文类 | `.body-zh` / `.lead` | `.body-text` / `.lead` | `.chalk-body` / `.chalk-note` |
+| 元数据 | `.meta` / `.meta-row` | `.meta` / `.meta-row` | `.chalk-label` / `.chalk-foot` |
+| 强调容器 | `.callout` | `.callout` | `.chalk-box` / `.chalk-underline` |
+| 数字展示 | `.stat-card` / `.big-num` | `.stat-card` / `.big-num` | —（手写体） |
+| 流程 | `.pipeline` / `.step` | `.pipeline` / `.step` | `.flow-step` / `.chalk-arrow` |
+| 对比 | `.split` | `.split` | `.split` / `.vs-badge` |
+| 图标 | Lucide `data-lucide="..."` | Lucide `data-lucide="..."` | SVG 手绘 / 火柴人 |
+| 动效 | cascade / hero / quote / directional / pipeline | 同上 | step-by-step 逐步揭示 |
+
+---
+
+## 排版层级对照
+
+| 层级 | Avocado | Dark Magazine | Blackboard |
+|------|---------|---------------|------------|
+| 巨标题 | `h-hero` 10vw Noto Serif SC | `h-hero` 9vw Noto Serif SC | `chalk-title` 7vw ZCOOL XiaoWei |
+| 大标题 | `h-xl` 5.8vw | `h-xl` 5.2vw | `chalk-h1` 5.5vw |
+| 副标题 | `h-sub` 2.8vw | `h-sub` 2.5vw | `chalk-h2` 3.6vw |
+| 引语 | `lead` 1.65vw | `lead` 1.6vw | `chalk-note` 1.1vw |
+| 正文 | `body-zh` Noto Sans | `body-text` Noto Sans | `chalk-body` Noto Sans |
+| 元数据 | `meta` IBM Plex Mono | `meta` IBM Plex Mono | `chalk-label` JetBrains Mono |
 
 ---
 
@@ -22,65 +37,83 @@
 
 ### Avocado Nature
 
-使用 CSS 变量引用颜色：
+```html
+<span style="color:var(--primary)">主色文字</span>
+<span style="color:var(--primary-light)">辅助色文字</span>
+```
+
+### Dark Green Magazine
 
 ```html
-<!-- 主色文字 -->
-<span style="color:var(--primary)">重要文字</span>
-<!-- 辅助色 -->
-<span style="color:var(--primary-light)">次要文字</span>
-<!-- 强调色背景 -->
-<div style="background:var(--primary); color:var(--paper); padding:2vh 2vw;">
+<span style="color:var(--accent)">强调色文字</span>
+<span style="color:var(--text-soft)">次要文字</span>
 ```
 
 ### Blackboard Sketch
 
-使用预设 chalk 类：
-
 ```html
 <span class="chalk-yellow">黄色重点</span>
-<span class="chalk-blue">蓝色副标题</span>
-<span class="chalk-red">红色强调</span>
+<span class="chalk-blue">蓝色流程</span>
+<span class="chalk-pink">粉色强调</span>
+<span class="chalk-green">绿色正向</span>
+<span class="chalk-orange">橙色行动</span>
+<span class="chalk-red">红色风险</span>
 ```
 
 ---
 
 ## 图标
 
-使用 Lucide 图标库，CDN 方式引用：
+### Avocado & Dark Magazine — Lucide
 
 ```html
-<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 <i data-lucide="book-open" class="ico-md"></i>
 <i data-lucide="lightbulb" class="ico-md"></i>
-<i data-lucide="target" class="ico-md"></i>
-<i data-lucide="trending-up" class="ico-md"></i>
-<script>lucide.createIcons();</script>
 ```
 
-Avocado 推荐图标：`book-open` / `leaf` / `sparkles` / `lightbulb` / `target` / `trending-up` / `compass` / `feather`
+### Blackboard Sketch — SVG 手绘元素
 
-Blackboard 推荐图标：`graduation-cap` / `pencil` / `pen-tool` / `book-open` / `brain` / `circle-dot` / `arrow-right` / `list`
+黑板风使用 `chalk-arrow` SVG 箭头和 `stickman` SVG 火柴人：
+
+```html
+<!-- 手绘箭头 -->
+<svg class="chalk-arrow" viewBox="0 0 60 20"><path d="M5,10 H50 M45,4 L52,10 L45,16"/></svg>
+<svg class="chalk-arrow yellow" viewBox="0 0 60 20">...</svg>
+
+<!-- 火柴人 -->
+<svg class="stickman" viewBox="0 0 100 180">
+  <circle cx="50" cy="20" r="14"/>
+  <line x1="50" y1="34" x2="50" y2="120"/>
+  <line x1="50" y1="55" x2="25" y2="85"/>
+  <line x1="50" y1="55" x2="75" y2="85"/>
+  <line x1="50" y1="120" x2="30" y2="170"/>
+  <line x1="50" y1="120" x2="70" y2="170"/>
+</svg>
+```
 
 ---
 
 ## 动效系统
 
-### 动效 Recipe
+| recipe | Avocado / Dark Magazine | Blackboard |
+|--------|------------------------|------------|
+| 默认 | cascade — 级联淡入 y:12→0 | step-by-step — 逐步揭示 |
+| hero | 更慢淡入 y:14→0, 800ms | 播放初始动画 |
+| quote | 逐行揭示 | 逐条显示 |
+| directional | 左列左入/右列右入 | 左右分入 |
+| pipeline | 手动逐步推进 (→ 键) | — |
 
-| recipe | 用法 | 效果 |
-|---|---|---|
-| 默认(cascade) | 不加 data-animate | 级联淡入（y:12→0） |
-| `hero` | hero 页自动 | 更慢淡入（y:14→0, 800ms） |
-| `quote` | 金句页 | 逐行揭示 |
-| `directional` | 对比页 | 左列左入/右列右入 |
-| `pipeline` | 流程页 | 手动逐步推进 |
-
-### 实例
+### 动画标签
 
 ```html
-<section class="slide light" data-animate="hero">
-  <h1 class="h-hero" data-anim>标题</h1>
-  <p class="lead" data-anim>正文</p>
-</section>
+<!-- Avocado / Dark Magazine -->
+<div data-anim>级联淡入</div>
+<div data-anim="left">从左滑入</div>
+<div data-anim="right">从右滑入</div>
+<div data-anim="line">逐行揭示</div>
+
+<!-- Blackboard Sketch -->
+<div data-anim>淡入上移</div>
+<div data-anim="fade">仅淡入</div>
+<div data-anim="step">步进（等用户推进）</div>
 ```

@@ -2,10 +2,11 @@
 
 一个适配 Claude Code / Codex 等 Agent 环境的网页 PPT 技能，用于生成**单文件 HTML 横向翻页 PPT**。
 
-内置两套视觉系统：
+内置三套视觉系统：
 
 - **Style Avocado: 清新牛油果自然风**。像一本正在阅读的书，适合知识传播、观点表达、阅读感悟。
-- **Style Blackboard: 黑板手绘板书风**。像老师在黑板前推导，适合 AI、编程、方法论讲解。
+- **Style Dark Magazine: 深绿极简杂志风**。像一本深色主题的设计杂志，适合技术分享、AI、编程、效率系统。
+- **Style Blackboard: 黑板手绘板报风**。像老师在黑板前手绘推导，适合 AI、编程、计算机网络、学习方法论。
 
 由 Flycan 基于 guizang-ppt-skill 的设计理念创建，专注于知识传播和独立思考的内容呈现。
 
@@ -33,10 +34,11 @@
 ## 效果
 
 - 🥑 **Avocado Nature**: 牛油果绿主色、莫兰迪绿辅助、原木风、大量留白、治愈感
-- 🎯 **Blackboard Sketch**: 深绿黑板、粉笔白/黄/蓝/红、手绘线条、板书推导
+- 🌲 **Dark Green Magazine**: 深绿背景、深海蓝/古典金/玫瑰粉/冷杉绿主题色、杂志感排版
+- 🎯 **Blackboard Sketch**: 纯黑底色、彩色粉笔白/黄/蓝/粉/绿/橙/红、火柴人手绘推导
 - 📐 **横向左右翻页**: 键盘 ← → / 滚轮 / 触屏滑动 / 底部圆点 / ESC 索引
-- 🧩 **两种风格各自布局**: Avocado 10 种 / Blackboard 8 种
-- 🎨 **主题色预设**: Avocado 4 套 / Blackboard 固定配色
+- 🧩 **三种风格各自布局**: Avocado 10 种 / Dark Magazine 10 种 / Blackboard 8 种
+- 🎨 **主题色预设**: Avocado 4 套 / Dark Magazine 4 套 / Blackboard 固定配色
 - 📄 **单文件 HTML**: 不需要构建、不需要服务器，浏览器直接打开
 
 ## 示例
@@ -47,7 +49,13 @@
 |------|--------|--------|
 | ![cover](examples/avocado-cover.png) | ![content](examples/avocado-content.png) | ![compound](examples/avocado-compound.png) |
 
-### Style Blackboard · 黑板手绘板书风
+### Style Dark Green Magazine · 深绿极简杂志风
+
+| 封面 | 内容页 |
+|------|--------|
+| ![cover](examples/dark-magazine-cover.png) | ![content](examples/dark-magazine-content.png) |
+
+### Style Blackboard Sketch · 黑板手绘板报风
 
 | 封面 | 推导页 |
 |------|--------|
@@ -114,9 +122,9 @@ flycan-ppt-skill
 
 ## 使用流程
 
-1. **选择风格** — Avocado Nature（牛油果自然风）或 Blackboard Sketch（黑板手绘板书风）
+1. **选择风格** — Avocado Nature（牛油果自然风）/ Dark Green Magazine（深绿极简杂志风）/ Blackboard Sketch（黑板手绘板报风）
 2. **需求澄清** — 风格、受众、内容类型、素材、配图需求、主题色、硬约束
-3. **拷贝模板** — Avocado 用 `assets/template-avocado.html`，Blackboard 用 `assets/template-blackboard.html`
+3. **拷贝模板** — 对应风格拷贝 `assets/template-*.html`
 4. **填充内容** — 从对应 layout 骨架里挑、粘、改文案
 5. **自检** — 对照 `references/checklist.md` 检查
 6. **预览** — 浏览器直接打开
@@ -134,22 +142,28 @@ flycan-ppt-skill/
 ├── bin/
 │   └── cli.js                  ← npx 安装脚本
 ├── assets/
-│   ├── template-avocado.html   ← 风格一: 牛油果自然风模板
-│   ├── template-blackboard.html ← 风格二: 黑板手绘板书风模板
-│   └── motion.min.js           ← Motion One 本地副本
+│   ├── template-avocado.html     ← 风格一: 牛油果自然风模板
+│   ├── template-dark-magazine.html ← 风格二: 深绿极简杂志风模板
+│   ├── template-blackboard.html  ← 风格三: 黑板手绘板报风模板
+│   └── motion.min.js             ← Motion One 本地副本
 ├── examples/
-│   ├── example-avocado.html    ← 牛油果风完整示例
-│   ├── example-blackboard.html ← 黑板风完整示例
-│   ├── avocado-cover.png       ← 示例封面截图
-│   ├── avocado-content.png     ← 示例内容页截图
-│   ├── avocado-compound.png    ← 示例数据页截图
-│   ├── blackboard-cover.png    ← 黑板风封面截图
-│   └── blackboard-deduction.png ← 黑板风推导页截图
+│   ├── example-avocado.html      ← 牛油果风完整示例
+│   ├── example-dark-magazine.html ← 深绿杂志风完整示例
+│   ├── example-blackboard.html   ← 黑板风完整示例
+│   ├── avocado-cover.png         ← 牛油果封面截图
+│   ├── avocado-content.png       ← 牛油果内容截图
+│   ├── avocado-compound.png      ← 牛油果数据截图
+│   ├── dark-magazine-cover.png   ← 深绿杂志封面截图
+│   ├── dark-magazine-content.png ← 深绿杂志内容截图
+│   ├── blackboard-cover.png      ← 黑板风封面截图
+│   └── blackboard-deduction.png  ← 黑板风推导截图
 └── references/
     ├── themes-avocado.md       ← 风格一: 4 套主题色预设
-    ├── themes-blackboard.md    ← 风格二: 黑板配色预设
+    ├── themes-dark-magazine.md  ← 风格二: 4 套主题色预设
+    ├── themes-blackboard.md    ← 风格三: 黑板配色预设
     ├── layouts-avocado.md      ← 风格一: 页面布局骨架
-    ├── layouts-blackboard.md   ← 风格二: 页面布局骨架
+    ├── layouts-dark-magazine.md ← 风格二: 页面布局骨架
+    ├── layouts-blackboard.md   ← 风格三: 页面布局骨架
     ├── components.md           ← 组件手册
     └── checklist.md            ← 质量检查清单
 ```
@@ -167,17 +181,31 @@ flycan-ppt-skill/
 | 🍃 **原木** | `#B5A889` / `#F8F5EE` | 阅读/人文/哲学 |
 | 🌱 **春芽** | `#8FC89D` / `#F7FBF5` | 成长/独立开发/长期主义 |
 
+### Dark Green Magazine
+
+从 `references/themes-dark-magazine.md` 里选一套：
+
+| 主题 | 核心色 | 适合场景 |
+|------|--------|----------|
+| 🌀 **深海蓝** | `#7AADD9` | 默认通用、技术/AI/编程 |
+| 🏛️ **古典金** | `#D4A84B` | 知识/哲学/阅读 |
+| 🌸 **玫瑰粉** | `#D97A8A` | 成长/创意/独立开发 |
+| 🌿 **冷杉绿** | `#6BA87E` | 长期主义/产品/效率 |
+
 ### Blackboard Sketch
 
 固定配色（在模板中已预设）：
 
 | 颜色 | 色值 | 用途 |
 |------|------|------|
-| 黑板底色 | `#1B2F1D` | 背景 |
-| 粉笔白 | `#F5F0E8` | 正文/标题 |
-| 粉笔黄 | `#E8D56E` | 高亮/重点 |
-| 粉笔蓝 | `#7AADD9` | 副标题/链接 |
-| 粉笔红 | `#D9756B` | 强调/标注 |
+| 黑板底色 | `#0B0B0B` | 纯黑背景 |
+| 白粉笔 | `#F5F5F5` | 正文/主标题 |
+| 黄粉笔 | `#FFD54F` | 关键词/重点 |
+| 蓝粉笔 | `#64B5F6` | 流程/逻辑关系 |
+| 粉粉笔 | `#F48FB1` | 强调/警示 |
+| 绿粉笔 | `#81C784` | 成长/确认 |
+| 橙粉笔 | `#FFB74D` | 行动建议 |
+| 红粉笔 | `#EF5350` | 风险/错误 |
 
 ## 内容原则
 
