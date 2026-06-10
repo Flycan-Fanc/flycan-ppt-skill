@@ -3,215 +3,289 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KISS 原则 · Flycan 黑板手绘</title>
+<title>KISS 原则 · 保持简单 · Flycan 黑板手绘</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&family=Ma+Shan+Zheng&family=Liu+Jian+Mao+Cao&family=Noto+Sans+SC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&family=Ma+Shan+Zheng&family=Liu+Jian+Mao+Cao&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --board:#0B0B0B;--board-rgb:11,11,11;
-    --chalk:#F5F5F5;--chalk-rgb:245,245,245;
-    --chalk-yellow:#FFD54F;--chalk-yellow-rgb:255,213,79;
-    --chalk-blue:#64B5F6;--chalk-blue-rgb:100,181,246;
-    --chalk-pink:#F48FB1;--chalk-pink-rgb:244,143,177;
-    --chalk-green:#81C784;--chalk-green-rgb:129,199,132;
-    --chalk-orange:#FFB74D;--chalk-orange-rgb:255,183,77;
-    --chalk-red:#EF5350;--chalk-red-rgb:239,83,80;
-    --chalk-dim:#666666;
-    --handwrite:"ZCOOL XiaoWei","Ma Shan Zheng","Liu Jian Mao Cao",cursive;
-    --sans:"Noto Sans SC",sans-serif;
+    --board:#202321;
+    --board-rgb:32,35,33;
+    --chalk:#F5F5F5;
+    --chalk-rgb:245,245,245;
+    --chalk-yellow:#FFD54F;
+    --chalk-yellow-rgb:255,213,79;
+    --chalk-blue:#64B5F6;
+    --chalk-blue-rgb:100,181,246;
+    --chalk-pink:#F48FB1;
+    --chalk-pink-rgb:244,143,177;
+    --chalk-green:#81C784;
+    --chalk-green-rgb:129,199,132;
+    --chalk-orange:#FFB74D;
+    --chalk-orange-rgb:255,183,77;
+    --chalk-red:#EF5350;
+    --chalk-red-rgb:239,83,80;
+    --chalk-dim:rgba(245,245,245,.35);
+    --title:"ZCOOL XiaoWei",cursive;
+    --handwrite:"Ma Shan Zheng",cursive;
+    --sans:"Noto Sans SC","PingFang SC",sans-serif;
     --mono:"JetBrains Mono",monospace;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{width:100%;height:100%;overflow:hidden;background:var(--board);color:var(--chalk);font-family:var(--handwrite);-webkit-font-smoothing:antialiased}
-  body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(255,255,255,.008) 3px,rgba(255,255,255,.008) 5px);opacity:.25}
-  body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse at 60% 40%,transparent 40%,rgba(0,0,0,.3) 100%)}
-  #deck{position:fixed;inset:0;width:10000vw;height:100vh;display:flex;flex-wrap:nowrap;transition:transform .9s cubic-bezier(.77,0,.175,1);z-index:10;will-change:transform}
-  .slide{width:100vw;height:100vh;flex:0 0 100vw;position:relative;padding:6vh 7vw 8vh 7vw;display:flex;flex-direction:column;overflow:hidden;background:var(--board);color:var(--chalk)}
+  html,body{width:100%;height:100%;overflow:hidden;background:var(--board);color:var(--chalk);font-family:var(--title);-webkit-font-smoothing:antialiased}
+  body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:
+      radial-gradient(ellipse at 22% 18%, rgba(255,255,255,.025) 0%, transparent 40%),
+      radial-gradient(ellipse at 73% 58%, rgba(255,255,255,.018) 0%, transparent 35%),
+      radial-gradient(ellipse at 48% 80%, rgba(255,255,255,.012) 0%, transparent 30%),
+      radial-gradient(ellipse at 60% 25%, rgba(255,255,255,.008) 0%, transparent 20%),
+      linear-gradient(90deg, transparent 15%, rgba(255,255,255,.005) 18%, transparent 22%, transparent 55%, rgba(255,255,255,.004) 58%, transparent 62%),
+      linear-gradient(110deg, transparent 35%, rgba(255,255,255,.006) 37%, transparent 40%),
+      repeating-linear-gradient(0deg, transparent 0px, transparent 5px, rgba(255,255,255,.003) 5px, rgba(255,255,255,.003) 6px);
+  }
+  #deck{position:fixed;inset:0;width:10000vw;height:100vh;display:flex;flex-wrap:nowrap;transition:transform .8s cubic-bezier(.77,0,.175,1);z-index:10;will-change:transform}
+  .slide{width:100vw;height:100vh;flex:0 0 100vw;position:relative;padding:5vh 6vw 6vh 6vw;display:flex;flex-direction:column;overflow:hidden;background:var(--board);color:var(--chalk);z-index:1}
   .chalk-yellow{color:var(--chalk-yellow)}.chalk-blue{color:var(--chalk-blue)}.chalk-pink{color:var(--chalk-pink)}.chalk-green{color:var(--chalk-green)}.chalk-orange{color:var(--chalk-orange)}.chalk-red{color:var(--chalk-red)}.chalk-dim{color:var(--chalk-dim)}
-  .chalk-mark{font-family:var(--mono);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--chalk-dim);opacity:.5}
-  .chalk-title{font-family:var(--handwrite);font-weight:400;font-size:7vw;line-height:1.1;letter-spacing:.02em;color:var(--chalk)}
-  .chalk-h1{font-family:var(--handwrite);font-weight:400;font-size:5.5vw;line-height:1.15;letter-spacing:.015em;color:var(--chalk)}
-  .chalk-h2{font-family:var(--handwrite);font-weight:400;font-size:3.6vw;line-height:1.25;letter-spacing:.01em;color:var(--chalk)}
-  .chalk-body{font-family:var(--sans);font-weight:300;font-size:max(15px,1.15vw);line-height:1.7;color:rgba(var(--chalk-rgb),.82)}
-  .chalk-note{font-family:var(--handwrite);font-weight:400;font-size:max(14px,1.1vw);line-height:1.5;color:rgba(var(--chalk-rgb),.7)}
-  .chalk-label{font-family:var(--mono);font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:var(--chalk-dim);opacity:.5}
-  .chalk-box{border:2.5px solid rgba(var(--chalk-rgb),.35);padding:2vh 2.2vw;position:relative}
-  .chalk-box.yellow{border-color:var(--chalk-yellow)}.chalk-box.blue{border-color:var(--chalk-blue)}.chalk-box.pink{border-color:var(--chalk-pink)}.chalk-box.green{border-color:var(--chalk-green)}.chalk-box.red{border-color:var(--chalk-red)}.chalk-box.dashed{border-style:dashed}
-  .chalk-underline{display:inline-block;padding-bottom:.3vh;border-bottom:2.5px solid var(--chalk-yellow)}
-  .chalk-arrow{display:inline-block;width:4vw;height:2vh;vertical-align:middle;margin:.5vh auto;fill:none;stroke:var(--chalk-dim);stroke-width:2;stroke-linecap:round}
-  .chalk-arrow.yellow{stroke:var(--chalk-yellow)}.chalk-arrow.blue{stroke:var(--chalk-blue)}.chalk-arrow.green{stroke:var(--chalk-green)}
-  .stickman{display:inline-block;width:3.5vw;height:7vw;vertical-align:middle;fill:none;stroke:var(--chalk);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+  .chalk-title{font-family:var(--title);font-size:max(36px,6.5vw);line-height:1.12;letter-spacing:.04em;color:#FFF;text-shadow:0 0 12px rgba(255,255,255,.08),1.5px 1.5px 2px rgba(0,0,0,.55),-1px -1px 1.5px rgba(0,0,0,.35),.5px 0 3px rgba(255,255,255,.06)}
+  .chalk-h1{font-family:var(--title);font-size:max(28px,4.8vw);line-height:1.18;letter-spacing:.025em;color:#FFF;text-shadow:0 0 8px rgba(255,255,255,.06),1px 1px 1.5px rgba(0,0,0,.5),-.5px -.5px 1px rgba(0,0,0,.3)}
+  .chalk-h2{font-family:var(--handwrite);font-size:max(22px,3.2vw);line-height:1.3;letter-spacing:.015em;color:rgba(255,255,255,.9);text-shadow:0 0 6px rgba(255,255,255,.05),.5px .5px 1px rgba(0,0,0,.45)}
+  .chalk-body{font-family:var(--sans);font-weight:300;font-size:max(14px,1.2vw);line-height:1.7;color:rgba(255,255,255,.82);text-shadow:0 0 4px rgba(255,255,255,.04),.3px .3px .5px rgba(0,0,0,.3)}
+  .chalk-body-strong{font-family:var(--sans);font-weight:500;font-size:max(15px,1.3vw);line-height:1.6;color:rgba(255,255,255,.9);text-shadow:0 0 5px rgba(255,255,255,.05),.5px .5px 1px rgba(0,0,0,.4)}
+  .chalk-note{font-family:var(--handwrite);font-size:max(15px,1.1vw);line-height:1.45;color:rgba(255,255,255,.7);text-shadow:0 0 3px rgba(255,255,255,.03)}
+  .chalk-mono{font-family:var(--mono);font-weight:300;font-size:max(10px,.75vw);letter-spacing:.2em;text-transform:uppercase;color:var(--chalk-dim)}
+  .chalk-box{border:2.5px solid rgba(245,245,245,.3);padding:2vh 2.2vw;position:relative;box-shadow:1px 1px 0 rgba(245,245,245,.06),-1px 0 0 rgba(245,245,245,.04)}
+  .chalk-box.yellow{border-color:var(--chalk-yellow);box-shadow:1px 1px 0 rgba(255,213,79,.08),-1px 0 0 rgba(255,213,79,.05)}
+  .chalk-box.blue{border-color:var(--chalk-blue)}.chalk-box.pink{border-color:var(--chalk-pink)}.chalk-box.green{border-color:var(--chalk-green)}.chalk-box.orange{border-color:var(--chalk-orange)}.chalk-box.red{border-color:var(--chalk-red)}
+  .chalk-box.dashed{border-style:dashed}.chalk-box.thick{border-width:4px}
+  .chalk-arrow{display:inline-block;vertical-align:middle;margin:0 .4vw;fill:none;stroke:var(--chalk-dim);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+  .chalk-arrow.yellow{stroke:var(--chalk-yellow)}.chalk-arrow.blue{stroke:var(--chalk-blue)}.chalk-arrow.green{stroke:var(--chalk-green)}.chalk-arrow.pink{stroke:var(--chalk-pink)}
+  .stickman{display:inline-block;vertical-align:middle;fill:none;stroke:var(--chalk);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
   .stickman.lg{width:5vw;height:10vw;stroke-width:3}
-  .frame{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}.fill{flex:1}.center{align-items:center;justify-content:center;text-align:center}
-  .col{display:flex;flex-direction:column;gap:1.8vh}.row{display:flex;align-items:center;gap:2vw;flex-wrap:wrap}
-  .split{display:grid;grid-template-columns:1fr 1fr;gap:3vw;flex:1;align-items:start}
-  .flow-step{display:flex;flex-direction:column;gap:.6vh;padding:1.5vh 1.8vw;border-left:3px solid var(--chalk-yellow);background:rgba(var(--chalk-yellow-rgb),.04)}
-  .flow-step.blue{border-color:var(--chalk-blue);background:rgba(var(--chalk-blue-rgb),.04)}
-  .flow-step.pink{border-color:var(--chalk-pink);background:rgba(var(--chalk-pink-rgb),.04)}
-  .flow-step .step-label{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--chalk-dim);opacity:.7}
-  .flow-step .step-body{font-family:var(--handwrite);font-weight:400;font-size:max(15px,1.2vw);line-height:1.4;color:var(--chalk)}
+  .frame{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden;position:relative;z-index:1}
+  .center{align-items:center;justify-content:center;text-align:center}
+  .col{display:flex;flex-direction:column;gap:1.5vh}.row{display:flex;align-items:center;gap:1.5vw;flex-wrap:wrap}
+  .split-6-6{display:grid;grid-template-columns:1fr 1fr;gap:2vw;align-items:start;flex:1}
+  .flow-step{display:flex;flex-direction:column;gap:.5vh;padding:1.2vh 1.8vw;border-left:3.5px solid var(--chalk-yellow);position:relative}
+  .flow-step::before{content:"";position:absolute;left:-3.5px;top:0;bottom:0;width:3.5px;background:var(--chalk-yellow);opacity:.3}
+  .flow-step.blue{border-color:var(--chalk-blue)}.flow-step.blue::before{background:var(--chalk-blue)}
+  .flow-step.green{border-color:var(--chalk-green)}.flow-step.green::before{background:var(--chalk-green)}
+  .flow-step.pink{border-color:var(--chalk-pink)}.flow-step.pink::before{background:var(--chalk-pink)}
+  .flow-step .step-label{font-family:var(--mono);font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--chalk-dim)}
+  .flow-step .step-body{font-family:var(--handwrite);font-size:max(16px,1.25vw);line-height:1.4;color:rgba(255,255,255,.9);text-shadow:0 0 5px rgba(255,255,255,.05)}
+  .flow-step .step-body .highlight{color:var(--chalk-yellow)}
   .chalk-list{list-style:none;padding:0}
-  .chalk-list li{padding:.8vh 0 .8vh 2.5vw;position:relative;font-family:var(--handwrite);font-size:max(16px,1.25vw);line-height:1.4;color:var(--chalk)}
-  .chalk-list li::before{content:"";position:absolute;left:.3vw;top:1.4vh;width:.6vw;height:.6vw;border:2px solid var(--chalk-yellow)}
-  .chalk-list li.done::before{content:"✓";border:none;font-size:1.2vw;color:var(--chalk-green);top:.8vh}
-  .chalk-foot{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;font-family:var(--mono);font-size:10px;color:var(--chalk-dim);opacity:.4;padding-top:1.5vh;letter-spacing:.12em}
-  #nav{position:fixed;left:50%;bottom:2vh;transform:translateX(-50%);z-index:30;display:flex;gap:6px;padding:4px 8px;background:rgba(255,255,255,.06)}
-  #nav .dot{width:5px;height:5px;background:rgba(255,255,255,.15);cursor:pointer;transition:all .3s;border:0;padding:0}
-  #nav .dot.active{background:var(--chalk-yellow);width:14px}
-  #hint{position:fixed;bottom:2.4vh;right:2.4vw;z-index:30;font-family:var(--mono);font-size:8px;letter-spacing:.2em;color:var(--chalk-dim);opacity:.25}
-  body.low-power #hint{opacity:.5;color:var(--chalk-yellow)}
+  .chalk-list li{padding:.7vh 0 .7vh 2.8vw;position:relative;font-family:var(--handwrite);font-size:max(17px,1.25vw);line-height:1.35;color:var(--chalk);text-shadow:0 0 5px rgba(255,255,255,.06)}
+  .chalk-list li::before{content:"";position:absolute;left:.3vw;top:1.2vh;width:.65vw;height:.65vw;border:2.5px solid var(--chalk-yellow);transform:rotate(3deg)}
+  .chalk-list li.done::before{content:"✓";border:none;font-size:max(13px,1vw);color:var(--chalk-green);top:.5vh;left:.2vw;transform:none}
+  .vs-badge{display:inline-flex;align-items:center;justify-content:center;font-family:var(--title);font-size:max(24px,2.2vw);color:var(--chalk-yellow);padding:0 1vw;text-shadow:0 0 10px rgba(255,213,79,.12)}
+  .chalk-foot{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;font-family:var(--mono);font-size:max(8px,.55vw);color:var(--chalk-dim);opacity:.6;padding-top:2vh;letter-spacing:.15em;position:relative;z-index:1}
+  #nav{position:fixed;left:50%;bottom:2.5vh;transform:translateX(-50%);z-index:30;display:flex;gap:6px;padding:4px 8px}
+  #nav .dot{width:5px;height:5px;background:rgba(245,245,245,.15);cursor:pointer;transition:all .3s;border:0;padding:0;transform:rotate(45deg)}
+  #nav .dot.active{background:var(--chalk-yellow);width:14px;height:5px;transform:rotate(0)}
+  #hint{position:fixed;bottom:2.8vh;right:2.8vw;z-index:30;font-family:var(--mono);font-size:max(7px,.5vw);letter-spacing:.25em;color:var(--chalk-dim);opacity:.3}
+  body.low-power #hint{opacity:.6;color:var(--chalk-yellow)}
   [data-anim]{opacity:1}
   body.motion-ready [data-anim]{opacity:0;transform:translateY(0)}
   body.motion-ready [data-anim="fade"]{opacity:0;transform:none}
-  body.motion-ready [data-anim="left"]{transform:translateX(-25px)}
-  body.motion-ready [data-anim="right"]{transform:translateX(25px)}
+  body.motion-ready [data-anim="left"]{transform:translateX(-3vw)}
+  body.motion-ready [data-anim="right"]{transform:translateX(3vw)}
   body.low-power #deck{transition:none!important}
   body.low-power *,body.low-power *::before,body.low-power *::after{animation:none!important;transition:none!important}
   body.low-power.motion-ready [data-anim],body.low-power [data-anim]{opacity:1!important;transform:none!important}
-  @media (max-width:900px){.chalk-title{font-size:10vw}.chalk-h1{font-size:8vw}.chalk-h2{font-size:5.5vw}.split{grid-template-columns:1fr}.stickman{width:5vw;height:10vw}}
+  @media (max-width:900px){
+    .chalk-title{font-size:10vw}.chalk-h1{font-size:8vw}.chalk-h2{font-size:5.5vw}
+    .split-6-6{grid-template-columns:1fr}.stickman.lg{width:8vw;height:16vw}
+    .slide{padding:3vh 4vw 8vh 4vw}
+  }
 </style>
 </head>
 <body>
 <script>
-(function(){const KEY='flycan-board-low-power';const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;const stored=localStorage.getItem(KEY);window.__lowPowerMode=stored==='1'||(stored===null&&reduced);function updateHint(){const h=document.getElementById('hint');if(h)h.textContent=`← → · B ${window.__lowPowerMode?'动态':'静态'} · ESC`;}window.__setLowPowerMode=function(on,opts={}){window.__lowPowerMode=!!on;document.body.classList.toggle('low-power',window.__lowPowerMode);if(opts.persist!==false)localStorage.setItem(KEY,window.__lowPowerMode?'1':'0');if(window.__lowPowerMode&&document.getAnimations)document.getAnimations().forEach(a=>a.cancel());updateHint();if(window.__playSlide)window.__playSlide(window.__currentSlideIndex||0);};document.body.classList.toggle('low-power',window.__lowPowerMode);addEventListener('DOMContentLoaded',updateHint,{once:true});})();
+(function(){
+  const KEY='flycan-board-low-power';
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const stored=localStorage.getItem(KEY);
+  window.__lowPowerMode=stored==='1'||(stored===null&&reduced);
+  function updateHint(){const h=document.getElementById('hint');if(h)h.textContent='← → · B '+(window.__lowPowerMode?'静态':'动态')+' · ESC';}
+  window.__setLowPowerMode=function(on,opts={}){window.__lowPowerMode=!!on;document.body.classList.toggle('low-power',window.__lowPowerMode);if(opts.persist!==false)localStorage.setItem(KEY,window.__lowPowerMode?'1':'0');if(window.__lowPowerMode&&document.getAnimations)document.getAnimations().forEach(a=>a.cancel());updateHint();if(window.__playSlide)window.__playSlide(window.__currentSlideIndex||0);};
+  document.body.classList.toggle('low-power',window.__lowPowerMode);
+  addEventListener('DOMContentLoaded',updateHint,{once:true});
+})();
 </script>
 <div id="hint">← → · B 静态 · ESC</div>
 <div id="deck">
 
-<!-- Slide 1: Cover -->
-<div class="slide dark" data-animate="hero">
+<!-- S1: Cover -->
+<div class="slide" data-animate="hero">
   <div class="frame center" style="gap:1.5vh">
-    <div style="font-family:var(--mono);font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--chalk-dim);opacity:.6;margin-bottom:1vh" data-anim>—— 黑板 · 手绘 ——</div>
+    <div class="chalk-mono" data-anim style="color:var(--chalk-dim)">—— 黑板 · 手绘 ——</div>
+    <div style="width:3vw;height:2.5px;background:var(--chalk-yellow);opacity:.5;margin:1vh auto" data-anim></div>
     <h1 class="chalk-title" data-anim>KISS 原则</h1>
-    <div class="chalk-h2 chalk-blue" data-anim style="margin-top:1vh">保持简单 · Keep It Simple</div>
-    <div style="width:40%;height:2px;background:rgba(245,245,245,.15);margin:2.5vh auto" data-anim></div>
-    <div class="chalk-note" data-anim style="text-align:center;max-width:50vw">复杂的东西容易倒塌，<br>简单的东西难以替代。</div>
-    <svg class="stickman" viewBox="0 0 100 180" data-anim="fade" style="margin-top:2vh">
-      <circle cx="50" cy="20" r="14"/><line x1="50" y1="34" x2="50" y2="120"/>
-      <line x1="50" y1="55" x2="25" y2="85"/><line x1="50" y1="55" x2="75" y2="85"/>
-      <line x1="50" y1="120" x2="30" y2="170"/><line x1="50" y1="120" x2="70" y2="170"/>
-    </svg>
+    <div class="chalk-h2 chalk-yellow" data-anim style="margin-top:.5vh">Keep It Simple, Stupid</div>
+    <div style="width:40%;height:1.5px;background:rgba(245,245,245,.1);margin:2vh auto" data-anim></div>
+    <div class="chalk-note" data-anim style="text-align:center;max-width:55%">为什么最简单的方案，往往是最好的方案？</div>
+    <div class="row" style="justify-content:center;margin-top:1.5vh;gap:1vw" data-anim="fade">
+      <svg class="stickman" viewBox="0 0 100 180" style="width:3vw;height:5.4vw">
+        <circle cx="50" cy="20" r="14"/>
+        <line x1="50" y1="34" x2="50" y2="120"/>
+        <line x1="50" y1="55" x2="25" y2="85"/><line x1="50" y1="55" x2="75" y2="85"/>
+        <line x1="50" y1="120" x2="30" y2="170"/><line x1="50" y1="120" x2="70" y2="170"/>
+      </svg>
+    </div>
   </div>
-  <div class="chalk-foot"><span>Flycan 进化论 · 板书</span><span>01 / 05</span></div>
+  <div class="chalk-foot"><span>Flycan 进化论</span><span>01 / 07</span></div>
 </div>
 
-<!-- Slide 2: Core Question -->
-<div class="slide dark" data-animate="cascade">
+<!-- S2: Core Question -->
+<div class="slide" data-animate="cascade">
   <div class="frame center">
-    <span class="chalk-label" data-anim style="color:var(--chalk-yellow)">Q · 核心问题</span>
-    <h1 class="chalk-h1 chalk-yellow" data-anim style="margin-top:1.5vh;text-align:center;max-width:80%">为什么简单如此重要？</h1>
-    <div style="width:30%;height:2px;background:rgba(245,245,245,.1);margin:2.5vh auto" data-anim></div>
-    <div class="chalk-box" data-anim style="max-width:65%;text-align:center;margin:0 auto">
-      <div class="chalk-body" style="text-align:left">
-        复杂系统的代价：<br><br>
-        • 难以理解：需要更多时间上手<br>
-        • 难以修改：牵一发而动全身<br>
-        • 难以排查：Bug 藏得更深<br>
-        • 难以扩展：每加一个功能都更痛苦
-      </div>
+    <div class="chalk-mono" data-anim style="color:var(--chalk-yellow)">Q · 核心问题</div>
+    <div style="width:2vw;height:2px;background:var(--chalk-yellow);margin:1.5vh auto" data-anim></div>
+    <h1 class="chalk-h1 chalk-yellow" data-anim style="margin-top:1vh;text-align:center;max-width:80%">为什么复杂的东西<br>总是难以维护？</h1>
+    <div class="chalk-box dashed" data-anim style="max-width:55%;text-align:left;margin:2vh auto 0">
+      <div class="chalk-body">不论是代码、产品还是制度，<br>人类总倾向于不断叠加新功能。<br><span class="chalk-blue">→</span> 复杂度指数级上升<br><span class="chalk-red">→</span> 维护成本远超收益</div>
     </div>
-    <div class="chalk-body chalk-yellow" data-anim style="margin-top:2vh;text-align:center">→ 唯一解：保持简单</div>
+    <div class="chalk-note chalk-yellow" data-anim style="margin-top:2vh">—— 越复杂，越脆弱 ——</div>
   </div>
-  <div class="chalk-foot"><span>核心问题</span><span>02 / 05</span></div>
+  <div class="chalk-foot"><span>核心问题</span><span>02 / 07</span></div>
 </div>
 
-<!-- Slide 3: Deduction -->
-<div class="slide dark" data-animate="cascade">
+<!-- S3: Analysis -->
+<div class="slide" data-animate="cascade">
   <div class="frame">
-    <span class="chalk-label" data-anim>推导 · DEDUCTION</span>
-    <div class="chalk-h2" data-anim style="margin:1.5vh 0 2.5vh">为什么简单能赢？</div>
-    <div class="flow-step" data-anim>
-      <div class="step-label">步骤 01</div>
-      <div class="step-body">简单的东西容易理解<br><span class="chalk-yellow">→ 降低了认知负担</span></div>
+    <div class="chalk-mono" data-anim style="color:var(--chalk-blue)">分析 · ANALYSIS</div>
+    <div class="chalk-h2" data-anim style="margin:1vh 0 1.5vh">复杂度从哪来？</div>
+    <div class="split-6-6" style="flex:1;align-items:start">
+      <div class="col" data-anim="left" style="gap:1.2vh">
+        <div class="chalk-box pink" style="text-align:center">
+          <div class="chalk-body-strong chalk-pink">功能堆叠</div>
+        </div>
+        <div class="chalk-body">以为"多就是好"，不断叠加新功能，每个新功能都带来新的维护负担。</div>
+      </div>
+      <div class="col" data-anim="right" style="gap:1.2vh">
+        <div class="chalk-box blue" style="text-align:center">
+          <div class="chalk-body-strong chalk-blue">过度设计</div>
+        </div>
+        <div class="chalk-body">为"未来可能"做过度抽象，把简单问题变成复杂框架。</div>
+      </div>
     </div>
-    <svg class="chalk-arrow" viewBox="0 0 60 20" data-anim="fade"><path d="M5,10 H50 M45,4 L52,10 L45,16"/></svg>
-    <div class="flow-step blue" data-anim>
-      <div class="step-label">步骤 02</div>
-      <div class="step-body">容易理解意味着容易维护<br><span class="chalk-blue">→ 减少长期成本</span></div>
-    </div>
-    <svg class="chalk-arrow" viewBox="0 0 60 20" data-anim="fade"><path d="M5,10 H50 M45,4 L52,10 L45,16"/></svg>
-    <div class="flow-step pink" data-anim>
-      <div class="step-label">结论</div>
-      <div class="step-body chalk-pink">简单 = 可持续</div>
-    </div>
-    <div class="chalk-box yellow" data-anim style="margin-top:auto;text-align:center">
-      <span style="color:var(--chalk-yellow);font-size:max(14px,1.05vw)">KISS 不是偷懒，是长期主义的选择</span>
+    <div class="chalk-box yellow thick" data-anim style="margin-top:1.5vh;text-align:center">
+      <div class="chalk-body-strong chalk-yellow">根本原因：我们把「复杂」和「高级」画了等号</div>
     </div>
   </div>
-  <div class="chalk-foot"><span>推导过程</span><span>03 / 05</span></div>
+  <div class="chalk-foot"><span>分析</span><span>03 / 07</span></div>
 </div>
 
-<!-- Slide 4: Compare -->
-<div class="slide dark" data-animate="directional">
+<!-- S4: Deduction -->
+<div class="slide" data-animate="cascade">
   <div class="frame">
-    <span class="chalk-label" data-anim style="color:var(--chalk-blue)">对比 · COMPARE</span>
-    <div class="chalk-h2" data-anim style="margin:1.5vh 0 2.5vh">复杂 vs 简单</div>
-    <div class="split" style="flex:1;align-items:stretch">
-      <div class="chalk-box dashed" data-anim="left" style="display:flex;flex-direction:column;gap:1.2vh">
-        <div class="chalk-label" style="color:var(--chalk-dim);margin-bottom:.5vh">复杂系统</div>
-        <div class="chalk-body" style="color:var(--chalk-dim)">× 难以理解</div>
-        <div class="chalk-body" style="color:var(--chalk-dim)">× 容易出错</div>
-        <div class="chalk-body" style="color:var(--chalk-dim)">× 难以扩展</div>
-        <div class="chalk-body" style="color:var(--chalk-dim)">× 维护成本高</div>
-      </div>
-      <div class="chalk-box yellow" data-anim="right" style="display:flex;flex-direction:column;gap:1.2vh">
-        <div class="chalk-label chalk-yellow" style="margin-bottom:.5vh">简单系统</div>
-        <div class="chalk-body">✓ 易于理解</div>
-        <div class="chalk-body">✓ 稳定可靠</div>
-        <div class="chalk-body">✓ 易于扩展</div>
-        <div class="chalk-body">✓ 长期成本低</div>
-      </div>
-    </div>
-    <div class="chalk-box blue" data-anim style="margin-top:auto;text-align:center;border-style:dotted">
-      <span style="color:var(--chalk);font-size:max(12px,.95vw)">简单不是功能少，而是每个功能都恰到好处</span>
+    <div class="chalk-mono" data-anim>推导 · DEDUCTION</div>
+    <div class="chalk-h2" data-anim style="margin:1vh 0 2vh">为什么简单就是最好的？</div>
+    <div style="flex:1;display:flex;flex-direction:column;gap:.8vh">
+      <div class="flow-step" data-anim="step"><div class="step-label">STEP 01</div><div class="step-body">前提：任何系统都存在<span class="chalk-yellow">认知负载</span></div></div>
+      <div style="text-align:center;padding:.3vh 0" data-anim="step"><svg class="chalk-arrow yellow" viewBox="0 0 60 24" style="width:3.5vw"><path d="M5,12 H50 M45,6 L52,12 L45,18"/></svg></div>
+      <div class="flow-step blue" data-anim="step"><div class="step-label">STEP 02</div><div class="step-body">认知负载越低 → <span class="chalk-green">理解越快</span></div></div>
+      <div style="text-align:center;padding:.3vh 0" data-anim="step"><svg class="chalk-arrow yellow" viewBox="0 0 60 24" style="width:3.5vw"><path d="M5,12 H50 M45,6 L52,12 L45,18"/></svg></div>
+      <div class="flow-step green" data-anim="step"><div class="step-label">STEP 03</div><div class="step-body">理解越快 → <span class="chalk-green">修改越安全</span></div></div>
+      <div style="text-align:center;padding:.3vh 0" data-anim="step"><svg class="chalk-arrow yellow" viewBox="0 0 60 24" style="width:3.5vw"><path d="M5,12 H50 M45,6 L52,12 L45,18"/></svg></div>
+      <div class="flow-step pink" data-anim="step"><div class="step-label">结论</div><div class="step-body"><span class="chalk-pink">✦ 简单 = 可持续</span></div></div>
     </div>
   </div>
-  <div class="chalk-foot"><span>对比分析</span><span>04 / 05</span></div>
+  <div class="chalk-foot"><span>推导过程</span><span>04 / 07</span></div>
 </div>
 
-<!-- Slide 5: Conclusion -->
-<div class="slide dark" data-animate="hero">
+<!-- S5: Compare -->
+<div class="slide" data-animate="directional">
+  <div class="frame">
+    <div class="chalk-mono" data-anim style="color:var(--chalk-blue)">对比 · COMPARE</div>
+    <div class="chalk-h2" data-anim style="margin:1vh 0 2vh">复杂 vs 简单</div>
+    <div class="split-6-6" style="flex:1;align-items:stretch">
+      <div class="chalk-box dashed" data-anim="left" style="display:flex;flex-direction:column;gap:1vh;text-align:center">
+        <div class="chalk-mono" style="margin-bottom:.5vh">复杂方案</div>
+        <div class="chalk-body" style="text-align:left">× 理解成本高</div>
+        <div class="chalk-body" style="text-align:left">× 调试困难</div>
+        <div class="chalk-body" style="text-align:left">× 新人上手慢</div>
+      </div>
+      <div class="chalk-box yellow thick" data-anim="right" style="display:flex;flex-direction:column;gap:1vh;text-align:center">
+        <div class="chalk-mono chalk-yellow" style="margin-bottom:.5vh">简单方案</div>
+        <div class="chalk-body" style="text-align:left"><span class="chalk-green">✓</span> 一眼看懂</div>
+        <div class="chalk-body" style="text-align:left"><span class="chalk-green">✓</span> 快速定位问题</div>
+        <div class="chalk-body" style="text-align:left"><span class="chalk-green">✓</span> 改动有信心</div>
+      </div>
+    </div>
+    <div class="vs-badge" data-anim>VS</div>
+  </div>
+  <div class="chalk-foot"><span>对比分析</span><span>05 / 07</span></div>
+</div>
+
+<!-- S6: Checklist -->
+<div class="slide" data-animate="cascade">
+  <div class="frame">
+    <div class="chalk-mono" data-anim>实践 · PRACTICE</div>
+    <div class="chalk-h2" data-anim style="margin:1vh 0 2vh">如何保持简单？</div>
+    <ul class="chalk-list" style="flex:1;justify-content:center">
+      <li class="done" data-anim="step">先问：这个真的需要吗？</li>
+      <li data-anim="step">砍掉 80% 的"锦上添花"</li>
+      <li data-anim="step" class="chalk-yellow">一个方案解决一个问题</li>
+      <li data-anim="step">为未来重构，而非预先设计</li>
+      <li data-anim="step">写给人读，顺便给机器执行</li>
+    </ul>
+    <div class="chalk-box yellow" data-anim style="text-align:center;margin-top:auto">
+      <span class="chalk-yellow chalk-body-strong">简单 ≠ 简陋，简单 = 恰到好处</span>
+    </div>
+  </div>
+  <div class="chalk-foot"><span>实践清单</span><span>06 / 07</span></div>
+</div>
+
+<!-- S7: Conclusion -->
+<div class="slide" data-animate="hero">
   <div class="frame center">
-    <div style="width:30%;height:2px;background:rgba(245,245,245,.15);margin-bottom:2vh" data-anim></div>
-    <svg class="stickman lg" viewBox="0 0 100 180" data-anim="fade">
-      <circle cx="50" cy="20" r="14"/><line x1="50" y1="34" x2="50" y2="120"/>
-      <line x1="50" y1="55" x2="25" y2="85"/><line x1="50" y1="55" x2="75" y2="85"/>
-      <line x1="50" y1="120" x2="30" y2="170"/><line x1="50" y1="120" x2="70" y2="170"/>
-    </svg>
-    <h1 class="chalk-h1 chalk-yellow" data-anim style="margin-top:1vh;text-align:center">Keep It Simple</h1>
-    <div class="chalk-note" data-anim style="margin-top:1.5vh;text-align:center;max-width:60%">"任何傻瓜都能写出计算机能理解的代码。<br>优秀的程序员写的是人类能理解的代码。"<br><span style="font-family:var(--mono);font-size:9px;letter-spacing:.2em;color:var(--chalk-dim)">—— Martin Fowler</span></div>
-    <div style="margin-top:3vh;display:flex;gap:1.5vw;justify-content:center" data-anim>
-      <span class="chalk-dim" style="font-family:var(--mono);font-size:9px;letter-spacing:.25em">FLYCAN · 独立思考 · 长期主义</span>
+    <div class="chalk-mono" data-anim style="color:var(--chalk-yellow)">结论 · CONCLUSION</div>
+    <div style="width:3vw;height:2.5px;background:var(--chalk-yellow);opacity:.4;margin:1.5vh auto" data-anim></div>
+    <div class="chalk-h1 chalk-yellow" data-anim style="margin-top:1vh;text-align:center;max-width:70%">一切事物都应尽可能简单，<br>但不能更简单。</div>
+    <div class="chalk-note" data-anim style="margin-top:1.5vh;text-align:center;max-width:55%">—— 爱因斯坦</div>
+    <div class="row" style="justify-content:center;margin-top:2vh;gap:1.5vw" data-anim="fade">
+      <svg class="stickman lg" viewBox="0 0 100 180">
+        <circle cx="50" cy="20" r="14"/>
+        <line x1="50" y1="34" x2="50" y2="120"/>
+        <line x1="50" y1="55" x2="20" y2="85"/><line x1="50" y1="55" x2="80" y2="85"/>
+        <line x1="50" y1="120" x2="30" y2="170"/><line x1="50" y1="120" x2="70" y2="170"/>
+        <path d="M72,25 Q85,10 95,20" stroke-width="2.5" fill="none"/>
+      </svg>
     </div>
+    <div class="chalk-mono" data-anim style="margin-top:1.5vh">—— 今天就讲到这里 ——</div>
   </div>
-  <div class="chalk-foot"><span>结论</span><span>05 / 05</span></div>
+  <div class="chalk-foot"><span>结论</span><span>07 / 07</span></div>
 </div>
 
 </div>
 <div id="nav"></div>
 <script>
-const deck=document.getElementById('deck');const slides=deck.querySelectorAll('.slide');const nav=document.getElementById('nav');let idx=0,total=slides.length,lock=false;
+const deck=document.getElementById('deck');
+const slides=deck.querySelectorAll('.slide');
+const nav=document.getElementById('nav');
+let idx=0,total=slides.length,lock=false;
 deck.style.width=(total*100)+'vw';
 slides.forEach((s,i)=>{const b=document.createElement('button');b.className='dot';b.dataset.i=i;b.setAttribute('aria-label','Page '+(i+1));b.onclick=()=>go(i);nav.appendChild(b);});
-function go(n){if(lock)return;idx=Math.max(0,Math.min(total-1,n));window.__currentSlideIndex=idx;deck.style.transform=`translateX(${-idx*100}vw)`;nav.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===idx));if(window.__playSlide)setTimeout(()=>window.__playSlide(idx),450);lock=true;setTimeout(()=>lock=false,700);}
-let overviewOn=false;const ov=document.createElement('div');ov.id='overview';ov.style.cssText='position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.95);backdrop-filter:blur(8px);display:none;overflow-y:auto;padding:3vh 4vw';document.body.appendChild(ov);
-function buildOverview(){ov.innerHTML='';const grid=document.createElement('div');grid.style.cssText='display:grid;grid-template-columns:repeat(4,1fr);gap:2vh 1.6vw;max-width:90vw;margin:0 auto';slides.forEach((s,i)=>{const c=document.createElement('div');c.style.cssText='cursor:pointer;overflow:hidden;border:2px solid '+(i===idx?'var(--chalk-yellow)':'rgba(255,255,255,.1)');const w=document.createElement('div');w.style.cssText='width:100%;aspect-ratio:16/9;overflow:hidden;position:relative;pointer-events:none;background:var(--board)';const cl=s.cloneNode(true);cl.style.cssText='width:100vw;height:100vh;transform:scale('+(1/4.5)+');transform-origin:top left;position:absolute;top:0;left:0;pointer-events:none';w.appendChild(cl);const l=document.createElement('div');l.style.cssText='padding:5px 8px;font-family:var(--mono);font-size:9px;color:var(--chalk-dim)';l.textContent=(i+1)+' / '+total;c.appendChild(w);c.appendChild(l);c.onclick=()=>{toggleOverview();go(i)};grid.appendChild(c);});ov.appendChild(grid);}
+function go(n){if(lock)return;idx=Math.max(0,Math.min(total-1,n));window.__currentSlideIndex=idx;deck.style.transform='translateX('+(-idx*100)+'vw)';nav.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===idx));if(window.__playSlide)setTimeout(()=>window.__playSlide(idx),450);lock=true;setTimeout(()=>lock=false,700);}
+let overviewOn=false;
+const ov=document.createElement('div');ov.id='overview';ov.style.cssText='position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.95);display:none;overflow-y:auto;padding:3vh 4vw';
+document.body.appendChild(ov);
+function buildOverview(){ov.innerHTML='';const g=document.createElement('div');g.style.cssText='display:grid;grid-template-columns:repeat(4,1fr);gap:2vh 1.6vw;max-width:90vw;margin:0 auto';slides.forEach((s,i)=>{const c=document.createElement('div');c.style.cssText='cursor:pointer;overflow:hidden;border:2px solid '+(i===idx?'var(--chalk-yellow)':'rgba(255,255,255,.08)');const w=document.createElement('div');w.style.cssText='width:100%;aspect-ratio:16/9;overflow:hidden;position:relative;pointer-events:none;background:var(--board)';const cl=s.cloneNode(true);cl.style.cssText='width:100vw;height:100vh;transform:scale(0.222);transform-origin:top left;position:absolute;top:0;left:0;pointer-events:none';w.appendChild(cl);const l=document.createElement('div');l.style.cssText='padding:5px 8px;font-family:var(--mono);font-size:8px;color:var(--chalk-dim)';l.textContent=(i+1)+' / '+total;c.appendChild(w);c.appendChild(l);c.onclick=()=>{toggleOverview();go(i)};g.appendChild(c);});ov.appendChild(g);}
 function toggleOverview(){overviewOn=!overviewOn;if(overviewOn){buildOverview();ov.style.display='block';}else{ov.style.display='none';}}
 addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();toggleOverview();return;}if(e.key&&e.key.toLowerCase()==='b'&&!e.metaKey&&!e.ctrlKey&&!e.altKey){e.preventDefault();window.__setLowPowerMode(!window.__lowPowerMode);return;}if(overviewOn)return;if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '||e.key==='ArrowDown'){if(window.__pipeAdvance&&window.__pipeAdvance())return;go(idx+1);return;}if(e.key==='ArrowLeft'||e.key==='PageUp'||e.key==='ArrowUp')go(idx-1);if(e.key==='Home')go(0);if(e.key==='End')go(total-1);});
 let wheelTO=null,wheelAcc=0;
-addEventListener('wheel',e=>{wheelAcc+=e.deltaY+e.deltaX;if(Math.abs(wheelAcc)>50){if(wheelAcc>0&&window.__pipeAdvance&&window.__pipeAdvance()){wheelAcc=0;}else{go(idx+(wheelAcc>0?1:-1));wheelAcc=0;}}clearTimeout(wheelTO);wheelTO=setTimeout(()=>wheelAcc=0,150);},{passive:true});
+addEventListener('wheel',function(e){wheelAcc+=e.deltaY+e.deltaX;if(Math.abs(wheelAcc)>50){if(wheelAcc>0&&window.__pipeAdvance&&window.__pipeAdvance()){}else{go(idx+(wheelAcc>0?1:-1))}wheelAcc=0}clearTimeout(wheelTO);wheelTO=setTimeout(function(){wheelAcc=0},150)},{passive:true});
 let tx=0,ty=0;
-addEventListener('touchstart',e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY},{passive:true});
-addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;const dy=e.changedTouches[0].clientY-ty;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)){if(dx<0&&window.__pipeAdvance&&window.__pipeAdvance())return;go(idx+(dx<0?1:-1));}},{passive:true});
+addEventListener('touchstart',function(e){tx=e.touches[0].clientX;ty=e.touches[0].clientY},{passive:true});
+addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-tx,dy=e.changedTouches[0].clientY-ty;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)){if(dx<0&&window.__pipeAdvance&&window.__pipeAdvance())return;go(idx+(dx<0?1:-1))}},{passive:true});
 go(0);
 </script>
 <script type="module">
-let motion;try{motion=await import('../assets/motion.min.js');}catch(e1){try{motion=await import('https://cdn.jsdelivr.net/npm/motion@11.11.17/+esm');}catch(e2){console.warn('[motion] failed',e1,e2);document.querySelectorAll('[data-anim]').forEach(el=>{el.style.opacity='1';el.style.transform='none'});}}
-if(motion){const{animate,stagger}=motion;document.body.classList.add('motion-ready');const EASE=[.22,1,.36,1];const slides=[...document.querySelectorAll('.slide')];let lastIdx=-1;
-function resetAnims(s){s.querySelectorAll('[data-anim]').forEach(el=>{el.style.opacity='';el.style.transform='';});}
-function revealStatic(s){resetAnims(s);document.getAnimations?.().forEach(a=>a.cancel());s.querySelectorAll('[data-anim]').forEach(el=>{el.style.opacity='1';el.style.transform='none';});}
-function playSlide(i){const slide=slides[i];if(!slide)return;lastIdx=i;if(window.__lowPowerMode){revealStatic(slide);return;}resetAnims(slide);const all=[...slide.querySelectorAll('[data-anim]')];if(!all.length)return;const groups=[];let cur=[];all.forEach(el=>{if(el.dataset.anim==='step'){if(cur.length)groups.push(cur);groups.push([el]);cur=[];}else{cur.push(el);}});if(cur.length)groups.push(cur);if(groups.length){let delay=0;groups.forEach((g,i)=>{const base=i*.25;g.forEach(el=>{const tag=el.tagName;const dur=tag==='svg'||tag==='path'?.5:.4;animate(el,{opacity:[0,1],y:[6,0]},{duration:dur,delay:base+(i*.05),easing:EASE});});});}else{animate(all,{opacity:[0,1],y:[8,0]},{duration:.5,delay:stagger(.08,{start:.1}),easing:EASE});}}
+let motion;
+try{motion=await import('./assets/motion.min.js');}catch(e1){try{motion=await import('https://cdn.jsdelivr.net/npm/motion@11.11.17/+esm');}catch(e2){console.warn('[motion] failed');document.querySelectorAll('[data-anim]').forEach(function(el){el.style.opacity='1';el.style.transform='none'});}}
+if(motion){var{animate,stagger}=motion;document.body.classList.add('motion-ready');var EASE=[.22,1,.36,1];var slides=[...document.querySelectorAll('.slide')];
+function playSlide(i){var slide=slides[i];if(!slide)return;if(window.__lowPowerMode){slide.querySelectorAll('[data-anim]').forEach(function(el){el.style.opacity='1';el.style.transform='none'});return;}slide.querySelectorAll('[data-anim]').forEach(function(el){el.style.opacity='';el.style.transform=''});var all=[...slide.querySelectorAll('[data-anim]')];if(!all.length)return;var groups=[];var cur=[];all.forEach(function(el){if(el.dataset.anim==='step'){if(cur.length)groups.push(cur);groups.push([el]);cur=[];}else{cur.push(el);}});if(cur.length)groups.push(cur);groups.forEach(function(g,i){g.forEach(function(el){animate(el,{opacity:[0,1],y:[6,0]},{duration:.4,delay:i*.25+(i*.05),easing:EASE})})});}
 window.__playSlide=playSlide;playSlide(0);}
 </script>
 </body>

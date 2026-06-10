@@ -1,35 +1,35 @@
 # 组件手册（Components）
 
-通用组件和样式用法，适用于 Avocado Nature、Dark Green Magazine 和 Blackboard Sketch 三种风格。
+通用组件和样式用法，适用于 Avocado Nature、Dark Green Magazine、Blackboard Sketch 和 Midnight Minimal 四种风格。
 
 ---
 
 ## Style 对照
 
-| 组件/类名 | Avocado Nature | Dark Green Magazine | Blackboard Sketch |
-|-----------|----------------|---------------------|-------------------|
-| 标题类 | `.h-hero` / `.h-xl` | `.h-hero` / `.h-xl` | `.chalk-title` / `.chalk-h1` |
-| 正文类 | `.body-zh` / `.lead` | `.body-text` / `.lead` | `.chalk-body` / `.chalk-note` |
-| 元数据 | `.meta` / `.meta-row` | `.meta` / `.meta-row` | `.chalk-label` / `.chalk-foot` |
-| 强调容器 | `.callout` | `.callout` | `.chalk-box` / `.chalk-underline` |
-| 数字展示 | `.stat-card` / `.big-num` | `.stat-card` / `.big-num` | —（手写体） |
-| 流程 | `.pipeline` / `.step` | `.pipeline` / `.step` | `.flow-step` / `.chalk-arrow` |
-| 对比 | `.split` | `.split` | `.split` / `.vs-badge` |
-| 图标 | Lucide `data-lucide="..."` | Lucide `data-lucide="..."` | SVG 手绘 / 火柴人 |
-| 动效 | cascade / hero / quote / directional / pipeline | 同上 | step-by-step 逐步揭示 |
+| 组件/类名 | Avocado Nature | Dark Green Magazine | Blackboard Sketch | Midnight Minimal |
+|-----------|----------------|---------------------|-------------------|------------------|
+| 标题类 | `.h-hero` / `.h-xl` | `.h-hero` / `.h-xl` | `.chalk-title` / `.chalk-h1` | `.mm-hero` / `.mm-hero-strong` / `.mm-h1` |
+| 正文类 | `.body-zh` / `.lead` | `.body-text` / `.lead` | `.chalk-body` / `.chalk-note` | `.mm-body` / `.mm-body-serif` |
+| 元数据 | `.meta` / `.meta-row` | `.meta` / `.meta-row` | `.chalk-foot` / `.chalk-mono` | `.mm-foot` / `.mm-meta` / `.mm-num` |
+| 强调容器 | `.callout` | `.callout` | `.chalk-box` / `.chalk-underline` | `.mm-card` / `.mm-card-accent` |
+| 数字展示 | `.stat-card` / `.big-num` | `.stat-card` / `.big-num` | `.chalk-big-num` | `.mm-big-num` / `.mm-stat` |
+| 流程 | `.pipeline` / `.step` | `.pipeline` / `.step` | `.flow-step` / `.chalk-arrow` | `.mm-timeline-item` |
+| 对比 | `.split` | `.split` | `.split` / `.vs-badge` | `.split-6-6` / `.mm-card` |
+| 图标 | Lucide `data-lucide="..."` | Lucide `data-lucide="..."` | SVG 手绘 / 火柴人 | 无（纯文字） |
+| 动效 | cascade / hero / quote / directional / pipeline | 同上 | step-by-step 逐步揭示 | 慢速淡入（meditative） |
 
 ---
 
 ## 排版层级对照
 
-| 层级 | Avocado | Dark Magazine | Blackboard |
-|------|---------|---------------|------------|
-| 巨标题 | `h-hero` 10vw Noto Serif SC | `h-hero` 9vw Noto Serif SC | `chalk-title` 7vw ZCOOL XiaoWei |
-| 大标题 | `h-xl` 5.8vw | `h-xl` 5.2vw | `chalk-h1` 5.5vw |
-| 副标题 | `h-sub` 2.8vw | `h-sub` 2.5vw | `chalk-h2` 3.6vw |
-| 引语 | `lead` 1.65vw | `lead` 1.6vw | `chalk-note` 1.1vw |
-| 正文 | `body-zh` Noto Sans | `body-text` Noto Sans | `chalk-body` Noto Sans |
-| 元数据 | `meta` IBM Plex Mono | `meta` IBM Plex Mono | `chalk-label` JetBrains Mono |
+| 层级 | Avocado | Dark Magazine | Blackboard | Midnight Minimal |
+|------|---------|---------------|------------|------------------|
+| 巨标题 | `h-hero` 10vw Noto Serif SC | `h-hero` 9vw Noto Serif SC | `chalk-title` 6.5vw ZCOOL XiaoWei（粗粉笔） | `.mm-hero-strong` 7vw Noto Serif SC 700 |
+| 大标题 | `h-xl` 5.8vw | `h-xl` 5.2vw | `chalk-h1` 4.8vw ZCOOL XiaoWei（中粉笔） | `.mm-h1` 4.5vw Noto Serif SC 300 |
+| 副标题 | `h-sub` 2.8vw | `h-sub` 2.5vw | `chalk-h2` 3.2vw Ma Shan Zheng（细粉笔） | `.mm-h2` 3vw Noto Serif SC 300 |
+| 引语 | `lead` 1.65vw | `lead` 1.6vw | `chalk-note` 1.1vw Ma Shan Zheng（粉笔注释） | `.mm-quote` 3.2vw Noto Serif SC italic |
+| 正文 | `body-zh` Noto Sans | `body-text` Noto Sans | `chalk-body` 1.2vw Noto Sans 300（极细粉笔） | `.mm-body-serif` 1.15vw Noto Serif SC |
+| 元数据 | `meta` IBM Plex Mono | `meta` IBM Plex Mono | `chalk-mono` JetBrains Mono（刻印） | `.mm-meta` IBM Plex Mono |
 
 ---
 
@@ -60,7 +60,15 @@
 <span class="chalk-red">红色风险</span>
 ```
 
+### Midnight Minimal
+
+```html
+<span class="mm-focus">强调色文字</span>
+<span style="color:var(--mm-text-soft)">次要文字</span>
+<span style="color:var(--mm-text-dim)">弱化文字</span>
+```
 ---
+
 
 ## 图标
 
@@ -73,7 +81,7 @@
 
 ### Blackboard Sketch — SVG 手绘元素
 
-黑板风使用 `chalk-arrow` SVG 箭头和 `stickman` SVG 火柴人：
+黑板风使用 `chalk-arrow` SVG 箭头、`stickman` SVG 火柴人、`chalk-lightbulb` SVG 灯泡、`chalk-check` SVG 勾选：
 
 ```html
 <!-- 手绘箭头 -->
@@ -95,13 +103,13 @@
 
 ## 动效系统
 
-| recipe | Avocado / Dark Magazine | Blackboard |
-|--------|------------------------|------------|
-| 默认 | cascade — 级联淡入 y:12→0 | step-by-step — 逐步揭示 |
-| hero | 更慢淡入 y:14→0, 800ms | 播放初始动画 |
-| quote | 逐行揭示 | 逐条显示 |
-| directional | 左列左入/右列右入 | 左右分入 |
-| pipeline | 手动逐步推进 (→ 键) | — |
+| recipe | Avocado / Dark Magazine | Blackboard | Midnight Minimal |
+|--------|------------------------|------------|------------------|
+| 默认 | cascade — 级联淡入 y:12→0 | step-by-step — 逐步揭示 | 慢速淡入（慢 20%） |
+| hero | 更慢淡入 y:14→0, 800ms | 初始动画（封面） | 更慢, 更长位移 |
+| quote | 逐行揭示 | 逐条显示 | `data-anim="line"` 逐行 |
+| directional | 左列左入/右列右入 | 左右分入 | 左右分入 |
+| pipeline | 手动逐步推进 (→ 键) | — | — |
 
 ### 动画标签
 
@@ -116,4 +124,9 @@
 <div data-anim>淡入上移</div>
 <div data-anim="fade">仅淡入</div>
 <div data-anim="step">步进（等用户推进）</div>
+
+<!-- Midnight Minimal -->
+<div data-anim>慢速淡入上移</div>
+<div data-anim="step">步进</div>
+<div data-anim="line">逐行揭示</div>
 ```

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[必填] 替换为 PPT 标题 · Flycan 午夜极简</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* ============ 主题变量（由引用样式覆盖） ============ */
+    --mm-bg:#0A0A0A;
+    --mm-bg-rgb:10,10,10;
+    --mm-text:#F0F0F0;
+    --mm-text-rgb:240,240,240;
+    --mm-accent:#E8E8E8;
+    --mm-accent-rgb:232,232,232;
+    --mm-text-soft:rgba(240,240,240,.7);
+    --mm-text-dim:rgba(240,240,240,.35);
+    --mm-surface:rgba(255,255,255,.04);
+    --mm-line:rgba(255,255,255,.08);
+    --mm-star:rgba(255,255,255,.15);
+
+    /* 字体 */
+    --serif:"Noto Serif SC",serif;
+    --sans:"Noto Sans SC",sans-serif;
+    --mono:"IBM Plex Mono",monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:100%;height:100%;overflow:hidden;background:var(--mm-bg);color:var(--mm-text);font-family:var(--serif);-webkit-font-smoothing:antialiased}
+
+  /* ============ 深邃星空纹理 ============ */
+  body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none}
+  body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse at 50% 30%, rgba(255,255,255,.015) 0%, transparent 60%),radial-gradient(ellipse at 80% 70%, rgba(255,255,255,.008) 0%, transparent 50%)}
+
+  /* ============ Deck ============ */
+  #deck{position:fixed;inset:0;width:10000vw;height:100vh;display:flex;flex-wrap:nowrap;transition:transform 1s cubic-bezier(.77,0,.175,1);z-index:10;will-change:transform}
+  .slide{width:100vw;height:100vh;flex:0 0 100vw;position:relative;padding:6vh 8vw 8vh 8vw;display:flex;flex-direction:column;overflow:hidden;background:var(--mm-bg);color:var(--mm-text)}
+
+  /* ============ 排版层级 ============ */
+  .mm-hero{
+    font-family:var(--serif);
+    font-weight:300;
+    font-size:max(36px,6vw);
+    line-height:1.2;
+    letter-spacing:.04em;
+    color:var(--mm-text);
+  }
+  .mm-hero-strong{
+    font-family:var(--serif);
+    font-weight:700;
+    font-size:max(42px,7vw);
+    line-height:1.15;
+    letter-spacing:.02em;
+    color:var(--mm-text);
+  }
+  .mm-h1{
+    font-family:var(--serif);
+    font-weight:300;
+    font-size:max(28px,4.5vw);
+    line-height:1.25;
+    letter-spacing:.03em;
+    color:var(--mm-text);
+  }
+  .mm-h2{
+    font-family:var(--serif);
+    font-weight:300;
+    font-size:max(22px,3vw);
+    line-height:1.3;
+    letter-spacing:.025em;
+    color:var(--mm-text-soft);
+  }
+  .mm-body{
+    font-family:var(--sans);
+    font-weight:300;
+    font-size:max(15px,1.1vw);
+    line-height:1.8;
+    color:var(--mm-text-soft);
+  }
+  .mm-body-serif{
+    font-family:var(--serif);
+    font-weight:300;
+    font-size:max(16px,1.15vw);
+    line-height:1.75;
+    color:var(--mm-text-soft);
+  }
+  .mm-quote{
+    font-family:var(--serif);
+    font-weight:300;
+    font-size:max(24px,3.2vw);
+    line-height:1.4;
+    letter-spacing:.04em;
+    color:var(--mm-text);
+    font-style:italic;
+  }
+  .mm-quote-source{
+    font-family:var(--sans);
+    font-weight:300;
+    font-size:max(12px,.85vw);
+    letter-spacing:.12em;
+    color:var(--mm-text-dim);
+    margin-top:1.5vh;
+  }
+  .mm-meta{
+    font-family:var(--mono);
+    font-size:max(9px,.65vw);
+    letter-spacing:.25em;
+    text-transform:uppercase;
+    color:var(--mm-text-dim);
+  }
+  .mm-focus{
+    color:var(--mm-accent);
+    font-weight:500;
+  }
+
+  /* ============ 装饰元素 ============ */
+  .mm-line{width:100%;height:1px;background:var(--mm-line)}
+  .mm-line-accent{width:4vw;height:1.5px;background:var(--mm-accent)}
+  .mm-line-short{width:30%;height:1px;background:var(--mm-line);margin:0 auto}
+  .mm-gap-sm{height:1.5vh}
+  .mm-gap-md{height:3vh}
+  .mm-gap-lg{height:5vh}
+
+  /* ============ 卡片/容器 ============ */
+  .mm-card{padding:3vh 3vw;background:var(--mm-surface);border:1px solid var(--mm-line)}
+  .mm-card-accent{border-left:2px solid var(--mm-accent);padding:2.5vh 2.5vw;background:var(--mm-surface)}
+  .mm-card-accent-right{border-right:2px solid var(--mm-accent);padding:2.5vh 2.5vw;background:var(--mm-surface)}
+
+  /* ============ 布局工具 ============ */
+  .frame{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .fill{flex:1}
+  .center{align-items:center;justify-content:center;text-align:center}
+  .col{display:flex;flex-direction:column;gap:1.8vh}
+  .row{display:flex;align-items:center;gap:2vw;flex-wrap:wrap}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:3vw;flex:1;align-items:start}
+  .split-6-6{display:grid;grid-template-columns:1fr 1fr;gap:2.5vw;align-items:start;flex:1}
+  .split-7-5{display:grid;grid-template-columns:7fr 5fr;gap:2.5vw;align-items:start;flex:1}
+
+  /* ============ 序号/数字 ============ */
+  .mm-num{font-family:var(--mono);font-weight:300;font-size:max(11px,.75vw);letter-spacing:.15em;color:var(--mm-text-dim)}
+
+  /* ============ 数据展示 ============ */
+  .mm-big-num{font-family:var(--serif);font-weight:300;font-size:max(48px,7vw);line-height:1;color:var(--mm-accent)}
+  .mm-stat{font-family:var(--sans);font-weight:300;font-size:max(14px,1vw);color:var(--mm-text-soft)}
+
+  /* ============ 步骤/时间线 ============ */
+  .mm-timeline-item{display:flex;gap:1.5vw;padding:1.5vh 0;border-bottom:1px solid var(--mm-line)}
+  .mm-timeline-item:last-child{border-bottom:none}
+  .mm-timeline-num{font-family:var(--mono);font-size:max(11px,.75vw);color:var(--mm-accent);white-space:nowrap;min-width:3vw}
+  .mm-timeline-content{flex:1}
+  .mm-timeline-title{font-family:var(--serif);font-weight:500;font-size:max(16px,1.2vw);color:var(--mm-text);margin-bottom:.3vh}
+  .mm-timeline-desc{font-family:var(--sans);font-weight:300;font-size:max(13px,.9vw);color:var(--mm-text-soft)}
+  .mm-timeline-bar{width:1px;background:var(--mm-accent);opacity:.3;margin:0 1.2vw}
+
+  /* ============ 页脚 ============ */
+  .mm-foot{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;font-family:var(--mono);font-size:max(9px,.6vw);color:var(--mm-text-dim);opacity:.5;padding-top:2vh;letter-spacing:.15em}
+
+  /* ============ Navigation ============ */
+  #nav{position:fixed;left:50%;bottom:2.5vh;transform:translateX(-50%);z-index:30;display:flex;gap:8px;padding:6px 12px}
+  #nav .dot{width:4px;height:4px;border-radius:50%;background:var(--mm-text-dim);cursor:pointer;transition:all .5s ease;border:0;padding:0}
+  #nav .dot.active{background:var(--mm-accent);width:16px;border-radius:2px}
+  #hint{position:fixed;bottom:2.8vh;right:2.8vw;z-index:30;font-family:var(--mono);font-size:max(7px,.5vw);letter-spacing:.25em;color:var(--mm-text-dim);opacity:.2}
+  body.low-power #hint{opacity:.5;color:var(--mm-accent)}
+
+  /* ============ Animation ============ */
+  [data-anim]{opacity:1}
+  body.motion-ready [data-anim]{opacity:0;transform:translateY(3vh)}
+  body.motion-ready [data-anim="fade"]{opacity:0;transform:none}
+  body.motion-ready [data-anim="left"]{transform:translateX(-3vw)}
+  body.motion-ready [data-anim="right"]{transform:translateX(3vw)}
+  body.motion-ready [data-anim="hero"]{transform:translateY(4vh)}
+  body.motion-ready [data-anim="line"]>*{opacity:0;transform:translateY(2vh)}
+  body.low-power #deck{transition:none!important}
+  body.low-power *,body.low-power *::before,body.low-power *::after{animation:none!important;transition:none!important}
+  body.low-power.motion-ready [data-anim],body.low-power [data-anim]{opacity:1!important;transform:none!important}
+
+  @media (max-width:900px){
+    .mm-hero{font-size:8vw}.mm-hero-strong{font-size:9vw}.mm-h1{font-size:6.5vw}.mm-h2{font-size:5vw}
+    .mm-quote{font-size:5.5vw}
+    .split,.split-6-6,.split-7-5{grid-template-columns:1fr}
+    .slide{padding:4vh 5vw 10vh 5vw}
+  }
+</style>
+</head>
+<body>
+<script>
+(function(){
+  const KEY='flycan-mm-low-power';
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const stored=localStorage.getItem(KEY);
+  window.__lowPowerMode=stored==='1'||(stored===null&&reduced);
+  function updateHint(){const h=document.getElementById('hint');if(h)h.textContent=`← → · B ${window.__lowPowerMode?'静态':'动态'} · ESC`;}
+  window.__setLowPowerMode=function(on,opts={}){window.__lowPowerMode=!!on;document.body.classList.toggle('low-power',window.__lowPowerMode);if(opts.persist!==false)localStorage.setItem(KEY,window.__lowPowerMode?'1':'0');if(window.__lowPowerMode&&document.getAnimations)document.getAnimations().forEach(a=>a.cancel());updateHint();if(window.__playSlide)window.__playSlide(window.__currentSlideIndex||0);};
+  document.body.classList.toggle('low-power',window.__lowPowerMode);
+  addEventListener('DOMContentLoaded',updateHint,{once:true});
+})();
+</script>
+
+<div id="hint">← → · B 静态 · ESC</div>
+
+<div id="deck">
+
+<!-- ============================================================
+     SLIDES 插入区
+     布局参考 references/layouts-midnight.md
+     ============================================================ -->
+
+<!-- SLIDES_HERE -->
+
+</div>
+
+<div id="nav"></div>
+
+<script>
+const deck=document.getElementById('deck');
+const slides=deck.querySelectorAll('.slide');
+const nav=document.getElementById('nav');
+let idx=0,total=slides.length,lock=false;
+deck.style.width=(total*100)+'vw';
+slides.forEach((s,i)=>{
+  const b=document.createElement('button');
+  b.className='dot';b.dataset.i=i;b.setAttribute('aria-label','Page '+(i+1));
+  b.onclick=()=>go(i);
+  nav.appendChild(b);
+});
+function go(n){
+  if(lock)return;
+  idx=Math.max(0,Math.min(total-1,n));
+  window.__currentSlideIndex=idx;
+  deck.style.transform=`translateX(${-idx*100}vw)`;
+  nav.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===idx));
+  if(window.__playSlide)setTimeout(()=>window.__playSlide(idx),550);
+  lock=true;setTimeout(()=>lock=false,700);
+}
+let overviewOn=false;
+const ov=document.createElement('div');
+ov.id='overview';ov.style.cssText='position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.95);backdrop-filter:blur(8px);display:none;overflow-y:auto;padding:3vh 4vw';
+document.body.appendChild(ov);
+function buildOverview(){
+  ov.innerHTML='';const grid=document.createElement('div');
+  grid.style.cssText='display:grid;grid-template-columns:repeat(4,1fr);gap:2vh 1.6vw;max-width:90vw;margin:0 auto';
+  slides.forEach((s,i)=>{const c=document.createElement('div');c.style.cssText='cursor:pointer;overflow:hidden;border:1px solid '+(i===idx?'var(--mm-accent)':'var(--mm-line)');const w=document.createElement('div');w.style.cssText='width:100%;aspect-ratio:16/9;overflow:hidden;position:relative;pointer-events:none;background:var(--mm-bg)';const cl=s.cloneNode(true);cl.style.cssText='width:100vw;height:100vh;transform:scale('+(1/4.5)+');transform-origin:top left;position:absolute;top:0;left:0;pointer-events:none';w.appendChild(cl);const l=document.createElement('div');l.style.cssText='padding:5px 8px;font-family:var(--mono);font-size:8px;color:var(--mm-text-dim)';l.textContent=(i+1)+' / '+total;c.appendChild(w);c.appendChild(l);c.onclick=()=>{toggleOverview();go(i)};grid.appendChild(c);});
+  ov.appendChild(grid);
+}
+function toggleOverview(){overviewOn=!overviewOn;if(overviewOn){buildOverview();ov.style.display='block';}else{ov.style.display='none';}}
+addEventListener('keydown',e=>{
+  if(e.key==='Escape'){e.preventDefault();toggleOverview();return;}
+  if(e.key&&e.key.toLowerCase()==='b'&&!e.metaKey&&!e.ctrlKey&&!e.altKey){e.preventDefault();window.__setLowPowerMode(!window.__lowPowerMode);return;}
+  if(overviewOn)return;
+  if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '||e.key==='ArrowDown'){go(idx+1);return;}
+  if(e.key==='ArrowLeft'||e.key==='PageUp'||e.key==='ArrowUp')go(idx-1);
+  if(e.key==='Home')go(0);if(e.key==='End')go(total-1);
+});
+let wheelTO=null,wheelAcc=0;
+addEventListener('wheel',e=>{wheelAcc+=e.deltaY+e.deltaX;if(Math.abs(wheelAcc)>50){go(idx+(wheelAcc>0?1:-1));wheelAcc=0;}clearTimeout(wheelTO);wheelTO=setTimeout(()=>wheelAcc=0,150);},{passive:true});
+let tx=0,ty=0;
+addEventListener('touchstart',e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY},{passive:true});
+addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;const dy=e.changedTouches[0].clientY-ty;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy))go(idx+(dx<0?1:-1));},{passive:true});
+go(0);
+</script>
+
+<script type="module">
+let motion;
+try{motion=await import('./assets/motion.min.js');}catch(e1){try{motion=await import('https://cdn.jsdelivr.net/npm/motion@11.11.17/+esm');}catch(e2){console.warn('[motion] failed',e1,e2);document.querySelectorAll('[data-anim]').forEach(el=>{el.style.opacity='1';el.style.transform='none'});}}
+if(motion){const{animate,stagger}=motion;document.body.classList.add('motion-ready');const EASE=[.25,1,.5,1];const slides=[...document.querySelectorAll('.slide')];let lastIdx=-1;
+function resetAnims(s){s.querySelectorAll('[data-anim]').forEach(el=>{el.style.opacity='';el.style.transform='';});}
+function revealStatic(s){resetAnims(s);document.getAnimations?.().forEach(a=>a.cancel());s.querySelectorAll('[data-anim]').forEach(el=>{el.style.opacity='1';el.style.transform='none';});}
+function playSlide(i){const slide=slides[i];if(!slide)return;lastIdx=i;if(window.__lowPowerMode){revealStatic(slide);return;}resetAnims(slide);const all=[...slide.querySelectorAll('[data-anim]')];if(!all.length)return;const lineWraps=slide.querySelectorAll('[data-anim="line"]');lineWraps.forEach(w=>{w.style.opacity='1';w.style.transform='none';const kids=[...w.children];kids.forEach(k=>{k.style.opacity='';k.style.transform='';});});const lineKids=[...lineWraps].flatMap(w=>[...w.querySelectorAll('[data-anim]')]);const standalone=all.filter(el=>el.getAttribute('data-anim')!=='line'&&!lineKids.includes(el));const groups=[];let cur=[];standalone.forEach(el=>{if(el.dataset.anim==='step'){if(cur.length)groups.push(cur);groups.push([el]);cur=[];}else{cur.push(el);}});if(cur.length)groups.push(cur);if(groups.length){let delay=0;groups.forEach((g,i)=>{const base=i*.28;g.forEach(el=>animate(el,{opacity:[0,1],y:[20,0]},{duration:.6,delay:base+(i*.04),easing:EASE}));});}else{animate(all,{opacity:[0,1],y:[15,0]},{duration:.6,delay:stagger(.08,{start:.1}),easing:EASE});}}
+window.__playSlide=playSlide;playSlide(0);}
+</script>
+</body>
+</html>
