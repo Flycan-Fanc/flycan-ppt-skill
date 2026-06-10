@@ -12,14 +12,14 @@
 
 ### B. 核心设计——像课堂黑板
 
-- 底色 `#1A1E1A` 深灰绿——模拟真实石板黑板
+- 底色 `#0B0B0B`——真正的深黑石板黑板
 - 黑板纹理：粉笔灰痕迹 + 板擦纹 + 木纹
 - 粉笔字要有**纹理感**（通过 text-shadow 模拟粉笔边缘毛糙感）
 - **不同层级文字粗细不同**：
   - `.chalk-title`（巨标题 6.5vw）—— **粗粉笔**，ZCOOL XiaoWei + 重阴影
   - `.chalk-h1`（大标题 4.8vw）—— **中粉笔**，ZCOOL XiaoWei + 中阴影
   - `.chalk-h2`（副标题 3.2vw）—— **细粉笔手写**，Ma Shan Zheng 行书
-  - `.chalk-body`（正文 1.2vw）—— **极细粉笔**，Noto Sans SC 300 超细体
+  - `.chalk-body`（正文 1.25vw）—— **普通粉笔**，Noto Sans SC 400（略粗）
   - `.chalk-note`（注释 1.1vw）—— **粉笔注释**，Ma Shan Zheng 手写体
   - `.chalk-mono`（标签 0.75vw）—— **刻印**，JetBrains Mono 等宽
 
@@ -49,7 +49,44 @@
 - 禁止：干净整洁的杂志封面感
 - 要有"开始上课啦"的感觉
 
-### F. 禁止
+### G. 扩展手绘 SVG 元素
+
+除了 `stickman`（火柴人）、`chalk-arrow`（箭头）、`chalk-lightbulb`（灯泡）、`chalk-check`（勾选），模板新增了更多手绘插画元素：
+
+| 元素 | 类名 | 默认颜色 | 用途 |
+|------|------|----------|------|
+| 大脑 | `chalk-brain` | 粉色 | 思考/智力/理解 |
+| 放大镜 | `chalk-magnifier` | 蓝色 | 分析/检查/调试 |
+| 对话框 | `chalk-dialog` | 绿色 | 沟通/对话/提示 |
+| 书本 | `chalk-book` | 白色 | 阅读/学习/知识 |
+| 星星 | `chalk-star` | 黄色 | 亮点/成就/评级 |
+| 火箭 | `chalk-rocket` | 黄色 | 成长/快速/突破 |
+| 机器人 | `chalk-robot` | 黄色 | AI/自动化/编程 |
+| 靶心 | `chalk-target` | 粉色 | 目标/精准/定位 |
+| 旗帜 | `chalk-flag` | 绿色 | 里程碑/完成/目标 |
+
+```html
+<!-- 使用方式示例 -->
+<svg class="chalk-brain" viewBox="0 0 100 100"><!-- SVG path --></svg>
+<svg class="chalk-magnifier" viewBox="0 0 100 100"><!-- SVG path --></svg>
+<svg class="chalk-star" viewBox="0 0 100 100"><polygon points="50,5 63,38 ..."/></svg>
+```
+
+### H. SVG 粉笔滤镜
+
+模板内置 `#chalk-texture` SVG 滤镜，可通过 CSS `filter: url(#chalk-texture)` 为任意元素添加粉笔毛糙纹理效果：
+
+```html
+<svg class="chalk-filter" aria-hidden="true">
+  <filter id="chalk-texture">
+    <feTurbulence type="fractalNoise" baseFrequency=".65" numOctaves="3"/>
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.8"/>
+    <feComposite in="displaced" in2="SourceGraphic" operator="in"/>
+  </filter>
+</svg>
+```
+
+### I. 禁止
 
 - ❌ 真实照片、3D 图标、emoji
 - ❌ 渐变背景、毛玻璃、圆角卡片

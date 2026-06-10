@@ -99,7 +99,7 @@ Midnight Minimal 极致留白，内容页最多 3 个要点，文字间距要宽
 - **不同层级文字粗细不同**：粗粉笔（title）→ 中粉笔（h1）→ 细粉笔手写（h2）→ 极细粉笔（body）
 - 黑板纹理：粉笔灰痕迹、板擦纹、木纹（模板已预设）
 - 手绘框线（`chalk-box`）代替圆角卡片
-- SVG 箭头/火柴人（`chalk-arrow` / `stickman`）代替图标
+- SVG 手绘元素（`chalk-arrow` / `stickman` / `chalk-brain` / `chalk-magnifier` / `chalk-dialog` / `chalk-book` / `chalk-star` 等）代替图标
 - 体现推导过程：问题 → 分析 → 推导 → 结论
 - 像板书，不要像 PPT
 - 禁止：真实照片、3D 图标、杂志排版、极简海报风
@@ -161,10 +161,11 @@ grep "\[必填\]" 应无结果。
   □ 衬线标题 + 非衬线正文
 
 排版(仅 Blackboard)
-  □ 所有页使用石板黑板底色 #202321
+  □ 所有页使用石板黑板底色 #0B0B0B
   □ 粉笔配色正确（白/黄/蓝/粉/绿/橙/红）
   □ 不同层级文字粗细不同
   □ 使用手绘框线代替圆角卡片
+  □ 使用 SVG 手绘元素（chalk-brain/magnifier/dialog/book/star 等）代替图标
   □ 无真实照片 / 3D 图标
   □ 体现推导过程：问题→分析→推导→结论
 

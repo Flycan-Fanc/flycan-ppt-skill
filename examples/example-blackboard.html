@@ -9,8 +9,8 @@
 <link href="https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&family=Ma+Shan+Zheng&family=Liu+Jian+Mao+Cao&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --board:#202321;
-    --board-rgb:32,35,33;
+    --board:#0B0B0B;
+    --board-rgb:11,11,11;
     --chalk:#F5F5F5;
     --chalk-rgb:245,245,245;
     --chalk-yellow:#FFD54F;
@@ -46,10 +46,10 @@
   #deck{position:fixed;inset:0;width:10000vw;height:100vh;display:flex;flex-wrap:nowrap;transition:transform .8s cubic-bezier(.77,0,.175,1);z-index:10;will-change:transform}
   .slide{width:100vw;height:100vh;flex:0 0 100vw;position:relative;padding:5vh 6vw 6vh 6vw;display:flex;flex-direction:column;overflow:hidden;background:var(--board);color:var(--chalk);z-index:1}
   .chalk-yellow{color:var(--chalk-yellow)}.chalk-blue{color:var(--chalk-blue)}.chalk-pink{color:var(--chalk-pink)}.chalk-green{color:var(--chalk-green)}.chalk-orange{color:var(--chalk-orange)}.chalk-red{color:var(--chalk-red)}.chalk-dim{color:var(--chalk-dim)}
-  .chalk-title{font-family:var(--title);font-size:max(36px,6.5vw);line-height:1.12;letter-spacing:.04em;color:#FFF;text-shadow:0 0 12px rgba(255,255,255,.08),1.5px 1.5px 2px rgba(0,0,0,.55),-1px -1px 1.5px rgba(0,0,0,.35),.5px 0 3px rgba(255,255,255,.06)}
+  .chalk-title{font-family:var(--title);font-size:max(36px,6.5vw);line-height:1.12;letter-spacing:.04em;color:#FFF;text-shadow:0 0 15px rgba(255,255,255,.1),1px 2px 3px rgba(0,0,0,.6),-1px -1px 2px rgba(0,0,0,.4),.8px .8px 0 rgba(255,255,255,.08),-.5px .3px 0 rgba(255,255,255,.05),0 0 4px rgba(255,255,255,.06)}
   .chalk-h1{font-family:var(--title);font-size:max(28px,4.8vw);line-height:1.18;letter-spacing:.025em;color:#FFF;text-shadow:0 0 8px rgba(255,255,255,.06),1px 1px 1.5px rgba(0,0,0,.5),-.5px -.5px 1px rgba(0,0,0,.3)}
   .chalk-h2{font-family:var(--handwrite);font-size:max(22px,3.2vw);line-height:1.3;letter-spacing:.015em;color:rgba(255,255,255,.9);text-shadow:0 0 6px rgba(255,255,255,.05),.5px .5px 1px rgba(0,0,0,.45)}
-  .chalk-body{font-family:var(--sans);font-weight:300;font-size:max(14px,1.2vw);line-height:1.7;color:rgba(255,255,255,.82);text-shadow:0 0 4px rgba(255,255,255,.04),.3px .3px .5px rgba(0,0,0,.3)}
+  .chalk-body{font-family:var(--sans);font-weight:400;font-size:max(15px,1.25vw);line-height:1.7;color:rgba(255,255,255,.85);text-shadow:0 0 5px rgba(255,255,255,.04),.5px .5px .5px rgba(0,0,0,.35),-.2px .2px 0 rgba(255,255,255,.03)}
   .chalk-body-strong{font-family:var(--sans);font-weight:500;font-size:max(15px,1.3vw);line-height:1.6;color:rgba(255,255,255,.9);text-shadow:0 0 5px rgba(255,255,255,.05),.5px .5px 1px rgba(0,0,0,.4)}
   .chalk-note{font-family:var(--handwrite);font-size:max(15px,1.1vw);line-height:1.45;color:rgba(255,255,255,.7);text-shadow:0 0 3px rgba(255,255,255,.03)}
   .chalk-mono{font-family:var(--mono);font-weight:300;font-size:max(10px,.75vw);letter-spacing:.2em;text-transform:uppercase;color:var(--chalk-dim)}
@@ -59,6 +59,11 @@
   .chalk-box.dashed{border-style:dashed}.chalk-box.thick{border-width:4px}
   .chalk-arrow{display:inline-block;vertical-align:middle;margin:0 .4vw;fill:none;stroke:var(--chalk-dim);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
   .chalk-arrow.yellow{stroke:var(--chalk-yellow)}.chalk-arrow.blue{stroke:var(--chalk-blue)}.chalk-arrow.green{stroke:var(--chalk-green)}.chalk-arrow.pink{stroke:var(--chalk-pink)}
+  .chalk-brain{display:inline-block;width:4vw;height:4vw;fill:none;stroke:var(--chalk-pink);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+  .chalk-magnifier{display:inline-block;width:3.5vw;height:3.5vw;fill:none;stroke:var(--chalk-blue);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+  .chalk-dialog{display:inline-block;width:4vw;height:3.2vw;fill:none;stroke:var(--chalk-green);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+  .chalk-book{display:inline-block;width:3.5vw;height:3.5vw;fill:none;stroke:var(--chalk);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+  .chalk-star{display:inline-block;width:3vw;height:3vw;fill:none;stroke:var(--chalk-yellow);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
   .stickman{display:inline-block;vertical-align:middle;fill:none;stroke:var(--chalk);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
   .stickman.lg{width:5vw;height:10vw;stroke-width:3}
   .frame{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden;position:relative;z-index:1}
@@ -113,6 +118,17 @@
 })();
 </script>
 <div id="hint">← → · B 静态 · ESC</div>
+<!-- SVG 粉笔滤镜 -->
+<svg class="chalk-filter" aria-hidden="true" style="position:fixed;width:0;height:0;pointer-events:none;overflow:hidden">
+  <defs>
+    <filter id="chalk-texture" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency=".65" numOctaves="3" result="noise" seed="2"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.8" xChannelSelector="R" yChannelSelector="G" result="displaced"/>
+      <feComposite in="displaced" in2="SourceGraphic" operator="in" result="textured"/>
+      <feMerge><feMergeNode in="textured"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+</svg>
 <div id="deck">
 
 <!-- S1: Cover -->
@@ -159,12 +175,14 @@
       <div class="col" data-anim="left" style="gap:1.2vh">
         <div class="chalk-box pink" style="text-align:center">
           <div class="chalk-body-strong chalk-pink">功能堆叠</div>
+          <svg class="chalk-brain" viewBox="0 0 100 100" style="margin-top:.5vh"><path d="M50,10 C30,10 15,25 15,45 C15,60 22,72 35,78 L35,90 L45,82 C47,83 49,84 50,84 C51,84 53,83 55,82 L65,90 L65,78 C78,72 85,60 85,45 C85,25 70,10 50,10Z"/><path d="M35,40 Q45,35 50,45"/><path d="M65,40 Q55,35 50,45"/><path d="M38,55 Q50,65 62,55"/></svg>
         </div>
         <div class="chalk-body">以为"多就是好"，不断叠加新功能，每个新功能都带来新的维护负担。</div>
       </div>
       <div class="col" data-anim="right" style="gap:1.2vh">
         <div class="chalk-box blue" style="text-align:center">
           <div class="chalk-body-strong chalk-blue">过度设计</div>
+          <svg class="chalk-magnifier" viewBox="0 0 100 100" style="margin-top:.5vh"><circle cx="40" cy="40" r="28"/><line x1="62" y1="62" x2="88" y2="88"/></svg>
         </div>
         <div class="chalk-body">为"未来可能"做过度抽象，把简单问题变成复杂框架。</div>
       </div>
@@ -254,6 +272,11 @@
       </svg>
     </div>
     <div class="chalk-mono" data-anim style="margin-top:1.5vh">—— 今天就讲到这里 ——</div>
+    <div class="row" style="justify-content:center;margin-top:1vh;gap:.8vw" data-anim="fade">
+      <svg class="chalk-star" viewBox="0 0 100 100"><polygon points="50,5 63,38 98,38 70,60 80,95 50,75 20,95 30,60 2,38 37,38"/></svg>
+      <svg class="chalk-star" viewBox="0 0 100 100" style="stroke:var(--chalk-pink)"><polygon points="50,5 63,38 98,38 70,60 80,95 50,75 20,95 30,60 2,38 37,38"/></svg>
+      <svg class="chalk-star" viewBox="0 0 100 100"><polygon points="50,5 63,38 98,38 70,60 80,95 50,75 20,95 30,60 2,38 37,38"/></svg>
+    </div>
   </div>
   <div class="chalk-foot"><span>结论</span><span>07 / 07</span></div>
 </div>

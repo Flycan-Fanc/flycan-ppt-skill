@@ -6,7 +6,7 @@
 
 | 颜色 | 色值 | 用途 | 类名 |
 |------|------|------|------|
-| 黑板底色 | `#202321` | 石板黑板背景 | — |
+| 黑板底色 | `#0B0B0B` | 深黑石板黑板背景 | — |
 | 白粉笔 | `#F5F5F5` | 默认正文/标题 | —（默认色） |
 | 黄粉笔 | `#FFD54F` | 关键词/重点/核心问题 | `.chalk-yellow` |
 | 蓝粉笔 | `#64B5F6` | 流程/逻辑/分析推导 | `.chalk-blue` |
@@ -25,7 +25,7 @@
 | `.chalk-title` 6.5vw | ZCOOL XiaoWei | **粗粉笔**（重阴影） | 封面巨标题 |
 | `.chalk-h1` 4.8vw | ZCOOL XiaoWei | **中粉笔**（中阴影） | 章节大标题 |
 | `.chalk-h2` 3.2vw | Ma Shan Zheng | **细粉笔手写** | 副标题/引导语 |
-| `.chalk-body` 1.2vw 300w | Noto Sans SC | **极细粉笔** | 正文内容 |
+| `.chalk-body` 1.25vw 400 | Noto Sans SC | **普通粉笔**（略粗） | 正文内容 |
 | `.chalk-note` 1.1vw | Ma Shan Zheng | **粉笔注释** | 旁注/说明 |
 | `.chalk-mono` 0.75vw | JetBrains Mono | **刻印/标签** | 类别标识 |
 
@@ -48,7 +48,7 @@
 |------|------|
 | 巨标题 / 大标题 | ZCOOL XiaoWei（粗重手写，适合厚粉笔） |
 | 副标题 / 注释 | Ma Shan Zheng（自然行书，适合细粉笔） |
-| 正文结构化内容 | Noto Sans SC 300（超细体，适合极细粉笔） |
+| 正文结构化内容 | Noto Sans SC 400（略粗，适合普通粉笔） |
 | 代码/标签 | JetBrains Mono（等宽） |
 
 ## 黑板纹理说明

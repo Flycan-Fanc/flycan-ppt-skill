@@ -10,8 +10,8 @@
 <style>
   /* ========== 黑板基础 ========== */
   :root{
-    --board:#202321;
-    --board-rgb:32,35,33;
+    --board:#0B0B0B;
+    --board-rgb:11,11,11;
     --chalk:#F5F5F5;
     --chalk-rgb:245,245,245;
     --chalk-yellow:#FFD54F;
@@ -66,12 +66,13 @@
 
   /* ========== 粉笔字体层级 ==========
      不同层级 = 不同粗细的"粉笔"
-     .chalk-title  → 大粉笔（粗、厚、重）
+     .chalk-title  → 大粉笔（粗、厚、重，强纹理）
      .chalk-h1     → 中粉笔（中等粗细）
      .chalk-h2     → 细粉笔（手写体，自然流畅）
-     .chalk-body   → 极细粉笔（无衬线，结构清晰）
+     .chalk-body   → 普通粉笔（参考要求"略粗"）
      .chalk-note   → 注释粉笔（手写注释感）
      .chalk-mono   → 等宽粉笔（代码/标签）
+     所有层级共用粉笔纹理：多层 text-shadow 模拟毛糙边缘
   */
   .chalk-title{
     font-family:var(--title);
@@ -79,10 +80,13 @@
     line-height:1.12;
     letter-spacing:.04em;
     color:#FFF;
-    text-shadow:0 0 12px rgba(255,255,255,.08),
-                1.5px 1.5px 2px rgba(0,0,0,.55),
-                -1px -1px 1.5px rgba(0,0,0,.35),
-                .5px 0 3px rgba(255,255,255,.06);
+    text-shadow:
+      0 0 15px rgba(255,255,255,.1),
+      1px 2px 3px rgba(0,0,0,.6),
+      -1px -1px 2px rgba(0,0,0,.4),
+      .8px .8px 0 rgba(255,255,255,.08),
+      -.5px .3px 0 rgba(255,255,255,.05),
+      0 0 4px rgba(255,255,255,.06);
   }
   .chalk-h1{
     font-family:var(--title);
@@ -90,9 +94,11 @@
     line-height:1.18;
     letter-spacing:.025em;
     color:#FFF;
-    text-shadow:0 0 8px rgba(255,255,255,.06),
-                1px 1px 1.5px rgba(0,0,0,.5),
-                -.5px -.5px 1px rgba(0,0,0,.3);
+    text-shadow:
+      0 0 10px rgba(255,255,255,.08),
+      1px 1px 2px rgba(0,0,0,.55),
+      -.5px -.5px 1.5px rgba(0,0,0,.35),
+      .5px .3px 0 rgba(255,255,255,.06);
   }
   .chalk-h2{
     font-family:var(--handwrite);
@@ -100,33 +106,40 @@
     line-height:1.3;
     letter-spacing:.015em;
     color:rgba(255,255,255,.9);
-    text-shadow:0 0 6px rgba(255,255,255,.05),
-                .5px .5px 1px rgba(0,0,0,.45);
+    text-shadow:
+      0 0 8px rgba(255,255,255,.06),
+      .5px .5px 1px rgba(0,0,0,.5),
+      -.3px .2px 0 rgba(255,255,255,.04);
   }
   .chalk-body{
     font-family:var(--sans);
-    font-weight:300;
-    font-size:max(14px,1.2vw);
+    font-weight:400;
+    font-size:max(15px,1.25vw);
     line-height:1.7;
-    color:rgba(255,255,255,.82);
-    text-shadow:0 0 4px rgba(255,255,255,.04),
-                .3px .3px .5px rgba(0,0,0,.3);
+    color:rgba(255,255,255,.85);
+    text-shadow:
+      0 0 5px rgba(255,255,255,.04),
+      .5px .5px .5px rgba(0,0,0,.35),
+      -.2px .2px 0 rgba(255,255,255,.03);
   }
   .chalk-body-strong{
     font-family:var(--sans);
     font-weight:500;
-    font-size:max(15px,1.3vw);
+    font-size:max(16px,1.35vw);
     line-height:1.6;
-    color:rgba(255,255,255,.9);
-    text-shadow:0 0 5px rgba(255,255,255,.05),
-                .5px .5px 1px rgba(0,0,0,.4);
+    color:rgba(255,255,255,.92);
+    text-shadow:
+      0 0 6px rgba(255,255,255,.05),
+      .5px .5px 1px rgba(0,0,0,.4);
   }
   .chalk-note{
     font-family:var(--handwrite);
     font-size:max(15px,1.1vw);
     line-height:1.45;
-    color:rgba(255,255,255,.7);
-    text-shadow:0 0 3px rgba(255,255,255,.03);
+    color:rgba(255,255,255,.72);
+    text-shadow:
+      0 0 4px rgba(255,255,255,.03),
+      .3px .3px .5px rgba(0,0,0,.3);
   }
   .chalk-mono{
     font-family:var(--mono);
@@ -135,16 +148,17 @@
     letter-spacing:.2em;
     text-transform:uppercase;
     color:var(--chalk-dim);
+    text-shadow:0 0 3px rgba(255,255,255,.02);
   }
 
   /* ========== 粉笔手绘框 ========== */
-  .chalk-box{border:2.5px solid rgba(245,245,245,.3);padding:2vh 2.2vw;position:relative;box-shadow:1px 1px 0 rgba(245,245,245,.06),-1px 0 0 rgba(245,245,245,.04)}
-  .chalk-box.yellow{border-color:var(--chalk-yellow);box-shadow:1px 1px 0 rgba(255,213,79,.08),-1px 0 0 rgba(255,213,79,.05)}
-  .chalk-box.blue{border-color:var(--chalk-blue)}
-  .chalk-box.pink{border-color:var(--chalk-pink)}
-  .chalk-box.green{border-color:var(--chalk-green)}
-  .chalk-box.orange{border-color:var(--chalk-orange)}
-  .chalk-box.red{border-color:var(--chalk-red)}
+  .chalk-box{border:2.5px solid rgba(245,245,245,.25);padding:2vh 2.2vw;position:relative;border-radius:1px;box-shadow:1px 1px 0 rgba(245,245,245,.05),-1px 0 0 rgba(245,245,245,.03),inset 0 0 8px rgba(255,255,255,.02)}
+  .chalk-box.yellow{border-color:rgba(255,213,79,.45);box-shadow:1px 1px 0 rgba(255,213,79,.08),-1px 0 0 rgba(255,213,79,.04),inset 0 0 8px rgba(255,213,79,.03)}
+  .chalk-box.blue{border-color:rgba(100,181,246,.45)}
+  .chalk-box.pink{border-color:rgba(244,143,177,.45)}
+  .chalk-box.green{border-color:rgba(129,199,132,.45)}
+  .chalk-box.orange{border-color:rgba(255,183,77,.45)}
+  .chalk-box.red{border-color:rgba(239,83,80,.45)}
   .chalk-box.dashed{border-style:dashed}
   .chalk-box.dotted{border-style:dotted}
   .chalk-box.thick{border-width:4px}
@@ -176,6 +190,17 @@
   .chalk-lightbulb.pink{stroke:var(--chalk-pink)}
 
   .chalk-check{display:inline-block;width:1.8vw;height:1.8vw;fill:none;stroke:var(--chalk-green);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+
+  /* ========== 扩展手绘 SVG 元素 ========== */
+  .chalk-brain{display:inline-block;width:4vw;height:4vw;fill:none;stroke:var(--chalk-pink);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+  .chalk-magnifier{display:inline-block;width:3.5vw;height:3.5vw;fill:none;stroke:var(--chalk-blue);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+  .chalk-robot{display:inline-block;width:3.5vw;height:4.5vw;fill:none;stroke:var(--chalk-yellow);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+  .chalk-dialog{display:inline-block;width:4vw;height:3.2vw;fill:none;stroke:var(--chalk-green);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+  .chalk-book{display:inline-block;width:3.5vw;height:3.5vw;fill:none;stroke:var(--chalk);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+  .chalk-rocket{display:inline-block;width:3.5vw;height:4.5vw;fill:none;stroke:var(--chalk-yellow);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+  .chalk-star{display:inline-block;width:3vw;height:3vw;fill:none;stroke:var(--chalk-yellow);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+  .chalk-target{display:inline-block;width:3.5vw;height:3.5vw;fill:none;stroke:var(--chalk-pink);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+  .chalk-flag{display:inline-block;width:2.8vw;height:4vw;fill:none;stroke:var(--chalk-green);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
 
   /* ========== 布局工具 ========== */
   .frame{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden;position:relative;z-index:1}
@@ -249,6 +274,9 @@
   body.low-power *,body.low-power *::before,body.low-power *::after{animation:none!important;transition:none!important}
   body.low-power.motion-ready [data-anim],body.low-power [data-anim]{opacity:1!important;transform:none!important}
 
+  /* ========== SVG 粉笔滤镜（注入 SVG defs） ========== */
+  svg.chalk-filter{position:fixed;width:0;height:0;pointer-events:none;overflow:hidden}
+
   @media (max-width:900px){
     .chalk-title{font-size:10vw}.chalk-h1{font-size:8vw}.chalk-h2{font-size:5.5vw}
     .split,.split-6-6,.split-7-5{grid-template-columns:1fr}
@@ -274,6 +302,18 @@
 </script>
 
 <div id="hint">← → · B 静态 · ESC</div>
+
+<!-- SVG 粉笔滤镜定义 -->
+<svg class="chalk-filter" aria-hidden="true">
+  <defs>
+    <filter id="chalk-texture" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency=".65" numOctaves="3" result="noise" seed="2"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.8" xChannelSelector="R" yChannelSelector="G" result="displaced"/>
+      <feComposite in="displaced" in2="SourceGraphic" operator="in" result="textured"/>
+      <feMerge><feMergeNode in="textured"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+</svg>
 
 <div id="deck">
 
