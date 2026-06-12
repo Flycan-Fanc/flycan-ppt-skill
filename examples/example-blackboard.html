@@ -3,15 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KISS 原则 · 保持简单 · Flycan 黑板手绘</title>
+<title>AI 时代最重要的能力 · 独立思考</title>
+<link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&family=Ma+Shan+Zheng&family=Liu+Jian+Mao+Cao&family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
+  /* ========== 黑板基础 ========== */
   :root{
-    --board:#0B0B0B;
-    --board-rgb:11,11,11;
-    --chalk:#F5F5F5;
+    --board:#0E0F0D;
+    --board-deep:#070807;
+    --board-worn:#263128;
+    --board-rgb:17,21,18;
+    --chalk:#F2F0E8;
     --chalk-rgb:245,245,245;
     --chalk-yellow:#FFD54F;
     --chalk-yellow-rgb:255,213,79;
@@ -26,69 +30,314 @@
     --chalk-red:#EF5350;
     --chalk-red-rgb:239,83,80;
     --chalk-dim:rgba(245,245,245,.35);
-    --title:"ZCOOL XiaoWei",cursive;
-    --handwrite:"Ma Shan Zheng",cursive;
+    --chalk-glow-white:0 0 10px rgba(245,245,245,.12);
+    --chalk-glow-yellow:0 0 10px rgba(255,213,79,.12);
+    --chalk-glow-blue:0 0 10px rgba(100,181,246,.1);
+    --chalk-glow-pink:0 0 10px rgba(244,143,177,.1);
+    --title:"Ma Shan Zheng","ZCOOL XiaoWei",cursive;
+    --handwrite:"Liu Jian Mao Cao","Ma Shan Zheng",cursive;
     --sans:"Noto Sans SC","PingFang SC",sans-serif;
     --mono:"JetBrains Mono",monospace;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{width:100%;height:100%;overflow:hidden;background:var(--board);color:var(--chalk);font-family:var(--title);-webkit-font-smoothing:antialiased}
+  html,body{width:100%;height:100%;overflow:hidden;background:var(--board-deep);color:var(--chalk);font-family:var(--title);-webkit-font-smoothing:antialiased}
+
+  /* ========== 黑板纹理层 ========== */
   body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
     background:
-      radial-gradient(ellipse at 22% 18%, rgba(255,255,255,.025) 0%, transparent 40%),
-      radial-gradient(ellipse at 73% 58%, rgba(255,255,255,.018) 0%, transparent 35%),
-      radial-gradient(ellipse at 48% 80%, rgba(255,255,255,.012) 0%, transparent 30%),
-      radial-gradient(ellipse at 60% 25%, rgba(255,255,255,.008) 0%, transparent 20%),
-      linear-gradient(90deg, transparent 15%, rgba(255,255,255,.005) 18%, transparent 22%, transparent 55%, rgba(255,255,255,.004) 58%, transparent 62%),
-      linear-gradient(110deg, transparent 35%, rgba(255,255,255,.006) 37%, transparent 40%),
-      repeating-linear-gradient(0deg, transparent 0px, transparent 5px, rgba(255,255,255,.003) 5px, rgba(255,255,255,.003) 6px);
+      radial-gradient(ellipse at 18% 16%, rgba(244,240,229,.12) 0%, rgba(244,240,229,.045) 18%, transparent 46%),
+      radial-gradient(ellipse at 82% 24%, rgba(244,240,229,.08) 0%, rgba(244,240,229,.035) 20%, transparent 48%),
+      radial-gradient(ellipse at 62% 72%, rgba(244,240,229,.07) 0%, rgba(244,240,229,.025) 24%, transparent 52%),
+      linear-gradient(0deg, rgba(255,255,255,.025), transparent 18%, transparent 80%, rgba(255,255,255,.018)),
+      repeating-linear-gradient(0deg, rgba(244,240,229,.035) 0 1px, transparent 1px 9px),
+      repeating-linear-gradient(92deg, rgba(244,240,229,.018) 0 2px, transparent 2px 18px),
+      repeating-linear-gradient(17deg, transparent 0 34px, rgba(255,255,255,.022) 34px 38px, transparent 38px 86px),
+      linear-gradient(120deg, rgba(255,255,255,.055), transparent 13%, transparent 70%, rgba(0,0,0,.22));
+    mix-blend-mode:screen;
+    opacity:.86;
   }
+  body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:
+      radial-gradient(circle at 8% 8%, rgba(0,0,0,.5), transparent 18%),
+      radial-gradient(circle at 94% 88%, rgba(0,0,0,.45), transparent 22%),
+      linear-gradient(90deg, rgba(0,0,0,.4), transparent 8%, transparent 92%, rgba(0,0,0,.45)),
+      linear-gradient(0deg, rgba(0,0,0,.36), transparent 9%, transparent 88%, rgba(0,0,0,.42));
+    box-shadow:inset 0 0 7vw rgba(0,0,0,.58);
+  }
+
+  /* ========== Deck ========== */
   #deck{position:fixed;inset:0;width:10000vw;height:100vh;display:flex;flex-wrap:nowrap;transition:transform .8s cubic-bezier(.77,0,.175,1);z-index:10;will-change:transform}
-  .slide{width:100vw;height:100vh;flex:0 0 100vw;position:relative;padding:5vh 6vw 6vh 6vw;display:flex;flex-direction:column;overflow:hidden;background:var(--board);color:var(--chalk);z-index:1}
-  .chalk-yellow{color:var(--chalk-yellow)}.chalk-blue{color:var(--chalk-blue)}.chalk-pink{color:var(--chalk-pink)}.chalk-green{color:var(--chalk-green)}.chalk-orange{color:var(--chalk-orange)}.chalk-red{color:var(--chalk-red)}.chalk-dim{color:var(--chalk-dim)}
-  .chalk-title{font-family:var(--title);font-size:max(36px,6.5vw);line-height:1.12;letter-spacing:.04em;color:#FFF;text-shadow:0 0 15px rgba(255,255,255,.1),1px 2px 3px rgba(0,0,0,.6),-1px -1px 2px rgba(0,0,0,.4),.8px .8px 0 rgba(255,255,255,.08),-.5px .3px 0 rgba(255,255,255,.05),0 0 4px rgba(255,255,255,.06)}
-  .chalk-h1{font-family:var(--title);font-size:max(28px,4.8vw);line-height:1.18;letter-spacing:.025em;color:#FFF;text-shadow:0 0 8px rgba(255,255,255,.06),1px 1px 1.5px rgba(0,0,0,.5),-.5px -.5px 1px rgba(0,0,0,.3)}
-  .chalk-h2{font-family:var(--handwrite);font-size:max(22px,3.2vw);line-height:1.3;letter-spacing:.015em;color:rgba(255,255,255,.9);text-shadow:0 0 6px rgba(255,255,255,.05),.5px .5px 1px rgba(0,0,0,.45)}
-  .chalk-body{font-family:var(--sans);font-weight:400;font-size:max(15px,1.25vw);line-height:1.7;color:rgba(255,255,255,.85);text-shadow:0 0 5px rgba(255,255,255,.04),.5px .5px .5px rgba(0,0,0,.35),-.2px .2px 0 rgba(255,255,255,.03)}
-  .chalk-body-strong{font-family:var(--sans);font-weight:500;font-size:max(15px,1.3vw);line-height:1.6;color:rgba(255,255,255,.9);text-shadow:0 0 5px rgba(255,255,255,.05),.5px .5px 1px rgba(0,0,0,.4)}
-  .chalk-note{font-family:var(--handwrite);font-size:max(15px,1.1vw);line-height:1.45;color:rgba(255,255,255,.7);text-shadow:0 0 3px rgba(255,255,255,.03)}
-  .chalk-mono{font-family:var(--mono);font-weight:300;font-size:max(10px,.75vw);letter-spacing:.2em;text-transform:uppercase;color:var(--chalk-dim)}
-  .chalk-box{border:2.5px solid rgba(245,245,245,.3);padding:2vh 2.2vw;position:relative;box-shadow:1px 1px 0 rgba(245,245,245,.06),-1px 0 0 rgba(245,245,245,.04)}
-  .chalk-box.yellow{border-color:var(--chalk-yellow);box-shadow:1px 1px 0 rgba(255,213,79,.08),-1px 0 0 rgba(255,213,79,.05)}
-  .chalk-box.blue{border-color:var(--chalk-blue)}.chalk-box.pink{border-color:var(--chalk-pink)}.chalk-box.green{border-color:var(--chalk-green)}.chalk-box.orange{border-color:var(--chalk-orange)}.chalk-box.red{border-color:var(--chalk-red)}
-  .chalk-box.dashed{border-style:dashed}.chalk-box.thick{border-width:4px}
+  .slide{width:100vw;height:100vh;flex:0 0 100vw;position:relative;padding:4.2vh 3.8vw 4.5vh 3.8vw;display:flex;flex-direction:column;overflow:hidden;background:transparent;color:var(--chalk);z-index:1}
+  .chalk-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1}
+  .chalk-a11y{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  .slide::before{content:"";position:absolute;inset:1.4vh .9vw;z-index:0;pointer-events:none;border:1.5px solid rgba(242,240,232,.28);box-shadow:inset 0 0 1px rgba(242,240,232,.25),0 0 0 1px rgba(0,0,0,.45);background:
+    repeating-radial-gradient(circle at 20% 30%, rgba(244,240,229,.045) 0 1px, transparent 1px 4px),
+    linear-gradient(2deg, transparent 0 16%, rgba(244,240,229,.035) 17%, transparent 19% 41%, rgba(244,240,229,.025) 42%, transparent 44%),
+    linear-gradient(88deg, transparent 0 28%, rgba(244,240,229,.018) 29%, transparent 31% 72%, rgba(244,240,229,.016) 73%, transparent 75%);
+    opacity:.78;filter:blur(.15px)}
+
+  /* ========== 粉笔颜色 ========== */
+  .chalk-yellow{color:var(--chalk-yellow)}
+  .chalk-blue{color:var(--chalk-blue)}
+  .chalk-pink{color:var(--chalk-pink)}
+  .chalk-green{color:var(--chalk-green)}
+  .chalk-orange{color:var(--chalk-orange)}
+  .chalk-red{color:var(--chalk-red)}
+  .chalk-dim{color:var(--chalk-dim)}
+
+  /* ========== 粉笔字体层级 ==========
+     不同层级 = 不同粗细的"粉笔"
+     .chalk-title  → 大粉笔（粗、厚、重，强纹理）
+     .chalk-h1     → 中粉笔（中等粗细）
+     .chalk-h2     → 细粉笔（手写体，自然流畅）
+     .chalk-body   → 普通粉笔（参考要求"略粗"）
+     .chalk-note   → 注释粉笔（手写注释感）
+     .chalk-mono   → 等宽粉笔（代码/标签）
+     所有层级共用粉笔纹理：多层 text-shadow 模拟毛糙边缘
+  */
+  .chalk-title{
+    font-family:var(--title);
+    font-size:max(44px,7.4vw);
+    line-height:1.12;
+    letter-spacing:.02em;
+    color:#FFF;
+    text-shadow:
+      .5px 0 rgba(244,240,229,.55),
+      -.8px .4px rgba(244,240,229,.26),
+      0 0 1px rgba(244,240,229,.45),
+      0 0 15px rgba(255,255,255,.1),
+      1px 2px 3px rgba(0,0,0,.6),
+      -1px -1px 2px rgba(0,0,0,.4),
+      .8px .8px 0 rgba(255,255,255,.08),
+      -.5px .3px 0 rgba(255,255,255,.05),
+      0 0 4px rgba(255,255,255,.06);
+    filter:url(#chalk-texture);
+  }
+  .chalk-h1{
+    font-family:var(--title);
+    font-size:max(30px,4.2vw);
+    line-height:1.18;
+    letter-spacing:.025em;
+    color:#FFF;
+    text-shadow:
+      .45px 0 rgba(244,240,229,.45),
+      -.55px .35px rgba(244,240,229,.2),
+      0 0 1px rgba(244,240,229,.35),
+      0 0 10px rgba(255,255,255,.08),
+      1px 1px 2px rgba(0,0,0,.55),
+      -.5px -.5px 1.5px rgba(0,0,0,.35),
+      .5px .3px 0 rgba(255,255,255,.06);
+    filter:url(#chalk-texture);
+  }
+  .chalk-h2{
+    font-family:var(--handwrite);
+    font-size:max(24px,2.8vw);
+    line-height:1.3;
+    letter-spacing:.015em;
+    color:rgba(255,255,255,.9);
+    text-shadow:
+      .35px .15px rgba(244,240,229,.35),
+      -.45px .2px rgba(244,240,229,.16),
+      0 0 8px rgba(255,255,255,.06),
+      .5px .5px 1px rgba(0,0,0,.5),
+      -.3px .2px 0 rgba(255,255,255,.04);
+    filter:url(#chalk-texture);
+  }
+  .chalk-body{
+    font-family:var(--title);
+    font-weight:400;
+    font-size:max(18px,1.65vw);
+    line-height:1.42;
+    color:rgba(255,255,255,.9);
+    text-shadow:
+      .3px 0 rgba(244,240,229,.25),
+      -.25px .15px rgba(244,240,229,.12),
+      0 0 5px rgba(255,255,255,.04),
+      .5px .5px .5px rgba(0,0,0,.35),
+      -.2px .2px 0 rgba(255,255,255,.03);
+    filter:url(#chalk-texture);
+  }
+  .chalk-body-strong{
+    font-family:var(--title);
+    font-weight:500;
+    font-size:max(21px,1.9vw);
+    line-height:1.35;
+    color:rgba(255,255,255,.92);
+    text-shadow:
+      .3px 0 rgba(244,240,229,.28),
+      0 0 6px rgba(255,255,255,.05),
+      .5px .5px 1px rgba(0,0,0,.4);
+    filter:url(#chalk-texture);
+  }
+  .chalk-note{
+    font-family:var(--handwrite);
+    font-size:max(17px,1.35vw);
+    line-height:1.45;
+    color:rgba(255,255,255,.72);
+    text-shadow:
+      .25px 0 rgba(244,240,229,.22),
+      0 0 4px rgba(255,255,255,.03),
+      .3px .3px .5px rgba(0,0,0,.3);
+    filter:url(#chalk-texture);
+  }
+  .chalk-mono{
+    font-family:var(--title);
+    font-weight:300;
+    font-size:max(16px,1.2vw);
+    letter-spacing:.04em;
+    color:rgba(255,255,255,.86);
+    text-shadow:0 0 3px rgba(255,255,255,.02);
+  }
+
+  /* ========== 粉笔手绘框 ========== */
+  .chalk-box{border:0;padding:2vh 2.2vw;position:relative;border-radius:1px;box-shadow:inset 0 0 8px rgba(255,255,255,.02)}
+  .chalk-box::before,.chalk-box::after{content:"";position:absolute;inset:0;pointer-events:none;border:2.5px solid rgba(245,245,245,.28);transform:rotate(-.25deg);filter:url(#chalk-texture)}
+  .chalk-box::after{inset:2px -2px -1px 1px;opacity:.45;transform:rotate(.35deg)}
+  .chalk-box>*{position:relative;z-index:1}
+  .chalk-box.yellow{box-shadow:inset 0 0 8px rgba(255,213,79,.03)}
+  .chalk-box.yellow::before,.chalk-box.yellow::after{border-color:rgba(255,213,79,.52)}
+  .chalk-box.blue::before,.chalk-box.blue::after{border-color:rgba(100,181,246,.52)}
+  .chalk-box.pink::before,.chalk-box.pink::after{border-color:rgba(244,143,177,.52)}
+  .chalk-box.green::before,.chalk-box.green::after{border-color:rgba(129,199,132,.52)}
+  .chalk-box.orange::before,.chalk-box.orange::after{border-color:rgba(255,183,77,.52)}
+  .chalk-box.red::before,.chalk-box.red::after{border-color:rgba(239,83,80,.52)}
+  .chalk-box.dashed::before,.chalk-box.dashed::after{border-style:dashed}
+  .chalk-box.dotted::before,.chalk-box.dotted::after{border-style:dotted}
+  .chalk-box.thick::before,.chalk-box.thick::after{border-width:4px}
+
+  .chalk-underline{display:inline;padding-bottom:2px;border-bottom:2.5px solid var(--chalk-yellow);box-shadow:0 1px 0 rgba(255,213,79,.08)}
+  .chalk-underline.blue{border-color:var(--chalk-blue)}
+  .chalk-underline.pink{border-color:var(--chalk-pink)}
+  .chalk-underline.green{border-color:var(--chalk-green)}
+
+  .chalk-circle{display:inline-flex;align-items:center;justify-content:center;width:2.4em;height:2.4em;border-radius:50%;border:2.5px solid var(--chalk-yellow);font-family:var(--title);font-size:max(13px,1vw);text-shadow:0 0 5px rgba(255,213,79,.1)}
+
+  /* ========== 参考图式黑板知识卡片组件 ========== */
+  .board-title-row{display:flex;align-items:center;gap:1.2vw;margin-bottom:2vh}
+  .board-title-row .title-mark{font-family:var(--title);font-size:max(26px,2.4vw);color:var(--chalk)}
+  .chalk-heading{font-family:var(--title);font-size:max(30px,3.4vw);line-height:1.12;color:var(--chalk);filter:url(#chalk-texture);text-shadow:.5px 0 rgba(244,240,229,.5),-.6px .35px rgba(244,240,229,.22),0 0 8px rgba(255,255,255,.08)}
+  .chalk-rule{height:3px;width:100%;max-width:42vw;background:var(--chalk-yellow);filter:url(#chalk-texture);box-shadow:0 1px 0 rgba(255,213,79,.15);transform:rotate(-.5deg);margin:.7vh 0 1.6vh}
+  .chalk-rule.pink{background:var(--chalk-pink)}
+  .chalk-rule.blue{background:var(--chalk-blue)}
+  .chalk-rule.short{max-width:26vw}
+  .chalk-word{font-family:var(--title);font-size:max(34px,5.6vw);line-height:1;color:var(--chalk-yellow);filter:url(#chalk-texture);text-shadow:.8px 0 rgba(255,213,79,.45),-.7px .4px rgba(255,213,79,.22),0 0 10px rgba(255,213,79,.12)}
+  .chalk-word.white{color:var(--chalk)}
+  .chalk-word.pink{color:var(--chalk-pink)}
+  .chalk-page{position:absolute;right:2.3vw;bottom:2.2vh;font-family:var(--title);font-size:max(22px,2vw);color:var(--chalk)}
+  .chalk-tag-cloud{display:inline-block;border:2.5px solid var(--chalk-blue);border-radius:35% 42% 38% 45%;padding:1.1vh 1.6vw;font-family:var(--title);font-size:max(16px,1.5vw);line-height:1.28;color:var(--chalk);filter:url(#chalk-texture);transform:rotate(-2deg)}
+  .chalk-bubble{border:3px solid var(--chalk-pink);border-radius:43% 37% 45% 34%;padding:2vh 2.4vw;font-family:var(--title);font-size:max(22px,2.1vw);line-height:1.42;text-align:center;filter:url(#chalk-texture)}
+  .chalk-quote-box{border:4px solid var(--chalk-yellow);border-radius:16px 11px 18px 10px;padding:3vh 4vw;font-family:var(--title);font-size:max(26px,2.7vw);line-height:1.45;text-align:center;filter:url(#chalk-texture);position:relative}
+  .chalk-quote-mark{font-family:var(--title);font-size:max(44px,5vw);line-height:1;color:var(--chalk-yellow)}
+  .number-list{list-style:none;display:flex;flex-direction:column;gap:1vh}
+  .number-list li{display:grid;grid-template-columns:2.2em 1fr;gap:.8vw;align-items:start;font-family:var(--title);font-size:max(18px,1.7vw);line-height:1.35;color:var(--chalk)}
+  .number-list .num{display:inline-flex;align-items:center;justify-content:center;width:1.65em;height:1.65em;border:2.5px solid var(--chalk-yellow);border-radius:50%;color:var(--chalk-yellow);filter:url(#chalk-texture)}
+  .icon-flow{display:grid;grid-template-columns:repeat(5,1fr);gap:1vw;align-items:start;margin-top:2vh}
+  .icon-step{text-align:center;display:flex;flex-direction:column;align-items:center;gap:1vh}
+  .icon-step svg{width:5.8vw;height:5.8vw}
+  .icon-step .label{font-family:var(--title);font-size:max(19px,1.7vw);line-height:1.15}
+  .icon-step .desc{font-family:var(--title);font-size:max(15px,1.25vw);line-height:1.25;color:rgba(255,255,255,.84)}
+  .chalk-checklist{list-style:none;display:flex;flex-direction:column;gap:1.2vh}
+  .chalk-checklist li{display:grid;grid-template-columns:2em 1fr;gap:.8vw;align-items:center;font-family:var(--title);font-size:max(21px,2vw);line-height:1.2}
+  .chalk-checklist .box{width:1.25em;height:1.25em;border:3px solid var(--chalk-blue);position:relative;filter:url(#chalk-texture)}
+  .chalk-checklist .box::after{content:"";position:absolute;left:18%;top:43%;width:65%;height:35%;border-left:3px solid var(--chalk-blue);border-bottom:3px solid var(--chalk-blue);transform:rotate(-45deg)}
+
+  /* ========== 手绘 SVG 元素 ========== */
   .chalk-arrow{display:inline-block;vertical-align:middle;margin:0 .4vw;fill:none;stroke:var(--chalk-dim);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
-  .chalk-arrow.yellow{stroke:var(--chalk-yellow)}.chalk-arrow.blue{stroke:var(--chalk-blue)}.chalk-arrow.green{stroke:var(--chalk-green)}.chalk-arrow.pink{stroke:var(--chalk-pink)}
+  .chalk-arrow.yellow{stroke:var(--chalk-yellow)}
+  .chalk-arrow.blue{stroke:var(--chalk-blue)}
+  .chalk-arrow.green{stroke:var(--chalk-green)}
+  .chalk-arrow.pink{stroke:var(--chalk-pink)}
+
+  .stickman{display:inline-block;vertical-align:middle;fill:none;stroke:var(--chalk);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+  .stickman.sm{width:2.5vw;height:5vw;stroke-width:2}
+  .stickman.lg{width:5vw;height:10vw;stroke-width:3}
+  .stickman.xl{width:7vw;height:14vw;stroke-width:3.5}
+  .stickman.yellow{stroke:var(--chalk-yellow)}
+  .stickman.blue{stroke:var(--chalk-blue)}
+  .stickman.pink{stroke:var(--chalk-pink)}
+
+  .chalk-lightbulb{display:inline-block;width:3vw;height:4.5vw;fill:none;stroke:var(--chalk-yellow);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+  .chalk-lightbulb.blue{stroke:var(--chalk-blue)}
+  .chalk-lightbulb.pink{stroke:var(--chalk-pink)}
+
+  .chalk-check{display:inline-block;width:1.8vw;height:1.8vw;fill:none;stroke:var(--chalk-green);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+
+  /* ========== 扩展手绘 SVG 元素 ========== */
   .chalk-brain{display:inline-block;width:4vw;height:4vw;fill:none;stroke:var(--chalk-pink);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
   .chalk-magnifier{display:inline-block;width:3.5vw;height:3.5vw;fill:none;stroke:var(--chalk-blue);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+  .chalk-robot{display:inline-block;width:3.5vw;height:4.5vw;fill:none;stroke:var(--chalk-yellow);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
   .chalk-dialog{display:inline-block;width:4vw;height:3.2vw;fill:none;stroke:var(--chalk-green);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
   .chalk-book{display:inline-block;width:3.5vw;height:3.5vw;fill:none;stroke:var(--chalk);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+  .chalk-rocket{display:inline-block;width:3.5vw;height:4.5vw;fill:none;stroke:var(--chalk-yellow);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
   .chalk-star{display:inline-block;width:3vw;height:3vw;fill:none;stroke:var(--chalk-yellow);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
-  .stickman{display:inline-block;vertical-align:middle;fill:none;stroke:var(--chalk);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
-  .stickman.lg{width:5vw;height:10vw;stroke-width:3}
+  .chalk-target{display:inline-block;width:3.5vw;height:3.5vw;fill:none;stroke:var(--chalk-pink);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+  .chalk-flag{display:inline-block;width:2.8vw;height:4vw;fill:none;stroke:var(--chalk-green);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+
+  .chalk-arrow,.stickman,.chalk-lightbulb,.chalk-check,.chalk-brain,.chalk-magnifier,.chalk-robot,.chalk-dialog,.chalk-book,.chalk-rocket,.chalk-star,.chalk-target,.chalk-flag{filter:url(#chalk-texture);opacity:.94}
+
+  /* ========== 布局工具 ========== */
   .frame{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden;position:relative;z-index:1}
+  .fill{flex:1}
   .center{align-items:center;justify-content:center;text-align:center}
-  .col{display:flex;flex-direction:column;gap:1.5vh}.row{display:flex;align-items:center;gap:1.5vw;flex-wrap:wrap}
+  .col{display:flex;flex-direction:column;gap:1.5vh}
+  .row{display:flex;align-items:center;gap:1.5vw;flex-wrap:wrap}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:2.5vw;flex:1;align-items:start}
   .split-6-6{display:grid;grid-template-columns:1fr 1fr;gap:2vw;align-items:start;flex:1}
+  .split-7-5{display:grid;grid-template-columns:7fr 5fr;gap:2vw;align-items:start;flex:1}
+  .gap-sm{height:1.2vh}
+  .gap-md{height:2.5vh}
+  .gap-lg{height:4vh}
+
+  /* ========== 推导流程 ========== */
   .flow-step{display:flex;flex-direction:column;gap:.5vh;padding:1.2vh 1.8vw;border-left:3.5px solid var(--chalk-yellow);position:relative}
   .flow-step::before{content:"";position:absolute;left:-3.5px;top:0;bottom:0;width:3.5px;background:var(--chalk-yellow);opacity:.3}
   .flow-step.blue{border-color:var(--chalk-blue)}.flow-step.blue::before{background:var(--chalk-blue)}
   .flow-step.green{border-color:var(--chalk-green)}.flow-step.green::before{background:var(--chalk-green)}
   .flow-step.pink{border-color:var(--chalk-pink)}.flow-step.pink::before{background:var(--chalk-pink)}
+  .flow-step.orange{border-color:var(--chalk-orange)}.flow-step.orange::before{background:var(--chalk-orange)}
   .flow-step .step-label{font-family:var(--mono);font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--chalk-dim)}
   .flow-step .step-body{font-family:var(--handwrite);font-size:max(16px,1.25vw);line-height:1.4;color:rgba(255,255,255,.9);text-shadow:0 0 5px rgba(255,255,255,.05)}
-  .flow-step .step-body .highlight{color:var(--chalk-yellow)}
+  .flow-step .step-body .highlight{color:var(--chalk-yellow);font-family:var(--handwrite);font-size:max(18px,1.35vw)}
+  .flow-step .step-body .highlight.blue{color:var(--chalk-blue)}
+  .flow-step .step-body .highlight.pink{color:var(--chalk-pink)}
+  .flow-step .step-body .highlight.green{color:var(--chalk-green)}
+
+  /* ========== 思维导图 ========== */
+  .mind-map-center{text-align:center;padding:2vh 2.5vw;border:3px solid var(--chalk-yellow);display:inline-block;margin:0 auto 2vh auto;font-family:var(--title);font-size:max(18px,1.6vw);text-shadow:0 0 8px rgba(255,213,79,.1);box-shadow:1px 1px 0 rgba(255,213,79,.08)}
+  .mind-map-branches{display:flex;gap:1.2vw;justify-content:center;flex-wrap:wrap}
+  .mind-map-branch{flex:1;min-width:0;padding-top:1.2vh;text-align:center}
+  .mind-map-branch .branch-line{width:80%;height:2.5px;margin:0 auto 1vh;background:rgba(245,245,245,.2);border-radius:2px}
+  .mind-map-branch .branch-label{font-family:var(--handwrite);font-size:max(15px,1.15vw);color:var(--chalk-yellow);text-shadow:0 0 5px rgba(255,213,79,.08)}
+  .mind-map-branch .branch-desc{font-family:var(--sans);font-weight:300;font-size:max(11px,.85vw);line-height:1.4;color:rgba(255,255,255,.6);margin-top:.5vh}
+
+  /* ========== 清单 ========== */
   .chalk-list{list-style:none;padding:0}
   .chalk-list li{padding:.7vh 0 .7vh 2.8vw;position:relative;font-family:var(--handwrite);font-size:max(17px,1.25vw);line-height:1.35;color:var(--chalk);text-shadow:0 0 5px rgba(255,255,255,.06)}
   .chalk-list li::before{content:"";position:absolute;left:.3vw;top:1.2vh;width:.65vw;height:.65vw;border:2.5px solid var(--chalk-yellow);transform:rotate(3deg)}
   .chalk-list li.done::before{content:"✓";border:none;font-size:max(13px,1vw);color:var(--chalk-green);top:.5vh;left:.2vw;transform:none}
+
+  /* ========== 对比标注 ========== */
   .vs-badge{display:inline-flex;align-items:center;justify-content:center;font-family:var(--title);font-size:max(24px,2.2vw);color:var(--chalk-yellow);padding:0 1vw;text-shadow:0 0 10px rgba(255,213,79,.12)}
+
+  /* ========== 分隔装饰 ========== */
+  .chalk-divider{height:2px;background:rgba(245,245,245,.12);position:relative}
+  .chalk-divider::after{content:"";position:absolute;left:0;top:-1px;width:100%;height:1px;background:rgba(245,245,245,.06)}
+
+  /* ========== 大数字/重点标注 ========== */
+  .chalk-big-num{font-family:var(--title);font-size:max(48px,7vw);line-height:1;color:var(--chalk-yellow);text-shadow:0 0 15px rgba(255,213,79,.12);display:inline-block}
+  .chalk-stat-label{font-family:var(--sans);font-weight:300;font-size:max(12px,.9vw);color:var(--chalk-dim)}
+
+  /* ========== 底部页码/脚注 ========== */
   .chalk-foot{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;font-family:var(--mono);font-size:max(8px,.55vw);color:var(--chalk-dim);opacity:.6;padding-top:2vh;letter-spacing:.15em;position:relative;z-index:1}
+
+  /* ========== Navigation ========== */
   #nav{position:fixed;left:50%;bottom:2.5vh;transform:translateX(-50%);z-index:30;display:flex;gap:6px;padding:4px 8px}
   #nav .dot{width:5px;height:5px;background:rgba(245,245,245,.15);cursor:pointer;transition:all .3s;border:0;padding:0;transform:rotate(45deg)}
   #nav .dot.active{background:var(--chalk-yellow);width:14px;height:5px;transform:rotate(0)}
   #hint{position:fixed;bottom:2.8vh;right:2.8vw;z-index:30;font-family:var(--mono);font-size:max(7px,.5vw);letter-spacing:.25em;color:var(--chalk-dim);opacity:.3}
   body.low-power #hint{opacity:.6;color:var(--chalk-yellow)}
+
+  /* ========== Animation ========== */
   [data-anim]{opacity:1}
   body.motion-ready [data-anim]{opacity:0;transform:translateY(0)}
   body.motion-ready [data-anim="fade"]{opacity:0;transform:none}
@@ -97,29 +346,255 @@
   body.low-power #deck{transition:none!important}
   body.low-power *,body.low-power *::before,body.low-power *::after{animation:none!important;transition:none!important}
   body.low-power.motion-ready [data-anim],body.low-power [data-anim]{opacity:1!important;transform:none!important}
+
+  /* ========== SVG 粉笔滤镜（注入 SVG defs） ========== */
+  svg.chalk-filter{position:fixed;width:0;height:0;pointer-events:none;overflow:hidden}
+
   @media (max-width:900px){
     .chalk-title{font-size:10vw}.chalk-h1{font-size:8vw}.chalk-h2{font-size:5.5vw}
-    .split-6-6{grid-template-columns:1fr}.stickman.lg{width:8vw;height:16vw}
+    .split,.split-6-6,.split-7-5{grid-template-columns:1fr}
+    .stickman{width:5vw;height:10vw}.stickman.lg{width:8vw;height:16vw}
     .slide{padding:3vh 4vw 8vh 4vw}
+    .chalk-lightbulb{width:5vw;height:7.5vw}
+    .chalk-check{width:3vw;height:3vw}
   }
 </style>
 </head>
 <body>
 <script>
 (function(){
-  const KEY='flycan-board-low-power';
+  const KEY='ppt-board-low-power';
   const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
   const stored=localStorage.getItem(KEY);
   window.__lowPowerMode=stored==='1'||(stored===null&&reduced);
-  function updateHint(){const h=document.getElementById('hint');if(h)h.textContent='← → · B '+(window.__lowPowerMode?'静态':'动态')+' · ESC';}
+  function updateHint(){const h=document.getElementById('hint');if(h)h.textContent=`← → · B ${window.__lowPowerMode?'静态':'动态'} · ESC`;}
   window.__setLowPowerMode=function(on,opts={}){window.__lowPowerMode=!!on;document.body.classList.toggle('low-power',window.__lowPowerMode);if(opts.persist!==false)localStorage.setItem(KEY,window.__lowPowerMode?'1':'0');if(window.__lowPowerMode&&document.getAnimations)document.getAnimations().forEach(a=>a.cancel());updateHint();if(window.__playSlide)window.__playSlide(window.__currentSlideIndex||0);};
   document.body.classList.toggle('low-power',window.__lowPowerMode);
   addEventListener('DOMContentLoaded',updateHint,{once:true});
 })();
 </script>
+
+<script>
+window.ChalkCanvas=(()=>{
+  const W=1536,H=864;
+  const C={board:"#101411",white:"#fff9e9",yellow:"#ffd52f",blue:"#4dc8ff",pink:"#ff6294",green:"#89e052",dim:"rgba(255,249,233,.16)"};
+
+  function rng(seed){
+    let state=seed>>>0;
+    return()=>{
+      state+=0x6D2B79F5;
+      let n=state;
+      n=Math.imul(n^n>>>15,n|1);
+      n^=n+Math.imul(n^n>>>7,n|61);
+      return((n^n>>>14)>>>0)/4294967296;
+    };
+  }
+
+  function noise2(x,y,seed){
+    let n=Math.imul((x|0)+seed*374761393,668265263)^Math.imul((y|0)+seed*144269,2246822519);
+    n=Math.imul(n^n>>>13,1274126177);
+    return((n^n>>>16)>>>0)/4294967295;
+  }
+
+  function mount(canvas,draw){
+    const ctx=canvas.getContext("2d");
+
+    function chalkPath(points,color,width=5,seed=1,closed=false,passes=2){
+      const random=rng(seed);
+      ctx.save();
+      ctx.lineCap="round";
+      ctx.lineJoin="round";
+      for(let pass=0;pass<Math.max(2,passes);pass++){
+        ctx.beginPath();
+        points.forEach((p,index)=>{
+          const jitter=width*(pass ? .16 : .055);
+          const x=p[0]+(random()-.5)*jitter;
+          const y=p[1]+(random()-.5)*jitter;
+          if(!index)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+        });
+        if(closed)ctx.closePath();
+        ctx.strokeStyle=color;
+        ctx.globalAlpha=pass ? .22 : .83;
+        ctx.lineWidth=width*(pass ? .44 : 1);
+        if(pass){
+          ctx.setLineDash([width*(1.2+random()),width*(2.8+random()*3.8),width*(.7+random()),width*(4+random()*4)]);
+          ctx.lineDashOffset=-random()*width*7;
+        }else ctx.setLineDash([]);
+        ctx.stroke();
+      }
+      ctx.setLineDash([]);
+      ctx.globalAlpha=.34;
+      ctx.strokeStyle=color;
+      ctx.lineWidth=Math.max(.7,width*.22);
+      for(let i=1;i<points.length;i++){
+        if(random()<.68)continue;
+        const a=points[i-1],b=points[i];
+        const t1=random()*.62;
+        const t2=Math.min(1,t1+.1+random()*.22);
+        const ox=(random()-.5)*width*.8;
+        const oy=(random()-.5)*width*.8;
+        ctx.beginPath();
+        ctx.moveTo(a[0]+(b[0]-a[0])*t1+ox,a[1]+(b[1]-a[1])*t1+oy);
+        ctx.lineTo(a[0]+(b[0]-a[0])*t2+ox,a[1]+(b[1]-a[1])*t2+oy);
+        ctx.stroke();
+      }
+      ctx.globalAlpha=.18;
+      ctx.fillStyle=color;
+      const dust=Math.max(10,Math.round(points.length*width*.95));
+      for(let i=0;i<dust;i++){
+        const p=points[Math.floor(random()*points.length)];
+        const r=.2+random()*.9;
+        ctx.beginPath();
+        ctx.ellipse(p[0]+(random()-.5)*width*1.8,p[1]+(random()-.5)*width*1.45,r*(1.2+random()*1.8),r,(random()-.5)*.5,0,Math.PI*2);
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+
+    function curve(points,color,width=5,seed=1){
+      const sampled=[];
+      for(let i=0;i+3<points.length;i+=4){
+        const p0=points[i],p1=points[i+1],p2=points[i+2],p3=points[i+3];
+        for(let t=0;t<=1;t+=.035){
+          const m=1-t;
+          sampled.push([m*m*m*p0[0]+3*m*m*t*p1[0]+3*m*t*t*p2[0]+t*t*t*p3[0],m*m*m*p0[1]+3*m*m*t*p1[1]+3*m*t*t*p2[1]+t*t*t*p3[1]]);
+        }
+      }
+      chalkPath(sampled,color,width,seed);
+    }
+
+    function chalkText(text,x,y,size,color=C.white,seed=1,options={}){
+      const random=rng(seed);
+      const font=options.font||`"HanziPen SC","Hannotate SC","Kaiti SC","STKaiti",cursive`;
+      let cursor=x;
+      [...text].forEach((char,index)=>{
+        const charSize=size*(1+(random()-.5)*(options.scale||.07));
+        ctx.font=`${options.weight||400} ${charSize}px ${font}`;
+        const width=ctx.measureText(char).width;
+        const baselineShift=(random()-.5)*(options.baseline||4);
+        const rotation=(random()-.5)*(options.rotate||.035);
+        const title=size>=64;
+        const pad=Math.ceil(charSize*.24);
+        const layer=document.createElement("canvas");
+        layer.width=Math.max(4,Math.ceil(width+pad*2));
+        layer.height=Math.max(4,Math.ceil(charSize*1.5+pad*2));
+        const lctx=layer.getContext("2d");
+        lctx.font=`${options.weight||400} ${charSize}px ${font}`;
+        lctx.textAlign="center";
+        lctx.textBaseline="alphabetic";
+        lctx.fillStyle=color;
+        lctx.fillText(char,layer.width/2,pad+charSize);
+        const pixels=lctx.getImageData(0,0,layer.width,layer.height);
+        const data=pixels.data;
+        for(let py=0;py<layer.height;py++){
+          for(let px=0;px<layer.width;px++){
+            const offset=(py*layer.width+px)*4;
+            const source=data[offset+3];
+            if(!source)continue;
+            const fiberA=noise2(Math.floor(px/3),Math.floor(py/1.4),seed+index*37+7);
+            const fiberB=noise2(Math.floor(px/8),Math.floor(py/3),seed+index*37+13);
+            const deposit=noise2(Math.floor(px/13),Math.floor(py/11),seed+index*37+19);
+            const coverage=title ? .74+fiberA*.1+fiberB*.07+deposit*.13 : .89+fiberA*.035+fiberB*.025+deposit*.045;
+            data[offset+3]=Math.round(source*Math.min(.99,coverage));
+          }
+        }
+        lctx.putImageData(pixels,0,0);
+        const materialRandom=rng(seed+index*101+701);
+        lctx.fillStyle=color;
+        lctx.globalAlpha=title ? .2 : .1;
+        const powderCount=Math.round(charSize*(title ? .56 : .18));
+        for(let i=0;i<powderCount;i++){
+          const px=pad+materialRandom()*Math.max(1,width);
+          const py=pad+charSize*.08+materialRandom()*charSize*.98;
+          const sourceIndex=(Math.floor(py)*layer.width+Math.floor(px))*4+3;
+          if(data[sourceIndex]<28)continue;
+          const radius=.18+materialRandom()*(title ? .9 : .45);
+          lctx.beginPath();
+          lctx.ellipse(px+(materialRandom()-.5)*(title?3.4:1.4),py+(materialRandom()-.5)*(title?2.8:1.1),radius*(1.2+materialRandom()*1.8),radius,(materialRandom()-.5)*.5,0,Math.PI*2);
+          lctx.fill();
+        }
+        ctx.save();
+        ctx.translate(cursor+width/2,y+baselineShift);
+        ctx.rotate(rotation);
+        ctx.drawImage(layer,-layer.width/2,-(pad+charSize));
+        ctx.restore();
+        cursor+=width+(options.spacing??size*.02);
+      });
+      return cursor;
+    }
+
+    function smoothClosed(points,color,width=5,seed=1){
+      const random=rng(seed);
+      ctx.save();
+      ctx.lineCap="round";
+      ctx.lineJoin="round";
+      for(let pass=0;pass<2;pass++){
+        const jitter=pass?1.7:.6;
+        const pts=points.map(p=>[p[0]+(random()-.5)*jitter,p[1]+(random()-.5)*jitter]);
+        ctx.beginPath();
+        const last=pts[pts.length-1],first=pts[0];
+        ctx.moveTo((last[0]+first[0])/2,(last[1]+first[1])/2);
+        for(let i=0;i<pts.length;i++){
+          const current=pts[i],next=pts[(i+1)%pts.length];
+          ctx.quadraticCurveTo(current[0],current[1],(current[0]+next[0])/2,(current[1]+next[1])/2);
+        }
+        ctx.closePath();
+        ctx.strokeStyle=color;
+        ctx.lineWidth=pass?width*.4:width;
+        ctx.globalAlpha=pass ? .2 : .83;
+        if(pass){
+          ctx.setLineDash([width*1.4,width*4.2,width*.8,width*5.4]);
+          ctx.lineDashOffset=-random()*width*5;
+        }else ctx.setLineDash([]);
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
+
+    function drawBackground(seed=9204){
+      ctx.fillStyle=C.board;
+      ctx.fillRect(0,0,W,H);
+      const random=rng(seed);
+      for(let i=0;i<28;i++){
+        const x=random()*W,y=random()*H,w=90+random()*260;
+        const g=ctx.createRadialGradient(x,y,0,x,y,w);
+        g.addColorStop(0,`rgba(238,238,222,${.006+random()*.012})`);
+        g.addColorStop(1,"rgba(238,238,222,0)");
+        ctx.fillStyle=g;
+        ctx.fillRect(x-w,y-w*.25,w*2,w*.5);
+      }
+      for(let i=0;i<380;i++){
+        ctx.fillStyle=`rgba(255,250,232,${.012+random()*.035})`;
+        const x=random()*W,y=random()*H,r=.3+random()*1.1;
+        ctx.beginPath();
+        ctx.ellipse(x,y,r*(1+random()*2),r,(random()-.5)*.5,0,Math.PI*2);
+        ctx.fill();
+      }
+    }
+
+    function render(){
+      const dpr=Math.min(devicePixelRatio||1,2);
+      canvas.width=Math.round(W*dpr);
+      canvas.height=Math.round(H*dpr);
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+      ctx.clearRect(0,0,W,H);
+      drawBackground();
+      draw(ctx,{W,H,C,rng,noise2,chalkPath,curve,chalkText,smoothClosed,drawBackground});
+    }
+
+    document.fonts.ready.then(render);
+    addEventListener("resize",render);
+    return{render};
+  }
+
+  return{W,H,C,rng,noise2,mount};
+})();
+</script>
+
 <div id="hint">← → · B 静态 · ESC</div>
-<!-- SVG 粉笔滤镜 -->
-<svg class="chalk-filter" aria-hidden="true" style="position:fixed;width:0;height:0;pointer-events:none;overflow:hidden">
+
+<!-- 旧 DOM/SVG 布局兼容层；新 Blackboard 页面优先使用 ChalkCanvas -->
+<svg class="chalk-filter" aria-hidden="true">
   <defs>
     <filter id="chalk-texture" x="-5%" y="-5%" width="110%" height="110%">
       <feTurbulence type="fractalNoise" baseFrequency=".65" numOctaves="3" result="noise" seed="2"/>
@@ -129,186 +604,344 @@
     </filter>
   </defs>
 </svg>
+
 <div id="deck">
 
-<!-- S1: Cover -->
-<div class="slide" data-animate="hero">
-  <div class="frame center" style="gap:1.5vh">
-    <div class="chalk-mono" data-anim style="color:var(--chalk-dim)">—— 黑板 · 手绘 ——</div>
-    <div style="width:3vw;height:2.5px;background:var(--chalk-yellow);opacity:.5;margin:1vh auto" data-anim></div>
-    <h1 class="chalk-title" data-anim>KISS 原则</h1>
-    <div class="chalk-h2 chalk-yellow" data-anim style="margin-top:.5vh">Keep It Simple, Stupid</div>
-    <div style="width:40%;height:1.5px;background:rgba(245,245,245,.1);margin:2vh auto" data-anim></div>
-    <div class="chalk-note" data-anim style="text-align:center;max-width:55%">为什么最简单的方案，往往是最好的方案？</div>
-    <div class="row" style="justify-content:center;margin-top:1.5vh;gap:1vw" data-anim="fade">
-      <svg class="stickman" viewBox="0 0 100 180" style="width:3vw;height:5.4vw">
-        <circle cx="50" cy="20" r="14"/>
-        <line x1="50" y1="34" x2="50" y2="120"/>
-        <line x1="50" y1="55" x2="25" y2="85"/><line x1="50" y1="55" x2="75" y2="85"/>
-        <line x1="50" y1="120" x2="30" y2="170"/><line x1="50" y1="120" x2="70" y2="170"/>
-      </svg>
-    </div>
-  </div>
-  <div class="chalk-foot"><span>Flycan 进化论</span><span>01 / 07</span></div>
-</div>
+<!-- ============================================================
+     SLIDES 插入区
+     布局参考 references/layouts-blackboard.md
+     Canvas 算法参考 references/chalk-rendering-blackboard.md
+     页数和页面节奏由内容决定
+     ============================================================ -->
 
-<!-- S2: Core Question -->
-<div class="slide" data-animate="cascade">
-  <div class="frame center">
-    <div class="chalk-mono" data-anim style="color:var(--chalk-yellow)">Q · 核心问题</div>
-    <div style="width:2vw;height:2px;background:var(--chalk-yellow);margin:1.5vh auto" data-anim></div>
-    <h1 class="chalk-h1 chalk-yellow" data-anim style="margin-top:1vh;text-align:center;max-width:80%">为什么复杂的东西<br>总是难以维护？</h1>
-    <div class="chalk-box dashed" data-anim style="max-width:55%;text-align:left;margin:2vh auto 0">
-      <div class="chalk-body">不论是代码、产品还是制度，<br>人类总倾向于不断叠加新功能。<br><span class="chalk-blue">→</span> 复杂度指数级上升<br><span class="chalk-red">→</span> 维护成本远超收益</div>
-    </div>
-    <div class="chalk-note chalk-yellow" data-anim style="margin-top:2vh">—— 越复杂，越脆弱 ——</div>
-  </div>
-  <div class="chalk-foot"><span>核心问题</span><span>02 / 07</span></div>
-</div>
+<section class="slide">
+  <canvas class="chalk-canvas" data-page="1" width="1536" height="864" aria-label="AI 时代最重要的能力：为什么独立思考比努力更重要。思考不等于想太多，独立不等于与众不同。"></canvas>
+  <p class="chalk-a11y">AI 时代最重要的能力：为什么独立思考比努力更重要。思考不等于想太多，独立不等于与众不同。</p>
+</section>
 
-<!-- S3: Analysis -->
-<div class="slide" data-animate="cascade">
-  <div class="frame">
-    <div class="chalk-mono" data-anim style="color:var(--chalk-blue)">分析 · ANALYSIS</div>
-    <div class="chalk-h2" data-anim style="margin:1vh 0 1.5vh">复杂度从哪来？</div>
-    <div class="split-6-6" style="flex:1;align-items:start">
-      <div class="col" data-anim="left" style="gap:1.2vh">
-        <div class="chalk-box pink" style="text-align:center">
-          <div class="chalk-body-strong chalk-pink">功能堆叠</div>
-          <svg class="chalk-brain" viewBox="0 0 100 100" style="margin-top:.5vh"><path d="M50,10 C30,10 15,25 15,45 C15,60 22,72 35,78 L35,90 L45,82 C47,83 49,84 50,84 C51,84 53,83 55,82 L65,90 L65,78 C78,72 85,60 85,45 C85,25 70,10 50,10Z"/><path d="M35,40 Q45,35 50,45"/><path d="M65,40 Q55,35 50,45"/><path d="M38,55 Q50,65 62,55"/></svg>
-        </div>
-        <div class="chalk-body">以为"多就是好"，不断叠加新功能，每个新功能都带来新的维护负担。</div>
-      </div>
-      <div class="col" data-anim="right" style="gap:1.2vh">
-        <div class="chalk-box blue" style="text-align:center">
-          <div class="chalk-body-strong chalk-blue">过度设计</div>
-          <svg class="chalk-magnifier" viewBox="0 0 100 100" style="margin-top:.5vh"><circle cx="40" cy="40" r="28"/><line x1="62" y1="62" x2="88" y2="88"/></svg>
-        </div>
-        <div class="chalk-body">为"未来可能"做过度抽象，把简单问题变成复杂框架。</div>
-      </div>
-    </div>
-    <div class="chalk-box yellow thick" data-anim style="margin-top:1.5vh;text-align:center">
-      <div class="chalk-body-strong chalk-yellow">根本原因：我们把「复杂」和「高级」画了等号</div>
-    </div>
-  </div>
-  <div class="chalk-foot"><span>分析</span><span>03 / 07</span></div>
-</div>
+<section class="slide">
+  <canvas class="chalk-canvas" data-page="2" width="1536" height="864" aria-label="我们为什么越来越难独立思考：信息过载、算法投喂、观点同质化和思考外包，最终让忙碌增加、判断减少。"></canvas>
+  <p class="chalk-a11y">我们为什么越来越难独立思考：信息过载、算法投喂、观点同质化和思考外包，最终让忙碌增加、判断减少。</p>
+</section>
 
-<!-- S4: Deduction -->
-<div class="slide" data-animate="cascade">
-  <div class="frame">
-    <div class="chalk-mono" data-anim>推导 · DEDUCTION</div>
-    <div class="chalk-h2" data-anim style="margin:1vh 0 2vh">为什么简单就是最好的？</div>
-    <div style="flex:1;display:flex;flex-direction:column;gap:.8vh">
-      <div class="flow-step" data-anim="step"><div class="step-label">STEP 01</div><div class="step-body">前提：任何系统都存在<span class="chalk-yellow">认知负载</span></div></div>
-      <div style="text-align:center;padding:.3vh 0" data-anim="step"><svg class="chalk-arrow yellow" viewBox="0 0 60 24" style="width:3.5vw"><path d="M5,12 H50 M45,6 L52,12 L45,18"/></svg></div>
-      <div class="flow-step blue" data-anim="step"><div class="step-label">STEP 02</div><div class="step-body">认知负载越低 → <span class="chalk-green">理解越快</span></div></div>
-      <div style="text-align:center;padding:.3vh 0" data-anim="step"><svg class="chalk-arrow yellow" viewBox="0 0 60 24" style="width:3.5vw"><path d="M5,12 H50 M45,6 L52,12 L45,18"/></svg></div>
-      <div class="flow-step green" data-anim="step"><div class="step-label">STEP 03</div><div class="step-body">理解越快 → <span class="chalk-green">修改越安全</span></div></div>
-      <div style="text-align:center;padding:.3vh 0" data-anim="step"><svg class="chalk-arrow yellow" viewBox="0 0 60 24" style="width:3.5vw"><path d="M5,12 H50 M45,6 L52,12 L45,18"/></svg></div>
-      <div class="flow-step pink" data-anim="step"><div class="step-label">结论</div><div class="step-body"><span class="chalk-pink">✦ 简单 = 可持续</span></div></div>
-    </div>
-  </div>
-  <div class="chalk-foot"><span>推导过程</span><span>04 / 07</span></div>
-</div>
+<section class="slide">
+  <canvas class="chalk-canvas" data-page="3" width="1536" height="864" aria-label="独立思考的五步路径：提出问题、收集信息、分析判断、形成观点、指导行动。"></canvas>
+  <p class="chalk-a11y">独立思考的五步路径：提出问题、收集信息、分析判断、形成观点、指导行动。</p>
+</section>
 
-<!-- S5: Compare -->
-<div class="slide" data-animate="directional">
-  <div class="frame">
-    <div class="chalk-mono" data-anim style="color:var(--chalk-blue)">对比 · COMPARE</div>
-    <div class="chalk-h2" data-anim style="margin:1vh 0 2vh">复杂 vs 简单</div>
-    <div class="split-6-6" style="flex:1;align-items:stretch">
-      <div class="chalk-box dashed" data-anim="left" style="display:flex;flex-direction:column;gap:1vh;text-align:center">
-        <div class="chalk-mono" style="margin-bottom:.5vh">复杂方案</div>
-        <div class="chalk-body" style="text-align:left">× 理解成本高</div>
-        <div class="chalk-body" style="text-align:left">× 调试困难</div>
-        <div class="chalk-body" style="text-align:left">× 新人上手慢</div>
-      </div>
-      <div class="chalk-box yellow thick" data-anim="right" style="display:flex;flex-direction:column;gap:1vh;text-align:center">
-        <div class="chalk-mono chalk-yellow" style="margin-bottom:.5vh">简单方案</div>
-        <div class="chalk-body" style="text-align:left"><span class="chalk-green">✓</span> 一眼看懂</div>
-        <div class="chalk-body" style="text-align:left"><span class="chalk-green">✓</span> 快速定位问题</div>
-        <div class="chalk-body" style="text-align:left"><span class="chalk-green">✓</span> 改动有信心</div>
-      </div>
-    </div>
-    <div class="vs-badge" data-anim>VS</div>
-  </div>
-  <div class="chalk-foot"><span>对比分析</span><span>05 / 07</span></div>
-</div>
+<section class="slide">
+  <canvas class="chalk-canvas" data-page="4" width="1536" height="864" aria-label="训练独立思考的四种方法：保持好奇、延迟判断、多角度验证、写下来形成自己的框架。"></canvas>
+  <p class="chalk-a11y">训练独立思考的四种方法：保持好奇、延迟判断、多角度验证、写下来形成自己的框架。</p>
+</section>
 
-<!-- S6: Checklist -->
-<div class="slide" data-animate="cascade">
-  <div class="frame">
-    <div class="chalk-mono" data-anim>实践 · PRACTICE</div>
-    <div class="chalk-h2" data-anim style="margin:1vh 0 2vh">如何保持简单？</div>
-    <ul class="chalk-list" style="flex:1;justify-content:center">
-      <li class="done" data-anim="step">先问：这个真的需要吗？</li>
-      <li data-anim="step">砍掉 80% 的"锦上添花"</li>
-      <li data-anim="step" class="chalk-yellow">一个方案解决一个问题</li>
-      <li data-anim="step">为未来重构，而非预先设计</li>
-      <li data-anim="step">写给人读，顺便给机器执行</li>
-    </ul>
-    <div class="chalk-box yellow" data-anim style="text-align:center;margin-top:auto">
-      <span class="chalk-yellow chalk-body-strong">简单 ≠ 简陋，简单 = 恰到好处</span>
-    </div>
-  </div>
-  <div class="chalk-foot"><span>实践清单</span><span>06 / 07</span></div>
-</div>
-
-<!-- S7: Conclusion -->
-<div class="slide" data-animate="hero">
-  <div class="frame center">
-    <div class="chalk-mono" data-anim style="color:var(--chalk-yellow)">结论 · CONCLUSION</div>
-    <div style="width:3vw;height:2.5px;background:var(--chalk-yellow);opacity:.4;margin:1.5vh auto" data-anim></div>
-    <div class="chalk-h1 chalk-yellow" data-anim style="margin-top:1vh;text-align:center;max-width:70%">一切事物都应尽可能简单，<br>但不能更简单。</div>
-    <div class="chalk-note" data-anim style="margin-top:1.5vh;text-align:center;max-width:55%">—— 爱因斯坦</div>
-    <div class="row" style="justify-content:center;margin-top:2vh;gap:1.5vw" data-anim="fade">
-      <svg class="stickman lg" viewBox="0 0 100 180">
-        <circle cx="50" cy="20" r="14"/>
-        <line x1="50" y1="34" x2="50" y2="120"/>
-        <line x1="50" y1="55" x2="20" y2="85"/><line x1="50" y1="55" x2="80" y2="85"/>
-        <line x1="50" y1="120" x2="30" y2="170"/><line x1="50" y1="120" x2="70" y2="170"/>
-        <path d="M72,25 Q85,10 95,20" stroke-width="2.5" fill="none"/>
-      </svg>
-    </div>
-    <div class="chalk-mono" data-anim style="margin-top:1.5vh">—— 今天就讲到这里 ——</div>
-    <div class="row" style="justify-content:center;margin-top:1vh;gap:.8vw" data-anim="fade">
-      <svg class="chalk-star" viewBox="0 0 100 100"><polygon points="50,5 63,38 98,38 70,60 80,95 50,75 20,95 30,60 2,38 37,38"/></svg>
-      <svg class="chalk-star" viewBox="0 0 100 100" style="stroke:var(--chalk-pink)"><polygon points="50,5 63,38 98,38 70,60 80,95 50,75 20,95 30,60 2,38 37,38"/></svg>
-      <svg class="chalk-star" viewBox="0 0 100 100"><polygon points="50,5 63,38 98,38 70,60 80,95 50,75 20,95 30,60 2,38 37,38"/></svg>
-    </div>
-  </div>
-  <div class="chalk-foot"><span>结论</span><span>07 / 07</span></div>
-</div>
+<section class="slide">
+  <canvas class="chalk-canvas" data-page="5" width="1536" height="864" aria-label="结论：AI 可以给答案，但不能替你思考。独立思考不是为了反对别人，而是为了形成自己的判断。"></canvas>
+  <p class="chalk-a11y">结论：AI 可以给答案，但不能替你思考。独立思考不是为了反对别人，而是为了形成自己的判断。</p>
+</section>
 
 </div>
+
+<script>
+(() => {
+  const { C } = window.ChalkCanvas;
+
+  function helpers(ctx, api) {
+    const { chalkText, chalkPath, curve, smoothClosed } = api;
+
+    function line(points, color, width, seed, closed = false) {
+      chalkPath(points, color, width, seed, closed);
+    }
+
+    function underline(x1, y1, x2, y2, color, seed, width = 5) {
+      curve([[x1,y1],[x1+(x2-x1)*.28,y1-4],[x1+(x2-x1)*.66,y1+5],[x2,y2]], color, width, seed);
+    }
+
+    function arrow(x1, y1, x2, y2, color, seed, width = 6) {
+      const angle = Math.atan2(y2-y1, x2-x1);
+      curve([[x1,y1],[(x1+x2)/2,y1-10],[(x1+x2)/2,y2+8],[x2,y2]], color, width, seed);
+      const len = 22 + width;
+      line([
+        [x2-Math.cos(angle-.58)*len,y2-Math.sin(angle-.58)*len],
+        [x2,y2],
+        [x2-Math.cos(angle+.58)*len,y2-Math.sin(angle+.58)*len]
+      ], color, width, seed+1);
+    }
+
+    function cloud(x, y, w, h, color, seed) {
+      smoothClosed([
+        [x+w*.04,y+h*.58],[x+w*.08,y+h*.3],[x+w*.22,y+h*.28],
+        [x+w*.28,y+h*.05],[x+w*.43,y+h*.16],[x+w*.54,y+h*.02],
+        [x+w*.65,y+h*.18],[x+w*.79,y+h*.13],[x+w*.83,y+h*.38],
+        [x+w*.98,y+h*.47],[x+w*.9,y+h*.7],[x+w*.76,y+h*.7],
+        [x+w*.69,y+h*.94],[x+w*.52,y+h*.84],[x+w*.4,y+h*.97],
+        [x+w*.29,y+h*.82],[x+w*.15,y+h*.87],[x+w*.16,y+h*.69]
+      ], color, 5, seed);
+    }
+
+    function bulb(cx, cy, s, seed) {
+      curve([
+        [cx-60*s,cy+15*s],[cx-94*s,cy-88*s],[cx-42*s,cy-126*s],[cx,cy-130*s],
+        [cx,cy-130*s],[cx+52*s,cy-132*s],[cx+92*s,cy-78*s],[cx+59*s,cy+18*s],
+        [cx+59*s,cy+18*s],[cx+45*s,cy+37*s],[cx+42*s,cy+54*s],[cx+38*s,cy+68*s]
+      ], C.white, 6, seed);
+      curve([[cx-60*s,cy+15*s],[cx-47*s,cy+36*s],[cx-44*s,cy+52*s],[cx-40*s,cy+68*s]], C.white, 6, seed+1);
+      line([[cx-43*s,cy+68*s],[cx+40*s,cy+68*s]], C.white, 7, seed+2);
+      line([[cx-38*s,cy+83*s],[cx+34*s,cy+83*s]], C.white, 7, seed+3);
+      line([[cx-29*s,cy+98*s],[cx+25*s,cy+98*s]], C.white, 7, seed+4);
+      curve([
+        [cx-23*s,cy+13*s],[cx-16*s,cy-12*s],[cx-7*s,cy-25*s],[cx-1*s,cy-50*s],
+        [cx-1*s,cy-50*s],[cx+7*s,cy-25*s],[cx+17*s,cy-12*s],[cx+23*s,cy+13*s]
+      ], C.yellow, 5, seed+5);
+      [[-98,-82],[-70,-122],[-18,-152],[44,-145],[93,-103],[112,-45],[104,18]].forEach((p,i) => {
+        const a = Math.atan2(p[1],p[0]);
+        line([
+          [cx+Math.cos(a)*104*s,cy+Math.sin(a)*104*s],
+          [cx+Math.cos(a)*(126+(i%3)*8)*s,cy+Math.sin(a)*(126+(i%3)*8)*s]
+        ], i%2 ? C.white : C.yellow, 6, seed+20+i);
+      });
+    }
+
+    function question(cx, cy, s, color, seed) {
+      const pts = Array.from({length:48}, (_,i) => {
+        const a = i/47*Math.PI*2;
+        return [cx+Math.cos(a)*45*s*(1+.04*Math.sin(i*.8)),cy+Math.sin(a)*45*s*(1+.05*Math.cos(i*.7))];
+      });
+      line(pts, color, 5, seed, true);
+      chalkText("?", cx-18*s, cy+26*s, 72*s, color, seed+2, {rotate:.06});
+    }
+
+    function magnifier(cx, cy, s, color, seed) {
+      const pts = Array.from({length:42}, (_,i) => {
+        const a = i/41*Math.PI*2;
+        return [cx+Math.cos(a)*35*s*(1+.04*Math.sin(i)),cy+Math.sin(a)*35*s];
+      });
+      line(pts, color, 5, seed, true);
+      line([[cx+25*s,cy+28*s],[cx+63*s,cy+70*s]], color, 8, seed+1);
+    }
+
+    function balance(cx, cy, s, color, seed) {
+      line([[cx,cy-58*s],[cx,cy+54*s]], color, 5, seed);
+      line([[cx-48*s,cy-32*s],[cx+52*s,cy-32*s]], color, 5, seed+1);
+      line([[cx-12*s,cy+54*s],[cx+12*s,cy+54*s]], color, 7, seed+2);
+      [[-42,-32],[44,-32]].forEach((p,i) => {
+        line([[cx+p[0]*s,cy+p[1]*s],[cx+(p[0]-18)*s,cy+15*s],[cx+(p[0]+18)*s,cy+15*s]], color, 4, seed+3+i);
+        curve([
+          [cx+(p[0]-18)*s,cy+15*s],[cx+(p[0]-12)*s,cy+34*s],[cx+(p[0]+12)*s,cy+34*s],[cx+(p[0]+18)*s,cy+15*s]
+        ], color, 4, seed+8+i);
+      });
+    }
+
+    function brain(cx, cy, s, color, seed) {
+      curve([
+        [cx-8*s,cy+62*s],[cx-62*s,cy+58*s],[cx-70*s,cy+6*s],[cx-42*s,cy-14*s],
+        [cx-42*s,cy-14*s],[cx-62*s,cy-54*s],[cx-14*s,cy-76*s],[cx+4*s,cy-50*s],
+        [cx+4*s,cy-50*s],[cx+32*s,cy-78*s],[cx+72*s,cy-42*s],[cx+53*s,cy-12*s],
+        [cx+53*s,cy-12*s],[cx+82*s,cy+16*s],[cx+49*s,cy+58*s],[cx+8*s,cy+55*s]
+      ], color, 7, seed);
+      curve([[cx,cy-52*s],[cx-12*s,cy-20*s],[cx+16*s,cy+4*s],[cx,cy+58*s]], color, 5, seed+1);
+      curve([[cx-40*s,cy-12*s],[cx-18*s,cy-28*s],[cx-3*s,cy-12*s],[cx+12*s,cy-22*s]], color, 4, seed+2);
+      curve([[cx+18*s,cy+15*s],[cx+35*s,cy-2*s],[cx+52*s,cy+13*s],[cx+42*s,cy+35*s]], color, 4, seed+3);
+    }
+
+    function target(cx, cy, s, color, seed) {
+      [72,46,20].forEach((r,i) => {
+        const pts = Array.from({length:56}, (_,j) => {
+          const a = j/55*Math.PI*2;
+          return [cx+Math.cos(a)*r*s,cy+Math.sin(a)*r*s];
+        });
+        line(pts, color, 5-i, seed+i, true);
+      });
+      arrow(cx+10*s,cy-10*s,cx+92*s,cy-92*s,color,seed+5,5);
+    }
+
+    function page(n) {
+      chalkText(String(n).padStart(2,"0"), 1440, 820, 28, C.dim, 900+n, {spacing:1,rotate:.01,baseline:1});
+    }
+
+    return { chalkText, line, underline, arrow, cloud, bulb, question, magnifier, balance, brain, target, page };
+  }
+
+  const drawings = [
+    (ctx, api) => {
+      const h = helpers(ctx, api);
+      h.chalkText("AI时代最重要的能力", 72, 105, 46, C.yellow, 101, {spacing:3,rotate:.025,baseline:3});
+      h.underline(72,126,520,128,C.pink,102,5);
+      h.chalkText("为什么", 72, 250, 112, C.white, 103, {spacing:5,rotate:.05,baseline:9,scale:.1});
+      h.chalkText("独立思考", 72, 390, 126, C.yellow, 104, {spacing:5,rotate:.055,baseline:10,scale:.11});
+      h.chalkText("比努力更重要？", 72, 505, 76, C.white, 105, {spacing:3,rotate:.04,baseline:6});
+      h.cloud(82,585,470,155,C.blue,120);
+      h.chalkText("思考 ≠ 想太多", 132, 655, 38, C.blue, 121, {spacing:2,rotate:.025});
+      h.chalkText("独立 ≠ 与众不同", 115, 710, 38, C.white, 122, {spacing:2,rotate:.025});
+      h.bulb(935,350,1.35,140);
+      h.chalkText("自己判断", 817, 585, 64, C.yellow, 141, {spacing:3,rotate:.04,baseline:5});
+      h.arrow(1125,370,1345,300,C.pink,145,7);
+      h.chalkText("答案很多", 1190, 215, 42, C.pink, 146, {spacing:2});
+      h.chalkText("判断只有自己能做", 1085, 690, 43, C.green, 147, {spacing:2,rotate:.025});
+      h.underline(1085,713,1435,708,C.green,148,5);
+      h.page(1);
+    },
+    (ctx, api) => {
+      const h = helpers(ctx, api);
+      h.chalkText("我们为什么越来越难", 72, 108, 58, C.white, 201, {spacing:3,rotate:.035,baseline:4});
+      h.chalkText("独立思考？", 670, 108, 64, C.yellow, 202, {spacing:4,rotate:.04,baseline:5});
+      h.underline(665,130,1045,126,C.pink,203,5);
+      const causes = [
+        [160,275,"信息过载",C.blue,211],
+        [450,410,"算法投喂",C.yellow,212],
+        [180,565,"观点同质",C.pink,213],
+        [495,700,"思考外包",C.green,214]
+      ];
+      causes.forEach(([x,y,text,color,seed],i) => {
+        h.cloud(x-45,y-65,260,105,color,seed);
+        h.chalkText(text,x,y,42,color,seed+20,{spacing:2,rotate:.03,baseline:3});
+        h.arrow(x+220,y-18,760,440,color,seed+40,5);
+      });
+      h.brain(825,430,1.22,C.white,260);
+      h.chalkText("判断力", 735,575,53,C.white,261,{spacing:2,rotate:.035});
+      h.arrow(930,440,1120,440,C.pink,270,8);
+      h.cloud(1110,300,340,255,C.pink,271);
+      h.chalkText("越来越忙", 1170,390,48,C.white,272,{spacing:2,rotate:.03});
+      h.chalkText("越来越迷茫", 1140,468,55,C.pink,273,{spacing:2,rotate:.035,baseline:4});
+      h.chalkText("信息增加", 1090,650,38,C.blue,280,{spacing:2});
+      h.chalkText("判断减少", 1280,650,38,C.yellow,281,{spacing:2});
+      h.line([[1235,615],[1235,690]],C.white,5,282);
+      h.page(2);
+    },
+    (ctx, api) => {
+      const h = helpers(ctx, api);
+      h.chalkText("独立思考不是天赋", 72, 108, 58, C.white, 301, {spacing:3,rotate:.03,baseline:4});
+      h.chalkText("而是一条可以练习的路径", 620, 108, 57, C.yellow, 302, {spacing:3,rotate:.035,baseline:4});
+      h.underline(620,132,1395,128,C.pink,303,5);
+      const xs = [150,445,745,1045,1340];
+      xs.forEach((x,i) => i < xs.length-1 && h.arrow(x+95,420,xs[i+1]-95,420,i%2?C.white:C.pink,320+i,6));
+      h.question(xs[0],410,1.05,C.blue,331);
+      h.magnifier(xs[1],405,1.18,C.yellow,332);
+      h.balance(xs[2],410,1.18,C.green,333);
+      h.bulb(xs[3],405,.62,334);
+      h.target(xs[4],410,.8,C.pink,335);
+      const labels = [
+        ["提出问题","别急着相信答案",C.blue],
+        ["收集信息","主动寻找反例",C.yellow],
+        ["分析判断","区分事实与观点",C.green],
+        ["形成观点","建立自己的框架",C.white],
+        ["指导行动","让思考产生价值",C.pink]
+      ];
+      labels.forEach(([title,note,color],i) => {
+        h.chalkText(title,xs[i]-85,585,42,color,350+i,{spacing:2,rotate:.03,baseline:3});
+        h.chalkText(note,xs[i]-105,645,28,C.white,370+i,{spacing:1,rotate:.02,baseline:2});
+      });
+      h.chalkText("问",125,750,52,C.blue,390,{rotate:.03});
+      h.arrow(190,735,1300,735,C.dim,391,4);
+      h.chalkText("做",1350,750,52,C.pink,392,{rotate:.03});
+      h.page(3);
+    },
+    (ctx, api) => {
+      const h = helpers(ctx, api);
+      h.chalkText("怎样训练自己的判断力？", 72, 112, 68, C.yellow, 401, {spacing:3,rotate:.04,baseline:5});
+      h.underline(70,138,790,134,C.pink,402,5);
+      h.brain(770,435,1.48,C.white,420);
+      h.chalkText("形成自己的", 635,610,43,C.white,421,{spacing:2});
+      h.chalkText("认知框架", 650,675,58,C.yellow,422,{spacing:3,rotate:.035});
+      const items = [
+        [190,255,"保持好奇","持续追问为什么",C.blue,431],
+        [1135,260,"延迟判断","先让事实说话",C.pink,432],
+        [190,635,"多角度验证","主动寻找反例",C.green,433],
+        [1140,640,"写下来","把想法变成结构",C.yellow,434]
+      ];
+      items.forEach(([x,y,title,note,color,seed],i) => {
+        h.cloud(x-55,y-80,330,145,color,seed);
+        h.chalkText(title,x,y,48,color,seed+10,{spacing:2,rotate:.035});
+        h.chalkText(note,x-5,y+55,30,C.white,seed+20,{spacing:1,rotate:.02});
+        h.arrow(i%2?x-35:x+250,y+20,i%2?880:650,i<2?365:540,color,seed+30,5);
+      });
+      h.question(105,200,.58,C.blue,470);
+      h.balance(1400,205,.65,C.pink,471);
+      h.magnifier(105,735,.7,C.green,472);
+      h.line([[1370,700],[1450,700],[1450,770],[1370,770],[1370,700]],C.yellow,5,473);
+      h.line([[1390,725],[1428,725],[1428,735],[1390,735]],C.white,4,474);
+      h.page(4);
+    },
+    (ctx, api) => {
+      const h = helpers(ctx, api);
+      h.chalkText("AI 可以给答案", 95, 205, 104, C.white, 501, {spacing:5,rotate:.05,baseline:8,scale:.09});
+      h.chalkText("但不能替你思考", 95, 345, 112, C.yellow, 502, {spacing:5,rotate:.05,baseline:9,scale:.1});
+      h.underline(95,375,960,368,C.pink,503,7);
+      h.cloud(1030,115,400,210,C.blue,510);
+      h.chalkText("答案",1160,225,64,C.blue,511,{spacing:3,rotate:.035});
+      h.arrow(1220,330,1160,475,C.pink,512,7);
+      h.target(1160,590,1.12,C.pink,513);
+      h.chalkText("判断",1060,775,70,C.pink,514,{spacing:3,rotate:.04});
+      h.chalkText("独立思考不是为了反对别人", 105, 570, 48, C.white, 520, {spacing:2,rotate:.025,baseline:3});
+      h.chalkText("而是为了形成自己的判断", 105, 650, 56, C.green, 521, {spacing:3,rotate:.035,baseline:4});
+      h.underline(105,680,840,675,C.green,522,5);
+      h.bulb(870,700,.42,530);
+      h.page(5);
+    }
+  ];
+
+  document.querySelectorAll(".chalk-canvas").forEach((canvas, index) => {
+    window.ChalkCanvas.mount(canvas, drawings[index]);
+  });
+})();
+</script>
+
 <div id="nav"></div>
+
 <script>
 const deck=document.getElementById('deck');
 const slides=deck.querySelectorAll('.slide');
 const nav=document.getElementById('nav');
 let idx=0,total=slides.length,lock=false;
 deck.style.width=(total*100)+'vw';
-slides.forEach((s,i)=>{const b=document.createElement('button');b.className='dot';b.dataset.i=i;b.setAttribute('aria-label','Page '+(i+1));b.onclick=()=>go(i);nav.appendChild(b);});
-function go(n){if(lock)return;idx=Math.max(0,Math.min(total-1,n));window.__currentSlideIndex=idx;deck.style.transform='translateX('+(-idx*100)+'vw)';nav.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===idx));if(window.__playSlide)setTimeout(()=>window.__playSlide(idx),450);lock=true;setTimeout(()=>lock=false,700);}
+slides.forEach((s,i)=>{
+  const b=document.createElement('button');
+  b.className='dot';b.dataset.i=i;b.setAttribute('aria-label','Page '+(i+1));
+  b.onclick=()=>go(i);
+  nav.appendChild(b);
+});
+function go(n){
+  if(lock)return;
+  idx=Math.max(0,Math.min(total-1,n));
+  window.__currentSlideIndex=idx;
+  deck.style.transform=`translateX(${-idx*100}vw)`;
+  nav.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===idx));
+  if(window.__playSlide)setTimeout(()=>window.__playSlide(idx),450);
+  lock=true;setTimeout(()=>lock=false,700);
+}
 let overviewOn=false;
-const ov=document.createElement('div');ov.id='overview';ov.style.cssText='position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.95);display:none;overflow-y:auto;padding:3vh 4vw';
+const ov=document.createElement('div');
+ov.id='overview';ov.style.cssText='position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.95);backdrop-filter:blur(8px);display:none;overflow-y:auto;padding:3vh 4vw';
 document.body.appendChild(ov);
-function buildOverview(){ov.innerHTML='';const g=document.createElement('div');g.style.cssText='display:grid;grid-template-columns:repeat(4,1fr);gap:2vh 1.6vw;max-width:90vw;margin:0 auto';slides.forEach((s,i)=>{const c=document.createElement('div');c.style.cssText='cursor:pointer;overflow:hidden;border:2px solid '+(i===idx?'var(--chalk-yellow)':'rgba(255,255,255,.08)');const w=document.createElement('div');w.style.cssText='width:100%;aspect-ratio:16/9;overflow:hidden;position:relative;pointer-events:none;background:var(--board)';const cl=s.cloneNode(true);cl.style.cssText='width:100vw;height:100vh;transform:scale(0.222);transform-origin:top left;position:absolute;top:0;left:0;pointer-events:none';w.appendChild(cl);const l=document.createElement('div');l.style.cssText='padding:5px 8px;font-family:var(--mono);font-size:8px;color:var(--chalk-dim)';l.textContent=(i+1)+' / '+total;c.appendChild(w);c.appendChild(l);c.onclick=()=>{toggleOverview();go(i)};g.appendChild(c);});ov.appendChild(g);}
+function buildOverview(){
+  ov.innerHTML='';const grid=document.createElement('div');
+  grid.style.cssText='display:grid;grid-template-columns:repeat(4,1fr);gap:2vh 1.6vw;max-width:90vw;margin:0 auto';
+  slides.forEach((s,i)=>{const c=document.createElement('div');c.style.cssText='cursor:pointer;overflow:hidden;border:2px solid '+(i===idx?'var(--chalk-yellow)':'rgba(255,255,255,.08)');const w=document.createElement('div');w.style.cssText='width:100%;aspect-ratio:16/9;overflow:hidden;position:relative;pointer-events:none;background:var(--board)';const cl=s.cloneNode(true);cl.style.cssText='width:100vw;height:100vh;transform:scale('+(1/4.5)+');transform-origin:top left;position:absolute;top:0;left:0;pointer-events:none';const sourceCanvases=s.querySelectorAll('canvas');cl.querySelectorAll('canvas').forEach((target,j)=>{const source=sourceCanvases[j];if(!source)return;target.width=source.width;target.height=source.height;target.getContext('2d').drawImage(source,0,0);});w.appendChild(cl);const l=document.createElement('div');l.style.cssText='padding:5px 8px;font-family:var(--mono);font-size:8px;color:var(--chalk-dim)';l.textContent=(i+1)+' / '+total;c.appendChild(w);c.appendChild(l);c.onclick=()=>{toggleOverview();go(i)};grid.appendChild(c);});
+  ov.appendChild(grid);
+}
 function toggleOverview(){overviewOn=!overviewOn;if(overviewOn){buildOverview();ov.style.display='block';}else{ov.style.display='none';}}
-addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();toggleOverview();return;}if(e.key&&e.key.toLowerCase()==='b'&&!e.metaKey&&!e.ctrlKey&&!e.altKey){e.preventDefault();window.__setLowPowerMode(!window.__lowPowerMode);return;}if(overviewOn)return;if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '||e.key==='ArrowDown'){if(window.__pipeAdvance&&window.__pipeAdvance())return;go(idx+1);return;}if(e.key==='ArrowLeft'||e.key==='PageUp'||e.key==='ArrowUp')go(idx-1);if(e.key==='Home')go(0);if(e.key==='End')go(total-1);});
+addEventListener('keydown',e=>{
+  if(e.key==='Escape'){e.preventDefault();toggleOverview();return;}
+  if(e.key&&e.key.toLowerCase()==='b'&&!e.metaKey&&!e.ctrlKey&&!e.altKey){e.preventDefault();window.__setLowPowerMode(!window.__lowPowerMode);return;}
+  if(overviewOn)return;
+  if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '||e.key==='ArrowDown'){if(window.__pipeAdvance&&window.__pipeAdvance())return;go(idx+1);return;}
+  if(e.key==='ArrowLeft'||e.key==='PageUp'||e.key==='ArrowUp')go(idx-1);
+  if(e.key==='Home')go(0);if(e.key==='End')go(total-1);
+});
 let wheelTO=null,wheelAcc=0;
-addEventListener('wheel',function(e){wheelAcc+=e.deltaY+e.deltaX;if(Math.abs(wheelAcc)>50){if(wheelAcc>0&&window.__pipeAdvance&&window.__pipeAdvance()){}else{go(idx+(wheelAcc>0?1:-1))}wheelAcc=0}clearTimeout(wheelTO);wheelTO=setTimeout(function(){wheelAcc=0},150)},{passive:true});
+addEventListener('wheel',e=>{wheelAcc+=e.deltaY+e.deltaX;if(Math.abs(wheelAcc)>50){if(wheelAcc>0&&window.__pipeAdvance&&window.__pipeAdvance()){wheelAcc=0;}else{go(idx+(wheelAcc>0?1:-1));wheelAcc=0;}}clearTimeout(wheelTO);wheelTO=setTimeout(()=>wheelAcc=0,150);},{passive:true});
 let tx=0,ty=0;
-addEventListener('touchstart',function(e){tx=e.touches[0].clientX;ty=e.touches[0].clientY},{passive:true});
-addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-tx,dy=e.changedTouches[0].clientY-ty;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)){if(dx<0&&window.__pipeAdvance&&window.__pipeAdvance())return;go(idx+(dx<0?1:-1))}},{passive:true});
+addEventListener('touchstart',e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY},{passive:true});
+addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;const dy=e.changedTouches[0].clientY-ty;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)){if(dx<0&&window.__pipeAdvance&&window.__pipeAdvance())return;go(idx+(dx<0?1:-1));}},{passive:true});
 go(0);
 </script>
+
 <script type="module">
 let motion;
-try{motion=await import('./assets/motion.min.js');}catch(e1){try{motion=await import('https://cdn.jsdelivr.net/npm/motion@11.11.17/+esm');}catch(e2){console.warn('[motion] failed');document.querySelectorAll('[data-anim]').forEach(function(el){el.style.opacity='1';el.style.transform='none'});}}
-if(motion){var{animate,stagger}=motion;document.body.classList.add('motion-ready');var EASE=[.22,1,.36,1];var slides=[...document.querySelectorAll('.slide')];
-function playSlide(i){var slide=slides[i];if(!slide)return;if(window.__lowPowerMode){slide.querySelectorAll('[data-anim]').forEach(function(el){el.style.opacity='1';el.style.transform='none'});return;}slide.querySelectorAll('[data-anim]').forEach(function(el){el.style.opacity='';el.style.transform=''});var all=[...slide.querySelectorAll('[data-anim]')];if(!all.length)return;var groups=[];var cur=[];all.forEach(function(el){if(el.dataset.anim==='step'){if(cur.length)groups.push(cur);groups.push([el]);cur=[];}else{cur.push(el);}});if(cur.length)groups.push(cur);groups.forEach(function(g,i){g.forEach(function(el){animate(el,{opacity:[0,1],y:[6,0]},{duration:.4,delay:i*.25+(i*.05),easing:EASE})})});}
+try{motion=await import('../assets/motion.min.js');}catch(e1){try{motion=await import('https://cdn.jsdelivr.net/npm/motion@11.11.17/+esm');}catch(e2){console.warn('[motion] failed',e1,e2);document.querySelectorAll('[data-anim]').forEach(el=>{el.style.opacity='1';el.style.transform='none'});}}
+if(motion){const{animate,stagger}=motion;document.body.classList.add('motion-ready');const EASE=[.22,1,.36,1];const slides=[...document.querySelectorAll('.slide')];let lastIdx=-1;
+function resetAnims(s){s.querySelectorAll('[data-anim]').forEach(el=>{el.style.opacity='';el.style.transform='';});}
+function revealStatic(s){resetAnims(s);document.getAnimations?.().forEach(a=>a.cancel());s.querySelectorAll('[data-anim]').forEach(el=>{el.style.opacity='1';el.style.transform='none';});}
+function playSlide(i){const slide=slides[i];if(!slide)return;lastIdx=i;if(window.__lowPowerMode){revealStatic(slide);return;}resetAnims(slide);const all=[...slide.querySelectorAll('[data-anim]')];if(!all.length)return;const groups=[];let cur=[];all.forEach(el=>{if(el.dataset.anim==='step'){if(cur.length)groups.push(cur);groups.push([el]);cur=[];}else{cur.push(el);}});if(cur.length)groups.push(cur);if(groups.length){groups.forEach((g,i)=>{const base=i*.25;g.forEach(el=>{const tag=el.tagName.toLowerCase();const isSVG=tag==='svg'||el.querySelectorAll('svg').length>0;const duration=isSVG ? .55 : .4;animate(el,{opacity:[0,1],y:[6,0]},{duration,delay:base+(i*.05),easing:EASE});});});}else{animate(all,{opacity:[0,1],y:[8,0]},{duration:.45,delay:stagger(.07,{start:.08}),easing:EASE});}}
 window.__playSlide=playSlide;playSlide(0);}
 </script>
 </body>

@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>长期主义者的思考方式 · Flycan 进化论</title>
+<title>长期主义者的思考方式</title>
+<link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@300;400;500;600&family=Noto+Serif+SC:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
@@ -141,7 +142,7 @@
 <body>
 <script>
   (function(){
-    const KEY = 'flycan-ppt-low-power';
+    const KEY = 'ppt-avocado-low-power';
     const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const stored = localStorage.getItem(KEY);
     window.__lowPowerMode = stored === '1' || (stored === null && reduced);
@@ -155,7 +156,7 @@
       if(opts.persist !== false) localStorage.setItem(KEY, window.__lowPowerMode ? '1' : '0');
       if(window.__lowPowerMode && document.getAnimations) document.getAnimations().forEach(a=>a.cancel());
       updateHint();
-      dispatchEvent(new CustomEvent('flycan-low-power-change', {detail:{on:window.__lowPowerMode}}));
+      dispatchEvent(new CustomEvent('ppt-low-power-change', {detail:{on:window.__lowPowerMode}}));
       if(window.__playSlide) window.__playSlide(window.__currentSlideIndex || 0);
     };
     document.body.classList.toggle('low-power', window.__lowPowerMode);
@@ -170,7 +171,7 @@
 <!-- ============ Slide 1: Cover ============ -->
 <div class="slide hero light" data-animate="hero">
   <div class="chrome">
-    <span class="meta">Flycan 进化论</span>
+    <span class="meta">长期主义</span>
     <span class="meta">01 / 05</span>
   </div>
   <div class="frame center">
@@ -178,7 +179,7 @@
     <h1 class="h-hero" data-anim style="color:var(--primary)">长期主义者<br>的思考方式</h1>
     <div class="lead" data-anim style="max-width:55%;margin-top:2.5vh">在快速变化的世界里，什么才是真正值得坚持的？</div>
     <div class="meta-row" data-anim style="margin-top:4vh">
-      <span>Flycan 进化论</span>
+      <span>长期主义</span>
       <span>·</span>
       <span>独立思考</span>
       <span>·</span>
@@ -187,14 +188,14 @@
   </div>
   <div class="foot">
     <span class="title">长期主义者的思考方式</span>
-    <span class="meta">Flycan 进化论 · 1</span>
+    <span class="meta">长期主义 · 1</span>
   </div>
 </div>
 
 <!-- ============ Slide 2: Core Idea ============ -->
 <div class="slide light" data-animate="cascade">
   <div class="chrome">
-    <span class="meta">Flycan 进化论</span>
+    <span class="meta">长期主义</span>
     <span class="meta">02 / 05</span>
   </div>
   <div class="frame">
@@ -220,19 +221,19 @@
     </div>
     <div class="callout" data-anim style="margin-top:auto">
       长期主义不是一种策略，而是一种世界观——相信今天的积累会在未来某天产生复利。
-      <span class="cite">—— Flycan 进化论</span>
+      <span class="cite">—— 示例引语</span>
     </div>
   </div>
   <div class="foot">
     <span class="title">长期主义者的思考方式</span>
-    <span class="meta">Flycan 进化论 · 2</span>
+    <span class="meta">长期主义 · 2</span>
   </div>
 </div>
 
 <!-- ============ Slide 3: 复利的魔力 ============ -->
 <div class="slide dark" data-animate="directional">
   <div class="chrome">
-    <span class="meta">Flycan 进化论</span>
+    <span class="meta">长期主义</span>
     <span class="meta">03 / 05</span>
   </div>
   <div class="frame">
@@ -258,14 +259,14 @@
   </div>
   <div class="foot">
     <span class="title">长期主义者的思考方式</span>
-    <span class="meta">Flycan 进化论 · 3</span>
+    <span class="meta">长期主义 · 3</span>
   </div>
 </div>
 
 <!-- ============ Slide 4: Compare ============ -->
 <div class="slide light" data-animate="directional">
   <div class="chrome">
-    <span class="meta">Flycan 进化论</span>
+    <span class="meta">长期主义</span>
     <span class="meta">04 / 05</span>
   </div>
   <div class="frame">
@@ -287,19 +288,19 @@
     </div>
     <div class="callout" data-anim>
       短期看差异，长期看趋同。真正拉开差距的，是你在一个方向上持续投入的时间。
-      <span class="cite">—— Flycan 进化论</span>
+      <span class="cite">—— 示例引语</span>
     </div>
   </div>
   <div class="foot">
     <span class="title">长期主义者的思考方式</span>
-    <span class="meta">Flycan 进化论 · 4</span>
+    <span class="meta">长期主义 · 4</span>
   </div>
 </div>
 
 <!-- ============ Slide 5: Summary ============ -->
 <div class="slide hero dark" data-animate="quote">
   <div class="chrome">
-    <span class="meta">Flycan 进化论</span>
+    <span class="meta">长期主义</span>
     <span class="meta">05 / 05</span>
   </div>
   <div class="frame center">
@@ -312,7 +313,7 @@
       长期主义不是等待，而是从现在开始，<br>用每一天的积累，去换取未来的复利。
     </div>
     <div class="meta-row" data-anim style="margin-top:4vh;justify-content:center">
-      <span>Flycan 进化论</span>
+      <span>长期主义</span>
       <span>·</span>
       <span>长期主义</span>
       <span>·</span>
@@ -321,7 +322,7 @@
   </div>
   <div class="foot">
     <span class="title">长期主义者的思考方式</span>
-    <span class="meta">Flycan 进化论 · 5</span>
+    <span class="meta">长期主义 · 5</span>
   </div>
 </div>
 

@@ -1,7 +1,7 @@
 {
   "name": "flycan-ppt-skill",
   "version": "1.0.0",
-  "description": "Flycan PPT Skill — 单文件 HTML 横向翻页 PPT，内置 Avocado Nature（牛油果自然风）和 Blackboard Sketch（黑板手绘板书风）两套视觉系统",
+  "description": "单文件 HTML 横向翻页 PPT Skill，内置 Avocado Nature、Dark Green Magazine、Blackboard Sketch 和 Midnight Minimal 四套视觉系统",
   "type": "module",
   "bin": {
     "flycan-ppt-skill": "./bin/cli.js"

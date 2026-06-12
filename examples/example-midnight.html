@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>长期主义者的思考方式 · Flycan 午夜极简</title>
+<title>长期主义者的思考方式</title>
+<link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -84,7 +85,7 @@
 <body>
 <script>
 (function(){
-  const KEY='flycan-mm-low-power';
+  const KEY='ppt-mm-low-power';
   const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
   const stored=localStorage.getItem(KEY);
   window.__lowPowerMode=stored==='1'||(stored===null&&reduced);
@@ -108,7 +109,7 @@
     <div class="mm-body-serif" data-anim style="text-align:center;max-width:55%;line-height:1.6">真正的长期主义不是熬时间，<br>而是让时间成为你的复利曲线。</div>
   </div>
   <div class="mm-foot">
-    <span>Flycan 进化论</span>
+    <span>长期主义</span>
     <span>01 / 06</span>
   </div>
 </div>
@@ -223,7 +224,7 @@
     <div style="height:2vh"></div>
     <div class="mm-line-short" data-anim></div>
     <div class="mm-body-serif" data-anim style="margin-top:2.5vh;text-align:center;max-width:55%;color:var(--mm-text-dim);font-size:max(13px,.9vw)">不必等到万事俱备。<br>从一件小事开始，持续做下去，<br>让时间成为你的朋友。</div>
-    <div class="mm-num" data-anim style="margin-top:2vh">FLYCAN · 2026</div>
+    <div class="mm-num" data-anim style="margin-top:2vh">LONG TERM · 2026</div>
   </div>
   <div class="mm-foot" style="opacity:.3">
     <span>结语</span>
@@ -282,7 +283,7 @@ go(0);
 </script>
 <script type="module">
 let motion;
-try{motion=await import('./assets/motion.min.js');}catch(e1){try{motion=await import('https://cdn.jsdelivr.net/npm/motion@11.11.17/+esm');}catch(e2){console.warn('[motion] failed',e1,e2);document.querySelectorAll('[data-anim]').forEach(el=>{el.style.opacity='1';el.style.transform='none'});}}
+try{motion=await import('../assets/motion.min.js');}catch(e1){try{motion=await import('https://cdn.jsdelivr.net/npm/motion@11.11.17/+esm');}catch(e2){console.warn('[motion] failed',e1,e2);document.querySelectorAll('[data-anim]').forEach(el=>{el.style.opacity='1';el.style.transform='none'});}}
 if(motion){const{animate,stagger}=motion;document.body.classList.add('motion-ready');const EASE=[.25,1,.5,1];const slides=[...document.querySelectorAll('.slide')];let lastIdx=-1;
 function resetAnims(s){s.querySelectorAll('[data-anim]').forEach(el=>{el.style.opacity='';el.style.transform='';});}
 function revealStatic(s){resetAnims(s);document.getAnimations?.().forEach(a=>a.cancel());s.querySelectorAll('[data-anim]').forEach(el=>{el.style.opacity='1';el.style.transform='none';});}

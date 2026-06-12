@@ -13,65 +13,70 @@
 - 确认 layouts 里用到的类都已定义
 - 如果某个类缺失，在模板 `<style>` 里补上
 
-### 2. 不要用 emoji 作图标
+### 2. 不默认添加作者或品牌
 
-Avocado / Dark Magazine 用 Lucide 图标库。Blackboard 用 SVG 手绘元素。
+- 只有用户明确提供作者、组织、栏目或品牌时才加入署名
+- 不要把 Skill 名、仓库名、作者名或示例栏目写入封面、页脚、引用来源或配图
 
-### 3. 页面主题节奏
+### 3. 不要用 emoji 作图标
+
+Avocado / Dark Magazine 用 Lucide 图标库。Blackboard 用 Canvas 手绘路径，不使用标准图标式 SVG。
+
+### 4. 页面主题节奏
 
 - Avocado：hero 页与 light 页交替，不要连续 3 页以上同主题
 - Dark Magazine：所有页使用 dark 背景（深绿色），hero 页和非 hero 页通过内容密度制造节奏
-- Blackboard：所有页纯黑灰背景，通过布局变化（推导/流程/对比/导图）制造节奏，遵循问题→分析→推导→结论
+- Blackboard：页数由内容决定；每页围绕一个命题，用主插画、箭头、流程、圈注和颜色形成知识叙事
 - Midnight Minimal：遵循"慢节奏"，封面→哲思→金句→总结的冥想感节奏，不要信息密集
 
-### 4. 标题字号不能超过屏宽
+### 5. 标题字号不能超过屏宽
 
-- `h-hero` 最大 10vw / `chalk-title` 最大 7vw
+- `h-hero` 最大 10vw；Blackboard Canvas 标题按逻辑画布宽度检查
 - 长标题用 `<br>` 手工断行
 
-### 5. 字体分工
+### 6. 字体分工
 
 | 角色 | Avocado | Dark Magazine | Blackboard | Midnight Minimal |
 |------|---------|---------------|------------|------------------|
-| 标题 | Noto Serif SC（衬线） | Noto Serif SC（衬线） | ZCOOL XiaoWei（手写粗粉笔） | Noto Serif SC（衬线） |
-| 正文 | Noto Sans SC（非衬线） | Noto Sans SC（非衬线） | Ma Shan Zheng / Noto Sans 300（细粉笔） | Noto Serif SC / Sans |
-| 元数据 | IBM Plex Mono（等宽） | IBM Plex Mono（等宽） | JetBrains Mono（刻印） | IBM Plex Mono |
+| 标题 | Noto Serif SC（衬线） | Noto Serif SC（衬线） | 中文手写字体骨架 + 逐字 Canvas 粉体覆盖 | Noto Serif SC（衬线） |
+| 正文 | Noto Sans SC（非衬线） | Noto Sans SC（非衬线） | 中文手写字体骨架 + 高连续覆盖 Canvas 渲染 | Noto Serif SC / Sans |
+| 元数据 | IBM Plex Mono（等宽） | IBM Plex Mono（等宽） | 小字号高覆盖手写渲染 | IBM Plex Mono |
 
-### 6. 图片比例
+### 7. 图片比例
 
 用标准比例 16:10 / 4:3 / 3:2 / 16:9，`object-fit:cover` 做裁切。  
 Blackboard 风禁止使用真实照片。
 
-### 7. chrome 和 kicker 不要写同一句话
+### 8. chrome 和 kicker 不要写同一句话
 
 - `chrome` = 杂志页眉 / 导航标签（可跨页重复）
 - `kicker` = 本页独一份的引导句（每页不同）
 
-### 8. 动效标注
+### 9. 动效标注
 
 - Avocado / Dark Magazine：所有页至少给标题/正文/主要元素加 `data-anim`
-- Blackboard：使用 `data-anim` + `data-anim="step"` 做逐步揭示
+- Blackboard：Canvas 页面可整页淡入；需要逐步讲解时按知识关系分层揭示，不能把单个 Canvas 路径拆成 UI 动画
 
 ---
 
 ## 🟡 P1 · 排版节奏
 
-### 9. Hero 页要和内容页交替（仅 Avocado）
+### 10. Hero 页要和内容页交替（仅 Avocado）
 
 推荐节奏：封面(hero) → 内容页 × 3-4 → 幕封(hero) → 内容页 × 3-4 → 金句页 → 总结
 
-### 10. 留白要充足
+### 11. 留白要充足
 
 Avocado 风以留白为特色，不要塞满内容。内容页最多 3 个要点。  
 Dark Magazine 适当留白，可用分割线组织信息。  
 Blackboard 风信息密度可稍高（像课堂笔记），但仍需清晰层次。  
 Midnight Minimal 极致留白，内容页最多 3 个要点，文字间距要宽敞。
 
-### 11. 术语统一
+### 12. 术语统一
 
 全篇统一用词，不要中英混译。
 
-### 12. 每页一个核心观点
+### 13. 每页一个核心观点
 
 避免一页塞多个观点。如果信息太多，拆成多页。
 
@@ -79,32 +84,34 @@ Midnight Minimal 极致留白，内容页最多 3 个要点，文字间距要宽
 
 ## 🟢 P2 · 视觉打磨
 
-### 13. Avocado 风：清新自然
+### 14. Avocado 风：清新自然
 
 - 主色不出 #A8C686 和辅助色范围
 - 配图用纪实感、自然光风格
 - 动画克制：淡入 + 轻微位移
 
-### 14. Dark Magazine 风：深绿质感
+### 15. Dark Magazine 风：深绿质感
 
 - 暗绿色背景 `#1B2F1D` 统一
 - 强调色（accent）控制杂志调性
 - 衬线标题 + 非衬线正文
 - 禁止：毛玻璃、高饱和荧光色、渐变背景
 
-### 15. Blackboard 风：黑板手绘
+### 16. Blackboard 风：粉笔知识插画
 
-- 石板黑板底色 `#202321`
-- 彩色粉笔颜色正确使用（白/黄/蓝/粉/绿/橙/红）
-- **不同层级文字粗细不同**：粗粉笔（title）→ 中粉笔（h1）→ 细粉笔手写（h2）→ 极细粉笔（body）
-- 黑板纹理：粉笔灰痕迹、板擦纹、木纹（模板已预设）
-- 手绘框线（`chalk-box`）代替圆角卡片
-- SVG 手绘元素（`chalk-arrow` / `stickman` / `chalk-brain` / `chalk-magnifier` / `chalk-dialog` / `chalk-book` / `chalk-star` 等）代替图标
-- 体现推导过程：问题 → 分析 → 推导 → 结论
-- 像板书，不要像 PPT
-- 禁止：真实照片、3D 图标、杂志排版、极简海报风
+- 严格参考 `黑板手绘版书风.png`
+- 页数由内容决定，不固定套用 6 页节奏
+- 每页有一个核心命题和一个可识别主插画
+- 大字、插画、箭头、流程、圈注和颜色共同表达知识关系
+- 背景使用低对比擦痕和稀疏颗粒，不抢内容
+- 配色语义正确：白=主体、黄=核心、蓝=提问、粉=强调/结论、绿=分析/判断
+- 标题逐字渲染，允许轻微字号、基线和旋转变化；正文保持连续覆盖与清晰识别
+- 图形优先使用 `chalkPath`、`curve`、`smoothClosed` 等 Canvas 路径直接绘制
+- 路径材质包含稳定主轨迹、确定性抖动、干擦复描、局部堆粉和沿线粉尘
+- 正常观看比例下检查粉笔感，不能只看放大局部
+- 禁止：真实照片、3D 图标、emoji、Lucide、杂志排版、极简海报风、Apple 发布会式居中大标题、现代 UI 卡片
 
-### 16. Midnight Minimal 风：午夜极简
+### 17. Midnight Minimal 风：午夜极简
 
 - 纯黑底色 `#0A0A0A` 
 - 衬线字体（Noto Serif SC）塑造哲学感
@@ -116,20 +123,20 @@ Midnight Minimal 极致留白，内容页最多 3 个要点，文字间距要宽
 
 ## 🔵 P3 · 操作细节
 
-### 17. 图片路径用相对路径
+### 18. 图片路径用相对路径
 
 `images/xxx.png`，不要用绝对路径。  
 Blackboard 风一般不使用图片。
 
-### 18. 页码写死
+### 19. 页码写死
 
 JS 动态算总页数，但 `.chrome` / `.chalk-foot` 里的 `XX / NN` 是写死的。
 
-### 19. 翻页导航要保留
+### 20. 翻页导航要保留
 
 模板默认支持：← → / 滚轮 / 触屏滑动 / 底部圆点 / ESC 索引。不要删 JS 里的导航逻辑。
 
-### 20. `<title>` 要改为实际标题
+### 21. `<title>` 要改为实际标题
 
 grep "\[必填\]" 应无结果。
 
@@ -149,6 +156,7 @@ grep "\[必填\]" 应无结果。
   □ 最多三个要点
   □ 避免大段文字
   □ 没有使用 emoji 作图标
+  □ 没有默认添加 Skill 作者、品牌、栏目或示例署名
 
 排版(仅 Avocado)
   □ 标题 vs 正文间距 ≥ 4vh
@@ -161,13 +169,17 @@ grep "\[必填\]" 应无结果。
   □ 衬线标题 + 非衬线正文
 
 排版(仅 Blackboard)
-  □ 所有页使用石板黑板底色 #0B0B0B
-  □ 粉笔配色正确（白/黄/蓝/粉/绿/橙/红）
-  □ 不同层级文字粗细不同
-  □ 使用手绘框线代替圆角卡片
-  □ 使用 SVG 手绘元素（chalk-brain/magnifier/dialog/book/star 等）代替图标
-  □ 无真实照片 / 3D 图标
-  □ 体现推导过程：问题→分析→推导→结论
+  □ 已严格参考 黑板手绘版书风.png
+  □ 页数由内容决定，没有固定套用 6 页节奏
+  □ 每页有一个核心命题和一个可识别主插画
+  □ 大字、插画、箭头、流程和圈注形成明确知识关系
+  □ 背景是低对比黑板底，不与内容争夺注意力
+  □ 粉笔配色语义正确（白/黄/蓝/粉/绿）
+  □ 标题逐字 Canvas 渲染，正文保持可读
+  □ 图形使用生成式 Canvas 路径，不是标准 SVG 图标
+  □ 正常观看比例下能看见粉体覆盖、干擦断触和毛糙边缘
+  □ 无真实照片 / 3D 图标 / emoji / Lucide
+  □ 不像 Apple 发布会 / 极简杂志 / 设计作品集 / 现代 UI 卡片
 
 排版(仅 Midnight Minimal)
   □ 所有页使用纯黑底色 #0A0A0A
@@ -176,10 +188,9 @@ grep "\[必填\]" 应无结果。
   □ 动画比常规慢 20%
 
 动效
-  □ 翻页时内容逐个淡入
-  □ 金句页有逐行揭示效果
-  □ 流程页支持手动逐步推进(Avocado/Dark Magazine)
-  □ data-anim 数量 ≥ 页数 × 3
+  □ Avocado / Dark Magazine / Midnight 的主要内容有语义化入场
+  □ Blackboard Canvas 至少支持整页揭示；需要讲解时按知识关系分层
+  □ 低功耗模式下内容保持可见
 
 交互
   □ ← → 翻页正常

@@ -36,7 +36,7 @@
 ```html
 <section class="slide hero" data-animate="hero">
   <div class="chrome">
-    <span class="meta">Flycan 进化论</span>
+    <span class="meta">主题分享</span>
     <span class="meta">01 / NN</span>
   </div>
   <div class="frame center">
@@ -44,7 +44,7 @@
     <h1 class="h-hero" data-anim style="color:var(--text)">主标题</h1>
     <div class="h-sub" data-anim style="margin-top:2vh">副标题 / 一句话介绍</div>
     <div class="meta-row" data-anim style="margin-top:4vh">
-      <span>Flycan 进化论</span>
+      <span>主题分享</span>
       <span>·</span>
       <span>标签1</span>
       <span>·</span>
@@ -53,7 +53,7 @@
   </div>
   <div class="foot">
     <span class="title">PPT 标题</span>
-    <span class="meta">Flycan 进化论 · 1</span>
+    <span class="meta">主题分享 · 1</span>
   </div>
 </section>
 ```
@@ -91,12 +91,12 @@
     </div>
     <div class="callout" data-anim style="margin-top:auto">
       引语文字。
-      <span class="cite">—— Flycan 进化论</span>
+      <span class="cite">—— 引语来源</span>
     </div>
   </div>
   <div class="foot">
     <span class="title">PPT 标题</span>
-    <span class="meta">Flycan 进化论 · 2</span>
+    <span class="meta">主题分享 · 2</span>
   </div>
 </section>
 ```
@@ -108,7 +108,7 @@
 ```html
 <section class="slide" data-animate="directional">
   <div class="chrome">
-    <span class="meta">Flycan 进化论</span>
+    <span class="meta">主题分享</span>
     <span class="meta">03 / NN</span>
   </div>
   <div class="frame">
@@ -129,7 +129,7 @@
   </div>
   <div class="foot">
     <span class="title">PPT 标题</span>
-    <span class="meta">Flycan 进化论 · 3</span>
+    <span class="meta">主题分享 · 3</span>
   </div>
 </section>
 ```
@@ -161,7 +161,7 @@
   </div>
   <div class="foot">
     <span class="title">PPT 标题</span>
-    <span class="meta">Flycan 进化论 · 4</span>
+    <span class="meta">主题分享 · 4</span>
   </div>
 </section>
 ```
@@ -201,7 +201,7 @@
   </div>
   <div class="foot">
     <span class="title">PPT 标题</span>
-    <span class="meta">Flycan 进化论 · 5</span>
+    <span class="meta">主题分享 · 5</span>
   </div>
 </section>
 ```
@@ -247,7 +247,7 @@
   </div>
   <div class="foot">
     <span class="title">PPT 标题</span>
-    <span class="meta">Flycan 进化论 · 6</span>
+    <span class="meta">主题分享 · 6</span>
   </div>
 </section>
 ```
@@ -272,14 +272,14 @@
       解释说明文字。
     </div>
     <div class="meta-row" data-anim style="margin-top:4vh;justify-content:center">
-      <span>Flycan 进化论</span>
+      <span>主题分享</span>
       <span>·</span>
       <span>标签</span>
     </div>
   </div>
   <div class="foot">
     <span class="title">PPT 标题</span>
-    <span class="meta">Flycan 进化论 · 7</span>
+    <span class="meta">主题分享 · 7</span>
   </div>
 </section>
 ```
@@ -302,7 +302,7 @@
   </div>
   <div class="foot">
     <span class="title">PPT 标题</span>
-    <span class="meta">Flycan 进化论 · 8</span>
+    <span class="meta">主题分享 · 8</span>
   </div>
 </section>
 ```
@@ -314,7 +314,7 @@
 ```html
 <section class="slide" data-animate="cascade">
   <div class="chrome">
-    <span class="meta">Flycan 进化论</span>
+    <span class="meta">主题分享</span>
     <span class="meta">09 / NN</span>
   </div>
   <div class="frame">
@@ -328,12 +328,12 @@
     </div>
     <div class="callout" data-anim style="margin-top:auto;max-width:55%">
       引语。
-      <span class="cite">—— Flycan 进化论</span>
+      <span class="cite">—— 引语来源</span>
     </div>
   </div>
   <div class="foot">
     <span class="title">PPT 标题</span>
-    <span class="meta">Flycan 进化论 · 9</span>
+    <span class="meta">主题分享 · 9</span>
   </div>
 </section>
 ```
@@ -358,14 +358,14 @@
       最后的话。
     </div>
     <div class="meta-row" data-anim style="margin-top:4vh;justify-content:center">
-      <span>Flycan 进化论</span>
+      <span>主题分享</span>
       <span>·</span>
       <span>长期主义</span>
     </div>
   </div>
   <div class="foot">
     <span class="title">PPT 标题</span>
-    <span class="meta">Flycan 进化论 · 10</span>
+    <span class="meta">主题分享 · 10</span>
   </div>
 </section>
 ```

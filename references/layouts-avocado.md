@@ -42,22 +42,22 @@ Avocado 风以留白为特色，间距偏大：
 ```html
 <section class="slide hero light">
   <div class="chrome">
-    <div>Flycan 进化论 · 分享</div>
+    <div>主题分享 · 分享</div>
     <div>Vol.01</div>
   </div>
   <div class="frame" style="display:grid; gap:5vh; align-content:center; min-height:78vh; text-align:center">
-    <div class="kicker" data-anim>Flycan 进化论 · 独立思考</div>
+    <div class="kicker" data-anim>主题分享 · 独立思考</div>
     <h1 class="h-hero" data-anim style="font-size:9vw; white-space:nowrap">标题</h1>
     <h2 class="h-sub" data-anim>副标题 / 一句话概括</h2>
     <p class="lead" style="max-width:50vw; margin:0 auto" data-anim>
       一段引语，定调全场。
     </p>
     <div class="meta-row" style="justify-content:center" data-anim>
-      <span>Flycan</span><span>·</span><span>2026</span>
+      <span>作者</span><span>·</span><span>2026</span>
     </div>
   </div>
   <div class="foot">
-    <div>Flycan 进化论</div>
+    <div>主题分享</div>
     <div>— · —</div>
   </div>
 </section>
@@ -342,7 +342,7 @@ Avocado 风以留白为特色，间距偏大：
     </p>
   </div>
   <div class="foot">
-    <div>Flycan 进化论</div>
+    <div>主题分享</div>
     <div>— · —</div>
   </div>
 </section>
@@ -359,13 +359,13 @@ Avocado 风以留白为特色，间距偏大：
     <div>NN / NN</div>
   </div>
   <div class="frame" style="display:grid; gap:3vh; align-content:center; min-height:78vh; text-align:center">
-    <div class="kicker" data-anim>Flycan 进化论</div>
+    <div class="kicker" data-anim>主题分享</div>
     <h1 class="h-xl" style="font-size:4.5vw" data-anim>保持独立思考</h1>
     <p class="lead" style="max-width:45vw; margin:0 auto" data-anim>
       长期主义 · 第一性原理 · 理性克制
     </p>
     <div class="meta-row" style="justify-content:center" data-anim>
-      <span>flycan.com</span><span>·</span><span>2026</span>
+      <span>example.com</span><span>·</span><span>2026</span>
     </div>
   </div>
   <div class="foot">

@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>[必填] 替换为 PPT 标题 · Flycan 进化论</title>
+<title>[必填] 替换为 PPT 标题</title>
+<link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@300;400;500;600&family=Noto+Serif+SC:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
@@ -119,7 +120,7 @@
 
   .lead{font-family:var(--serif-zh);font-weight:400;font-size:1.65vw;line-height:1.5;opacity:.86}
 
-  /* ============ 网格（Flycan 版） ============ */
+  /* ============ 扩展网格 ============ */
   .frame{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
   .grid-2-7-5{display:grid;grid-template-columns:7fr 5fr;gap:3vw 4vh;align-items:start}
   .grid-2-6-6{display:grid;grid-template-columns:1fr 1fr;gap:3vw 4vh;align-items:start}
@@ -210,7 +211,7 @@
 <body>
 <script>
   (function(){
-    const KEY = 'flycan-ppt-low-power';
+    const KEY = 'ppt-avocado-low-power';
     const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const stored = localStorage.getItem(KEY);
     window.__lowPowerMode = stored === '1' || (stored === null && reduced);
@@ -226,7 +227,7 @@
         document.getAnimations().forEach(a=>a.cancel());
       }
       updateHint();
-      dispatchEvent(new CustomEvent('flycan-low-power-change', {detail:{on:window.__lowPowerMode}}));
+      dispatchEvent(new CustomEvent('ppt-low-power-change', {detail:{on:window.__lowPowerMode}}));
       if(window.__playSlide) window.__playSlide(window.__currentSlideIndex || 0);
     };
     document.body.classList.toggle('low-power', window.__lowPowerMode);

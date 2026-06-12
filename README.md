@@ -6,10 +6,10 @@
 
 - **Style Avocado: 清新牛油果自然风**。像一本正在阅读的书，适合知识传播、观点表达、阅读感悟。
 - **Style Dark Magazine: 深绿极简杂志风**。像一本深色主题的设计杂志，适合技术分享、AI、编程、效率系统。
-- **Style Blackboard: 黑板手绘板报风**。像老师在黑板前手绘推导，粉笔字纹理、火柴人讲解，适合教学、知识拆解。
+- **Style Blackboard: 黑板手绘板书风**。参考粉笔知识插画分镜，用 Canvas 生成式粉笔文字、主插画、箭头、流程和圈注共同表达观点，适合教学、知识拆解。
 - **Style Midnight: 午夜极简哲思风**。像深夜独处的哲思时刻，适合读书感悟、长期主义、金句总结。
 
-由 Flycan 基于 guizang-ppt-skill 的设计理念创建，专注于知识传播和独立思考的内容呈现。
+项目由 Flycan 维护，设计工作流参考 guizang-ppt-skill。项目身份不会默认写入生成的 PPT。
 
 ## 30 秒开始
 
@@ -36,10 +36,10 @@
 
 - 🥑 **Avocado Nature**: 牛油果绿主色、莫兰迪绿辅助、原木风、大量留白、治愈感
 - 🌲 **Dark Green Magazine**: 深绿背景、深海蓝/古典金/玫瑰粉/冷杉绿主题色、杂志感排版
-- 🎯 **Blackboard Sketch**: 石板黑板底色、彩色粉笔（黄/蓝/粉/绿/橙/红）、粉笔字纹理、火柴人手绘推导、不同层级文字粗细不同
+- 🎯 **Blackboard Sketch**: Canvas 粉笔知识插画、逐字粉体覆盖、手绘路径复描、彩色语义（白/黄/蓝/粉/绿）
 - 🌌 **Midnight Minimal**: 纯黑底色、衬线排版、极简留白、哲学感
 - 📐 **横向左右翻页**: 键盘 ← → / 滚轮 / 触屏滑动 / 底部圆点 / ESC 索引
-- 🧩 **四种风格各自布局**: Avocado 10 种 / Dark Magazine 10 种 / Blackboard 8 种 / Midnight 10 种
+- 🧩 **四种风格各自布局**: Avocado 10 种 / Dark Magazine 10 种 / Blackboard 6 类知识关系构图 / Midnight 10 种
 - 🎨 **主题色预设**: Avocado 4 套 / Dark Magazine 4 套 / Blackboard 固定配色 / Midnight 4 套
 - 📄 **单文件 HTML**: 不需要构建、不需要服务器，浏览器直接打开
 
@@ -47,23 +47,31 @@
 
 ### Style Avocado · 清新牛油果自然风
 
+[打开完整示例](examples/example-avocado.html)
+
 | 封面 | 内容页 | 数据页 |
 |------|--------|--------|
 | ![cover](examples/avocado-cover.png) | ![content](examples/avocado-content.png) | ![compound](examples/avocado-compound.png) |
 
 ### Style Dark Green Magazine · 深绿极简杂志风
 
+[打开完整示例](examples/example-dark-magazine.html)
+
 | 封面 | 内容页 |
 |------|--------|
 | ![cover](examples/dark-magazine-cover.png) | ![content](examples/dark-magazine-content.png) |
 
-### Style Blackboard Sketch · 黑板手绘板报风
+### Style Blackboard Sketch · 黑板手绘板书风
+
+[打开完整示例](examples/example-blackboard.html)
 
 | 封面 | 推导页 |
 |------|--------|
 | ![cover](examples/blackboard-cover.png) | ![deduction](examples/blackboard-deduction.png) |
 
 ### Style Midnight Minimal · 午夜极简哲思风
+
+[打开完整示例](examples/example-midnight.html)
 
 | 封面 | 哲思页 |
 |------|--------|
@@ -96,7 +104,7 @@
 > 帮我安装 `flycan-ppt-skill` 这个 Claude Code skill。请按下面步骤做:
 >
 > 1. 确保 `~/.claude/skills/` 目录存在
-> 2. 执行 `git clone git@github.com:flycan/flycan-ppt-skill.git ~/.claude/skills/flycan-ppt-skill`
+> 2. 执行 `git clone https://github.com/Flycan-Fanc/flycan-ppt-skill.git ~/.claude/skills/flycan-ppt-skill`
 > 3. 验证: `ls ~/.claude/skills/flycan-ppt-skill/` 应该看到 `SKILL.md`、`assets/`、`references/` 三项
 > 4. 告诉我安装好了
 
@@ -128,11 +136,10 @@ flycan-ppt-skill
 - "帮我做一份黑板手绘风 PPT" / "黑板板书风"
 - "帮我做一份午夜极简风 PPT" / "午夜哲思风"
 - "生成一个知识分享型的 horizontal swipe deck"
-- "帮我做一份 Flycan 进化论的分享 PPT"
 
 ## 使用流程
 
-1. **选择风格** — Avocado Nature（牛油果自然风）/ Dark Green Magazine（深绿极简杂志风）/ Blackboard Sketch（黑板手绘板报风）/ Midnight Minimal（午夜极简哲思风）
+1. **选择风格** — Avocado Nature（牛油果自然风）/ Dark Green Magazine（深绿极简杂志风）/ Blackboard Sketch（黑板手绘板书风）/ Midnight Minimal（午夜极简哲思风）
 2. **需求澄清** — 风格、受众、内容类型、素材、配图需求、主题色、硬约束
 3. **拷贝模板** — 对应风格拷贝 `assets/template-*.html`
 4. **填充内容** — 从对应 layout 骨架里挑、粘、改文案
@@ -154,7 +161,7 @@ flycan-ppt-skill/
 ├── assets/
 │   ├── template-avocado.html       ← 风格一: 牛油果自然风模板
 │   ├── template-dark-magazine.html ← 风格二: 深绿极简杂志风模板
-│   ├── template-blackboard.html    ← 风格三: 黑板手绘板报风模板
+│   ├── template-blackboard.html    ← 风格三: 黑板手绘板书风模板
 │   ├── template-midnight.html      ← 风格四: 午夜极简哲思风模板
 │   └── motion.min.js               ← Motion One 本地副本
 ├── examples/
@@ -178,7 +185,8 @@ flycan-ppt-skill/
     ├── themes-midnight.md          ← 风格四: 4 套主题色预设
     ├── layouts-avocado.md          ← 风格一: 页面布局骨架
     ├── layouts-dark-magazine.md    ← 风格二: 页面布局骨架
-    ├── layouts-blackboard.md       ← 风格三: 页面布局骨架
+    ├── layouts-blackboard.md       ← 风格三: 知识关系构图骨架
+    ├── chalk-rendering-blackboard.md ← 风格三: Canvas 生成式粉笔算法
     ├── layouts-midnight.md         ← 风格四: 页面布局骨架
     ├── components.md               ← 组件手册
     └── checklist.md                ← 质量检查清单
@@ -210,18 +218,16 @@ flycan-ppt-skill/
 
 ### Blackboard Sketch
 
-固定配色（在模板中已预设）。石板黑板底色 + 彩色粉笔，不同层级文字粗细不同：
+固定配色（在模板中已预设）。参考 `黑板手绘版书风.png` 和当前 Canvas 原型：大面积手写字 + 主插画 + 箭头/圈注 + 彩色粉笔语义：
 
-| 颜色 | 色值 | 用途 | 粗细层级 |
+| 颜色/材质 | 色值 | 用途 | 重点 |
 |------|------|------|----------|
-| 黑板底色 | `#202321` | 石板黑板 | — |
-| 白粉笔 | `#F5F5F5` | 标题/正文 | 粗/中/细/极细 |
-| 黄粉笔 | `#FFD54F` | 关键词/重点/核心问题 | 中 |
-| 蓝粉笔 | `#64B5F6` | 流程/逻辑/分析 | 中 |
-| 粉粉笔 | `#F48FB1` | 强调/警示 | 中 |
-| 绿粉笔 | `#81C784` | 成长/确认/正向 | 中 |
-| 橙粉笔 | `#FFB74D` | 行动建议 | 中 |
-| 红粉笔 | `#EF5350` | 风险/错误（少用） | 中 |
+| 黑板底色 | `#101411` | 低调画布 | 低对比擦痕和稀疏颗粒 |
+| 白粉笔 | `#FFF9E9` | 主体文字/轮廓 | 保持识别度 |
+| 黄粉笔 | `#FFD52F` | 核心词/关键判断 | 核心词放大 |
+| 蓝粉笔 | `#4DC8FF` | 问题/提示/探索 | 提问结构 |
+| 粉粉笔 | `#FF6294` | 强调/转折/结论 | 结论强调 |
+| 绿粉笔 | `#89E052` | 分析/判断 | 正向关系 |
 
 ### Midnight Minimal
 
@@ -236,13 +242,14 @@ flycan-ppt-skill/
 
 ## 内容原则
 
-本 skill 的内容遵循 Flycan 进化论的核心价值观：
-
 - **第一性原理**：回归事物本质思考
 - **长期主义**：关注复利和积累
 - **独立思考**：不盲从、不跟风
 - **理性克制**：不贩卖焦虑、不营销、不震惊体
 - **朴素真诚**：用朴实的语言讲深刻的道理
+- **署名中立**：默认不添加 Skill 作者、品牌、栏目或个人标签
+
+> Blackboard 当前 Canvas 方案是生成式粉笔算法基线。构图和交互已接入正式 Skill，粉笔沉积、断触和毛糙边缘仍会继续优化。
 
 ## License
 

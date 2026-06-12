@@ -42,7 +42,7 @@
     <div class="mm-body-serif" data-anim style="text-align:center;max-width:55%;line-height:1.6">一句引言或序语。</div>
   </div>
   <div class="mm-foot">
-    <span>Flycan 进化论</span>
+    <span>主题分享</span>
     <span>01 / NN</span>
   </div>
 </div>
@@ -270,7 +270,7 @@
     <div class="mm-num" data-anim style="margin-top:1.5vh">—— 卷 〇 一 ——</div>
   </div>
   <div class="mm-foot" style="opacity:.2">
-    <span>Flycan 进化论</span>
+    <span>主题分享</span>
     <span>09 / NN</span>
   </div>
 </div>
@@ -289,7 +289,7 @@
     <div style="height:2vh"></div>
     <div class="mm-line-short" data-anim></div>
     <div class="mm-body-serif" data-anim style="margin-top:2.5vh;text-align:center;max-width:55%;color:var(--mm-text-dim);font-size:max(13px,.9vw)">结语 / 行动建议。</div>
-    <div class="mm-num" data-anim style="margin-top:2vh">FLYCAN · 2026</div>
+    <div class="mm-num" data-anim style="margin-top:2vh">YOUR NAME · 2026</div>
   </div>
   <div class="mm-foot" style="opacity:.3">
     <span>结语</span>
